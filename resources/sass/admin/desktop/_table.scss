@@ -1,7 +1,7 @@
 
 .table{
     width: 40%;
-    margin-top: 4vh;
+    margin-top: 2vh;
 }
 
 .table table {
@@ -137,4 +137,36 @@ th{
 }
 .table-sortable .th-sort-desc::after{
     content: "\25be";
+}
+
+.table-pagination{
+    border: solid black;
+    height: 4vh;
+    float: left;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.table-pagination-buttons{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+   
+    .table-pagination-button{
+        padding:0;
+        width: 1.5em ;
+        height:1em ;
+        display: flex;
+        align-items: center;
+        
+        svg{
+            width: 1.5em ;
+            height:1em ;
+        }
+    }
+    
+    
 }

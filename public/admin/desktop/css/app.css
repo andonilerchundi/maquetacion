@@ -94,7 +94,7 @@
 
 .table {
   width: 40%;
-  margin-top: 4vh;
+  margin-top: 2vh;
 }
 
 .table table {
@@ -219,6 +219,34 @@ th {
 
 .table-sortable .th-sort-desc::after {
   content: "▾";
+}
+
+.table-pagination {
+  border: solid black;
+  height: 4vh;
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-pagination-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.table-pagination-buttons .table-pagination-button {
+  padding: 0;
+  width: 1.5em;
+  height: 1em;
+  display: flex;
+  align-items: center;
+}
+.table-pagination-buttons .table-pagination-button svg {
+  width: 1.5em;
+  height: 1em;
 }
 
 .sidebar {

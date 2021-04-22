@@ -11,4 +11,6 @@ class Faq extends DBModel
     {
         return $this->belongsTo(FaqCategory::class);
     }
+
+    
 }

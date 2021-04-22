@@ -1,15 +1,15 @@
 
-.table{
+#table{
     display: none;
     width: 100%;
 }
 
-.table.visible{
+#table.visible{
     height: 100vh;
     display: initial;
     overflow: auto;
 }
-.table table {
+.table .table {
     border-collapse:collapse;
     font-family: arial, sans-serif;
     width:100%;
@@ -32,6 +32,8 @@
 }
 th{
     height: 2em;
+    font-size: 0.8em;
+    background-color: rgb(189, 189, 189);
 }
 
 .table td{
