@@ -103,7 +103,7 @@
 #table.visible {
   height: 100vh;
   display: initial;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .table .table {
@@ -131,7 +131,7 @@ th {
 }
 
 .table td {
-  height: 2em;
+  height: 4.25em;
   font-size: 0.8em;
   width: 8em;
 }
@@ -159,10 +159,11 @@ th {
   border: none;
   width: 100%;
   transition-duration: 0.5s;
+  height: 3em;
 }
 .edit svg {
-  width: 15px;
-  height: 15px;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .edit:hover {
@@ -175,10 +176,11 @@ th {
   border: none;
   width: 100%;
   transition-duration: 0.5s;
+  height: 3em;
 }
 .remove svg {
-  width: 15px;
-  height: 15px;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .remove:hover {
@@ -196,6 +198,40 @@ th {
 
 .table-sortable .th-sort-desc::after {
   content: "▾";
+}
+
+.table-pagination {
+  height: 4vh;
+  float: left;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+}
+
+.table-pagination-description {
+  margin: 1em;
+  color: white;
+}
+
+.table-pagination-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.table-pagination-buttons .table-pagination-button {
+  padding: 0;
+  width: 2.5em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  margin: 0em 0.5em;
+}
+.table-pagination-buttons .table-pagination-button svg {
+  width: 2.5em;
+  height: 2em;
 }
 
 .sidebar {

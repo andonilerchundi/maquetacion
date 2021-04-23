@@ -6,25 +6,36 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Jenssegers\Agent\Agent;
 use App\Http\Requests\Admin\FaqRequest;
 use App\Models\DB\Faq;
 
 class FaqController extends Controller
 {
+    protected $agent;
     protected $faq;
 
-    function __construct(Faq $faq)
+    function __construct(Faq $faq, Agent $agent)
     {
         $this->middleware('auth');
+        $this->agent = $agent;
         $this->faq = $faq;
     }
 
     public function index()
     {
 
-        $view = View::make('admin.faqs.index')
-                ->with('faq', $this->faq)
-                ->with('faqs', $this->faq->where('active', 1)->paginate(10));
+        if($this->agent->isDesktop()){
+            $view = View::make('admin.faqs.index')
+            ->with('faq', $this->faq)
+            ->with('faqs', $this->faq->where('active', 1)->paginate(12));
+        }
+
+        if($this->agent->isMobile()){
+            $view = View::make('admin.faqs.index')
+            ->with('faq', $this->faq)
+            ->with('faqs', $this->faq->where('active', 1)->paginate(7));
+        }
 
         if(request()->ajax()) {
 
@@ -61,10 +72,25 @@ class FaqController extends Controller
             'active' => 1,
         ]);
 
-        $view = View::make('admin.faqs.index')
-        ->with('faqs', $this->faq->where('active', 1)->paginate(10))
-        ->with('faq', $faq)
-        ->renderSections();        
+        if($this->agent->isDesktop()){
+            $view = View::make('admin.faqs.index')
+            ->with('faqs', $this->faq->where('active', 1)->paginate(12))
+            ->with('faq', $faq)
+            ->renderSections();
+
+        }
+
+        if($this->agent->isMobile()){
+            $view = View::make('admin.faqs.index')
+            ->with('faqs', $this->faq->where('active', 1)->paginate(7))
+            ->with('faq', $faq)
+            ->renderSections();
+
+        }
+
+
+
+                
 
         return response()->json([
             'table' => $view['table'],
@@ -75,9 +101,19 @@ class FaqController extends Controller
 
     public function show(Faq $faq)
     {
-        $view = View::make('admin.faqs.index')
-        ->with('faq', $faq)
-        ->with('faqs', $this->faq->where('active', 1)->paginate(10));   
+        if($this->agent->isDesktop()){
+
+            $view = View::make('admin.faqs.index')
+            ->with('faq', $faq)
+            ->with('faqs', $this->faq->where('active', 1)->paginate(12)); 
+        }
+        if($this->agent->isMobile()){
+
+            $view = View::make('admin.faqs.index')
+            ->with('faq', $faq)
+            ->with('faqs', $this->faq->where('active', 1)->paginate(7)); 
+        }
+         
         
         if(request()->ajax()) {
 
@@ -98,15 +134,36 @@ class FaqController extends Controller
 
         // $faq->delete();
 
-        $view = View::make('admin.faqs.index')
+        if($this->agent->isDesktop()){
+            $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(10))
+            ->with('faqs', $this->faq->where('active', 1)->paginate(12))
             ->renderSections();
         
-        return response()->json([
-            'table' => $view['table'],
-            'form' => $view['form']
-        ]);
+            return response()->json([
+                'table' => $view['table'],
+                'form' => $view['form']
+            ]);
+
+
+        }
+        if($this->agent->isMobile()){
+            $view = View::make('admin.faqs.index')
+            ->with('faq', $this->faq)
+            ->with('faqs', $this->faq->where('active', 1)->paginate(7))
+            ->renderSections();
+        
+            return response()->json([
+                'table' => $view['table'],
+                'form' => $view['form']
+            ]);
+
+
+        }
+
+
+
+        
     }
     public function filter(Request $request){
 
@@ -153,8 +210,15 @@ class FaqController extends Controller
             }
         });
         
+        if($this->agent->isDesktop()){
+            $faqs = $query->where('active', 1)->paginate(12);
+
+        }
+        if($this->agent->isDesktop()){
+            $faqs = $query->where('active', 1)->paginate(7);
+
+        }
         
-        $faqs = $query->where('active', 1)->paginate(10);
 
         $view = View::make('admin.faqs.index')
             ->with('faqs', $faqs)

@@ -87,6 +87,7 @@ export let renderTable = () => {
 
     let editButtons= document.querySelectorAll(".edit");
     let removeButtons = document.querySelectorAll(".remove");
+    let paginationButtons = document.querySelectorAll('.table-pagination-button');
 
     editButtons.forEach(editButton => {
 
@@ -99,6 +100,8 @@ export let renderTable = () => {
                 try {
                     await axios.get(url).then(response => {
                         form.innerHTML = response.data.form;
+                        form.classList.add('visible');
+                        table.classList.remove('visible');
                         renderForm();
                     });
                     
@@ -185,7 +188,30 @@ export let renderTable = () => {
         });
 
     });
+    paginationButtons.forEach(paginationButton => {
 
+        paginationButton.addEventListener("click", () => {
+           
+
+            let url = paginationButton.dataset.page;
+
+            let sendPaginationRequest = async () => {
+
+                try {
+                    await axios.get(url).then(response => {
+                        table.innerHTML = response.data.table;
+                        renderTable();
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+
+            sendPaginationRequest();
+            
+        });
+    });
 };
 
 renderForm();

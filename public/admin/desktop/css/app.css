@@ -222,13 +222,17 @@ th {
 }
 
 .table-pagination {
-  border: solid black;
   height: 4vh;
   float: left;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 1em;
+}
+
+.table-pagination-description {
+  margin-right: 14em;
 }
 
 .table-pagination-buttons {
@@ -239,14 +243,15 @@ th {
 }
 .table-pagination-buttons .table-pagination-button {
   padding: 0;
-  width: 1.5em;
-  height: 1em;
+  width: 2.5em;
+  height: 2em;
   display: flex;
   align-items: center;
+  margin: 0em 0.5em;
 }
 .table-pagination-buttons .table-pagination-button svg {
-  width: 1.5em;
-  height: 1em;
+  width: 2.5em;
+  height: 2em;
 }
 
 .sidebar {

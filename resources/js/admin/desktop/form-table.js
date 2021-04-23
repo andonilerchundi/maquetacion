@@ -9,6 +9,7 @@ export let renderForm = () => {
     let labels = document.getElementsByTagName('label');
     let inputs = document.querySelectorAll('.input');
     let enviar = document.getElementById("send");
+    
 
     inputs.forEach(input => {
 
@@ -86,6 +87,7 @@ export let renderTable = () => {
     let editButtons= document.querySelectorAll(".edit");
     let removeButtons = document.querySelectorAll(".remove");
     let headerCells = document.querySelectorAll(".table-sortable th");
+    let paginationButtons = document.querySelectorAll('.table-pagination-button');
 
     editButtons.forEach(editButton => {
 
@@ -176,6 +178,31 @@ export let renderTable = () => {
             table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
             table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
             table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
+        });
+    });
+
+    paginationButtons.forEach(paginationButton => {
+
+        paginationButton.addEventListener("click", () => {
+           
+
+            let url = paginationButton.dataset.page;
+
+            let sendPaginationRequest = async () => {
+
+                try {
+                    await axios.get(url).then(response => {
+                        table.innerHTML = response.data.table;
+                        renderTable();
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+
+            sendPaginationRequest();
+            
         });
     });
 };

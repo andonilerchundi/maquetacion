@@ -1,7 +1,7 @@
 const bottombarItems = document.querySelectorAll('.bottombar-item');
 const table = document.getElementById("table");
 const form = document.getElementById("form");
-const edit =document.getElementById('edit');
+
 
 bottombarItems.forEach( bottombarItem => {
 
