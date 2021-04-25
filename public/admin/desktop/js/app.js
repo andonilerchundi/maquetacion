@@ -1885,6 +1885,8 @@ __webpack_require__(/*! ./ckeditor */ "./resources/js/admin/desktop/ckeditor.js"
 __webpack_require__(/*! ./sidebar */ "./resources/js/admin/desktop/sidebar.js");
 
 __webpack_require__(/*! ./filter */ "./resources/js/admin/desktop/filter.js");
+
+__webpack_require__(/*! ./menubutton_transform */ "./resources/js/admin/desktop/menubutton_transform.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -2344,6 +2346,26 @@ var renderTable = function renderTable() {
 };
 renderForm();
 renderTable();
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/menubutton_transform.js":
+/*!************************************************************!*\
+  !*** ./resources/js/admin/desktop/menubutton_transform.js ***!
+  \************************************************************/
+/***/ (() => {
+
+var menuBtn = document.querySelectorAll('.menu-btn');
+var menuOpen = false;
+menuOpen.addEventListener('click', function () {
+  if (!menuOpen) {
+    menuBtn.classList.add('active');
+    menuOpen = true;
+  } else {
+    menuBtn.classList.remove('active');
+    menuOpen = false;
+  }
+});
 
 /***/ }),
 

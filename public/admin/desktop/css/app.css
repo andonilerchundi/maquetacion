@@ -291,6 +291,7 @@ li:hover {
   width: 100%;
   display: flex;
   flex-direction: column;
+  /*animation*/
 }
 .main-topbar .top-bar {
   display: flex;
@@ -306,10 +307,44 @@ li:hover {
   height: 3em;
   cursor: pointer;
   color: white;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
 }
-.main-topbar .sidebar-button svg {
-  width: 3em;
-  height: 3em;
+.main-topbar .menu-btn-burger {
+  width: 2em;
+  height: 0.2em;
+  background: white;
+  border-radius: 0.8em;
+  transition: all 0.5s ease-in-out;
+}
+.main-topbar .menu-btn-burger:before,
+.main-topbar .menu-btn-burger:after {
+  width: 2em;
+  height: 0.2em;
+  background: white;
+  border-radius: 0.8em;
+  transition: all 0.5s ease-in-out;
+  content: "";
+  position: absolute;
+}
+.main-topbar .menu-btn-burger:before {
+  transform: translateY(-0.6em);
+}
+.main-topbar .menu-btn-burger:after {
+  transform: translateY(0.6em);
+}
+.main-topbar .menu-btn.active .menu-btn-burger {
+  transform: translateX(-4em);
+  background: transparent;
+}
+.main-topbar .menu-btn.active .menu-btn-burger:before {
+  transform: rotate(45deg) translate(2.5em, -2.5em);
+}
+.main-topbar .menu-btn.active .menu-btn-burger:after {
+  transform: rotate(-45deg) translate(2.5em, 2.5em);
 }
 .main-topbar #title-page {
   color: white;
@@ -361,19 +396,13 @@ li:hover {
   width: 100%;
 }
 
-.main-filter {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
 .filter.appear {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 30vh;
+  height: 40vh;
   background-color: white;
 }
 .filter.appear .label-container {
