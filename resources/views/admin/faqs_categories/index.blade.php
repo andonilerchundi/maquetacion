@@ -76,7 +76,7 @@
             </div>
 
             <div class="button">
-                <button id="reload" onclick="location.reload()"> Reload </button>
+                <button id="reload"> Reload </button>
             </div>
         </div>
     </form>

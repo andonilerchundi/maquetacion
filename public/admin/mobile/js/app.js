@@ -2391,6 +2391,26 @@ renderTable();
 
 /***/ }),
 
+/***/ "./resources/js/admin/mobile/menubutton_transform.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/admin/mobile/menubutton_transform.js ***!
+  \***********************************************************/
+/***/ (() => {
+
+var menuBtn = document.querySelectorAll('.menu-btn');
+var menuOpen = false;
+menuOpen.addEventListener('click', function () {
+  if (!menuOpen) {
+    menuBtn.classList.add('active');
+    menuOpen = true;
+  } else {
+    menuBtn.classList.remove('active');
+    menuOpen = false;
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/mobile/sidebar.js":
 /*!**********************************************!*\
   !*** ./resources/js/admin/mobile/sidebar.js ***!
@@ -20794,6 +20814,8 @@ __webpack_require__(/*! ./sidebar */ "./resources/js/admin/mobile/sidebar.js");
 __webpack_require__(/*! ./bottombar */ "./resources/js/admin/mobile/bottombar.js");
 
 __webpack_require__(/*! ./filter */ "./resources/js/admin/mobile/filter.js");
+
+__webpack_require__(/*! ./menubutton_transform */ "./resources/js/admin/mobile/menubutton_transform.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when

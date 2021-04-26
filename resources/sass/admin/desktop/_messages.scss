@@ -1,0 +1,46 @@
+.success{
+    width: 20em;
+    height: 4em;
+    background-color: hsl(115, 77%, 75%);
+    border: 0.2em solid black;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: -5em;
+    right: -2em;
+    transition: 0.5s;
+    .description-success{
+        color: black;
+    }
+
+}
+.success.active{
+    top: 5em ;
+    right: 2em;
+}
+
+.error{
+    width: 20em;
+    height: 4em;
+    background-color: hsl(350, 77%, 75%);
+    border: 0.2em solid black;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: -5em;
+    right: -2em;
+    transition: 0.5s;
+    .description-error{
+        color: black;
+    }
+
+}
+
+.error.active{
+    top: 5em ;
+    right: 2em;
+}

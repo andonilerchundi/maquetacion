@@ -2,6 +2,14 @@ import {renderCkeditor} from './ckeditor'
 const table = document.getElementById("table");
 const form = document.getElementById("form");
 
+window.addEventListener ("load", () =>{
+
+    const loader = document.getElementById('loader-container')
+    
+    loader.classList.add("active");
+})
+
+
 
 export let renderForm = () => {
 
@@ -9,6 +17,7 @@ export let renderForm = () => {
     let labels = document.getElementsByTagName('label');
     let inputs = document.querySelectorAll('.input');
     let enviar = document.getElementById("send");
+    let refreshForm = document.getElementById('refresh-form');
     
 
     inputs.forEach(input => {
@@ -77,7 +86,7 @@ export let renderForm = () => {
             sendPostRequest();
         });
     });
-    
+
     renderCkeditor()
 };
 

@@ -1886,6 +1886,10 @@ __webpack_require__(/*! ./sidebar */ "./resources/js/admin/desktop/sidebar.js");
 
 __webpack_require__(/*! ./filter */ "./resources/js/admin/desktop/filter.js");
 
+__webpack_require__(/*! ./loading */ "./resources/js/admin/desktop/loading.js");
+
+__webpack_require__(/*! ./message */ "./resources/js/admin/desktop/message.js");
+
 __webpack_require__(/*! ./menubutton_transform */ "./resources/js/admin/desktop/menubutton_transform.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -2088,11 +2092,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var table = document.getElementById("table");
 var form = document.getElementById("form");
+window.addEventListener("load", function () {
+  var loader = document.getElementById('loader-container');
+  loader.classList.add("active");
+});
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var labels = document.getElementsByTagName('label');
   var inputs = document.querySelectorAll('.input');
   var enviar = document.getElementById("send");
+  var refreshForm = document.getElementById('refresh-form');
   inputs.forEach(function (input) {
     input.addEventListener('focusin', function () {
       for (var i = 0; i < labels.length; i++) {
@@ -2349,6 +2358,16 @@ renderTable();
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/loading.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/desktop/loading.js ***!
+  \***********************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/menubutton_transform.js":
 /*!************************************************************!*\
   !*** ./resources/js/admin/desktop/menubutton_transform.js ***!
@@ -2366,6 +2385,16 @@ menuOpen.addEventListener('click', function () {
     menuOpen = false;
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/message.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/desktop/message.js ***!
+  \***********************************************/
+/***/ (() => {
+
+
 
 /***/ }),
 

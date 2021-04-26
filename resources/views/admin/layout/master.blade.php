@@ -15,6 +15,8 @@
 <body>
 
     <div class="wrapper">
+        @include('admin.layout.partials.messages')
+        @include('admin.layout.partials.loader')
         @include('admin.layout.partials.topbar')
         @if(isset($filters))
             @include('admin.layout.partials.filter', $filters)

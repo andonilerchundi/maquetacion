@@ -28,6 +28,16 @@
   box-shadow: 0.2em 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.226), 0.2em 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.226);
 }
 
+.formulario {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-form-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .form form {
   width: 100%;
 }
@@ -442,6 +452,117 @@ li:hover {
 .filter-button svg {
   width: 1.5em;
   height: 1.5em;
+}
+
+.success {
+  width: 20em;
+  height: 4em;
+  background-color: #96f08e;
+  border: 0.2em solid black;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: -5em;
+  right: -2em;
+  transition: 0.5s;
+}
+.success .description-success {
+  color: black;
+}
+
+.success.active {
+  top: 5em;
+  right: 2em;
+}
+
+.error {
+  width: 20em;
+  height: 4em;
+  background-color: #f08e9f;
+  border: 0.2em solid black;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: -5em;
+  right: -2em;
+  transition: 0.5s;
+}
+.error .description-error {
+  color: black;
+}
+
+.error.active {
+  top: 5em;
+  right: 2em;
+}
+
+#loader-container {
+  width: 20em;
+  height: 8em;
+  font-size: 1em;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #8ecacc;
+  top: -20em;
+  right: 30em;
+  position: fixed;
+  border: solid white 0.2em;
+  z-index: 100;
+}
+#loader-container p {
+  width: 5em;
+  color: white;
+}
+
+#loader-container.active {
+  top: 5em;
+}
+
+#loader-animation {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin: 0 auto;
+}
+
+#loader-animation div {
+  width: 1em;
+  height: 1em;
+  margin: 0.5em;
+  border-radius: 50%;
+  background-color: white;
+  -webkit-animation: loader-animation 0.5s infinite alternate;
+          animation: loader-animation 0.5s infinite alternate;
+}
+
+@-webkit-keyframes loader-animation {
+  to {
+    opacity: 0.1;
+    transform: translate3d(0, -0.5em, 0);
+  }
+}
+
+@keyframes loader-animation {
+  to {
+    opacity: 0.1;
+    transform: translate3d(0, -0.5em, 0);
+  }
+}
+#loader-animation div:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+#loader-animation div:nth-child(3) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

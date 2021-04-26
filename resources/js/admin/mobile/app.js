@@ -4,6 +4,7 @@ require('./ckeditor');
 require('./sidebar');
 require('./bottombar');
 require('./filter');
+require('./menubutton_transform');
 
 
 

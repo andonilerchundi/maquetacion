@@ -10,7 +10,17 @@
     box-shadow: 0.2em 0.2em 0.2em 0.2em hsla(0, 0%, 0%, 0.226), 0.2em 0.2em 0.2em 0.2em rgba(0, 0%, 0%, 0.226);
 
 }
+.formulario{
+    display: flex;
+    flex-direction: column;
 
+}
+
+.button-form-container{
+    display: flex;
+    flex-direction: row;
+    
+}
 .form form{
     
     width: 100%;  

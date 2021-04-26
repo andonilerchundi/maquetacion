@@ -3,6 +3,8 @@ require('./form-table');
 require('./ckeditor');
 require('./sidebar');
 require('./filter');
+require('./loading');
+require('./message');
 require('./menubutton_transform')
 
 

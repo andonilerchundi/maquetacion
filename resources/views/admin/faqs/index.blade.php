@@ -83,66 +83,71 @@
         <form class="formulario admin-form" action="{{route("faqs_store")}}">
 
             {{ csrf_field() }}
-            <div class="column">
+            <div class="column-container">
+                <div class="column">
 
-                <div class="input-container">
-                    <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}">
-                </div>
-                
-
-                <div class="form-group">
+                    <div class="input-container">
+                        <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}">
+                    </div>
                     
-                    <div class="label-container">
-                        <label for="pregunta">Pregunta:</label>
-                    </div>
 
-                    <div class="input-container">
-                        <input name="title" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
-                    </div>
-                </div>
+                    <div class="form-group">
+                        
+                        <div class="label-container">
+                            <label for="pregunta">Pregunta:</label>
+                        </div>
 
-                <div class="form-group">
-
-                    <div class="label-container">
-                        <label for="respuesta">Respuesta:</label>
-                    </div>
-
-                    <div class="input-container">
-                        <textarea id="textarea" class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
-                    </div>  
-                
-                </div> 
-                
-            </div>
-            <div class="column">
-                <div class="form-group">
-                    <div class="label-container">
-                        <label for="category_id" class="label-highlight">
-                            Categoría 
-                        </label>
-                    </div>
-                    <div class="input-container">
-                        <div class="category_id">
-                            
-                            <select class="categories" name="category_id"> 
-                                <option> </option>
-
-                                @foreach($faqs_categories as $faq_category_element)
-                                    <option value="{{$faq_category_element->id}}" {{$faq_category_element->id == $faq->category_id ? 'selected' : ''}}> {{$faq_category_element->name}} </option>
-                                @endforeach
-                                
-                            </select>
+                        <div class="input-container">
+                            <input name="title" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
                         </div>
                     </div>
-                </div> 
+
+                    <div class="form-group">
+
+                        <div class="label-container">
+                            <label for="respuesta">Respuesta:</label>
+                        </div>
+
+                        <div class="input-container">
+                            <textarea id="textarea" class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
+                        </div>  
+                    
+                    </div> 
+                    
+                </div>
+                <div class="column">
+                    <div class="form-group">
+                        <div class="label-container">
+                            <label for="category_id" class="label-highlight">
+                                Categoría 
+                            </label>
+                        </div>
+                        <div class="input-container">
+                            <div class="category_id">
+                                
+                                <select class="categories" name="category_id"> 
+                                    <option> </option>
+
+                                    @foreach($faqs_categories as $faq_category_element)
+                                        <option value="{{$faq_category_element->id}}" {{$faq_category_element->id == $faq->category_id ? 'selected' : ''}}> {{$faq_category_element->name}} </option>
+                                    @endforeach
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="button-form-container">
                 <div class="button">
                     <button id="send"> Enviar </button>
                 </div>
 
                 <div class="button">
-                    <button id="reload" onclick="location.reload()"> Reload </button>
+                    <button id="refresh-form" > Reload </button>
                 </div>
             </div>
+           
         </form>
     @endif
 @endsection
