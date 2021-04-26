@@ -2101,7 +2101,6 @@ var renderForm = function renderForm() {
   var labels = document.getElementsByTagName('label');
   var inputs = document.querySelectorAll('.input');
   var enviar = document.getElementById("send");
-  var refreshForm = document.getElementById('refresh-form');
   inputs.forEach(function (input) {
     input.addEventListener('focusin', function () {
       for (var i = 0; i < labels.length; i++) {

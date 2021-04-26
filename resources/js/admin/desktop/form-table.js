@@ -17,7 +17,7 @@ export let renderForm = () => {
     let labels = document.getElementsByTagName('label');
     let inputs = document.querySelectorAll('.input');
     let enviar = document.getElementById("send");
-    let refreshForm = document.getElementById('refresh-form');
+    
     
 
     inputs.forEach(input => {

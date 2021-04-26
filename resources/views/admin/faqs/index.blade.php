@@ -102,19 +102,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-
-                        <div class="label-container">
-                            <label for="respuesta">Respuesta:</label>
-                        </div>
-
-                        <div class="input-container">
-                            <textarea id="textarea" class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
-                        </div>  
                     
-                    </div> 
                     
                 </div>
+
                 <div class="column">
                     <div class="form-group">
                         <div class="label-container">
@@ -137,14 +128,34 @@
                         </div>
                     </div> 
                 </div>
+            
             </div>
+
+            <div class="label-container" id="ckeditor-label">
+                <label for="respuesta">Respuesta:</label>
+            </div>
+
+            <div class="input-container">
+                <textarea id="textarea" class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
+            </div> 
+            
             <div class="button-form-container">
                 <div class="button">
-                    <button id="send"> Enviar </button>
+                    <button id="send">
+
+                        <svg  viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+                        </svg>
+
+                    </button>
                 </div>
 
                 <div class="button">
-                    <button id="refresh-form" > Reload </button>
+                    <button id="refresh-form" > 
+                        <svg  viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                        </svg>
+                    </button>
                 </div>
             </div>
            

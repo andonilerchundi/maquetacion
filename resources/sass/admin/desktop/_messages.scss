@@ -8,8 +8,8 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    top: -5em;
-    right: -2em;
+    bottom: -30em;
+    right: -4em;
     transition: 0.5s;
     .description-success{
         color: black;
@@ -17,8 +17,8 @@
 
 }
 .success.active{
-    top: 5em ;
-    right: 2em;
+    bottom: 30em;
+    right: 4em;
 }
 
 .error{
@@ -31,8 +31,8 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    top: -5em;
-    right: -2em;
+    bottom: -30em;
+    right: -4em;
     transition: 0.5s;
     .description-error{
         color: black;
@@ -41,6 +41,7 @@
 }
 
 .error.active{
-    top: 5em ;
-    right: 2em;
+    bottom: 30em;
+    right: 4em;
+
 }
