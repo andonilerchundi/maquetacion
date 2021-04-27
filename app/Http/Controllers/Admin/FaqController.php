@@ -72,6 +72,12 @@ class FaqController extends Controller
             'active' => 1,
         ]);
 
+        if (request('id')){
+            $message = \Lang::get('admin/faqs.faq-update');
+        }else{
+            $message = \Lang::get('admin/faqs.faq-create');
+        }
+
         if($this->agent->isDesktop()){
             $view = View::make('admin.faqs.index')
             ->with('faqs', $this->faq->where('active', 1)->paginate(12))
@@ -88,14 +94,11 @@ class FaqController extends Controller
 
         }
 
-
-
-                
-
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
             'id' => $faq->id,
+            'message' => $message,
         ]);
     }
 

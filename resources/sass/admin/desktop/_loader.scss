@@ -1,26 +1,19 @@
 
 #loader-container{
-    width: 20em;
-    height: 8em;
-    font-size: 1em;
-    display: flex;
+    width: 100%;
+    height: 100vh;
+    display: none;
     justify-content: space-around;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    background-color:  hsl(182, 38%, 68%);
-    left: 40%;
-    top: -10em;
+    background-color:  hsl(0, 0%, 0%);
+    opacity: 30%;
     position: fixed;
-    border: solid white 0.2em;
     z-index: 100;
-    p{
-        width: 5em;
-        color: hsl(0, 0%, 100%);
-    }
+   
 }
-#loader-container.active{
-    top: 5em;
+#loader-container.loading{
+    display: flex;
+    
 }
 
 #loader-animation{
@@ -28,6 +21,7 @@
     justify-content: center;
     align-self:center;
     margin: 0 auto;
+    animation: 1.5s;
 
 }
 

@@ -1,14 +1,23 @@
 import {renderCkeditor} from './ckeditor'
+import {showMessage} from './message';
+import {startLoading, stopLoading} from './loader';
+import axios from 'axios';
+
 const table = document.getElementById("table");
 const form = document.getElementById("form");
+const refreshForm = document.getElementById('refresh-form');
 
-window.addEventListener ("load", () =>{
+refreshForm.addEventListener('click', (event) =>{
 
-    const loader = document.getElementById('loader-container')
-    
-    loader.classList.add("active");
+    event.preventDefault();
+
+    let url = refreshForm.dataset.url;
+
+    axios.get(url).then(response => {
+        form.innerHTML = response.data.form;
+        renderForm();
+    });    
 })
-
 
 
 export let renderForm = () => {
@@ -17,7 +26,6 @@ export let renderForm = () => {
     let labels = document.getElementsByTagName('label');
     let inputs = document.querySelectorAll('.input');
     let enviar = document.getElementById("send");
-    
     
 
     inputs.forEach(input => {
@@ -57,16 +65,23 @@ export let renderForm = () => {
             let url = form.action;
     
             let sendPostRequest = async () => {
+
+                startLoading();
     
                 try {
                     await axios.post(url, data).then(response => {
                         form.id.value = response.data.id;
                         table.innerHTML = response.data.table;
+
+                        showMessage('success', response.data.message);
                         renderTable();
-                        
+                        stopLoading();
+                       
                     });
                     
                 } catch (error) {
+
+                    stopLoading();
     
                     if(error.response.status == '422'){
     
@@ -76,9 +91,8 @@ export let renderForm = () => {
                         Object.keys(errors).forEach(function(key) {
                             errorMessage += '<li>' + errors[key] + '</li>';
                         })
-        
-                        document.getElementById('error-container').classList.add('active');
-                        document.getElementById('errors').innerHTML = errorMessage;
+
+                        showMessage('error', errorMessage);
                     }
                 }
             };
