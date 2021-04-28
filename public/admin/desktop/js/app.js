@@ -2100,6 +2100,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var table = document.getElementById("table");
 var form = document.getElementById("form");
 var refreshForm = document.getElementById('refresh-form');
+var visibleSwitch = document.getElementById('visible');
 refreshForm.addEventListener('click', function (event) {
   event.preventDefault();
   var url = refreshForm.dataset.url;
@@ -2126,6 +2127,13 @@ var renderForm = function renderForm() {
         labels[i].classList.remove("active");
       }
     });
+  });
+  visibleSwitch.addEventListener("click", function () {
+    if (visibleSwitch.value == "true") {
+      visibleSwitch.value = "false";
+    } else {
+      visibleSwitch.value = "true";
+    }
   });
   enviar.addEventListener("click", function (event) {
     event.preventDefault();

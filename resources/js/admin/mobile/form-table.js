@@ -1,7 +1,11 @@
 import {renderCkeditor} from './ckeditor';
+import {showMessage} from './message';
+import {startLoading, stopLoading} from './loader';
+import axios from 'axios';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
+let visibleSwitch = document.getElementById('visible');
 
 
 
@@ -11,6 +15,21 @@ export let renderForm = () => {
     let labels = document.getElementsByTagName('label');
     let inputs = document.querySelectorAll('.input');
     let enviar = document.getElementById("send");
+    const refreshForm = document.getElementById('refresh-form');
+
+
+    refreshForm.addEventListener('click', (event) =>{
+
+        event.preventDefault();
+    
+        let url = refreshForm.dataset.url;
+    
+        axios.get(url).then(response => {
+            form.innerHTML = response.data.form;
+            renderForm();
+        });    
+    })
+    
 
     inputs.forEach(input => {
 
@@ -29,6 +48,14 @@ export let renderForm = () => {
                 labels[i].classList.remove("active");
             }
         });
+    });
+    visibleSwitch.addEventListener("click", () => {
+
+        if(visibleSwitch.value == "true"){
+            visibleSwitch.value = "false";
+        }else{
+            visibleSwitch.value = "true";
+        }
     });
     
     enviar.addEventListener("click", (event) => {
@@ -49,16 +76,22 @@ export let renderForm = () => {
             let url = form.action;
     
             let sendPostRequest = async () => {
+
+                startLoading();
     
                 try {
                     await axios.post(url, data).then(response => {
                         form.id.value = response.data.id;
                         table.innerHTML = response.data.table;
+                        showMessage('success', response.data.message);
                         renderTable();
+                        stopLoading();
                         
                     });
                     
                 } catch (error) {
+
+                    stopLoading();
     
                     if(error.response.status == '422'){
     
@@ -68,9 +101,9 @@ export let renderForm = () => {
                         Object.keys(errors).forEach(function(key) {
                             errorMessage += '<li>' + errors[key] + '</li>';
                         })
+
+                        showMessage('error', errorMessage);
         
-                        document.getElementById('error-container').classList.add('active');
-                        document.getElementById('errors').innerHTML = errorMessage;
                     }
                 }
             };

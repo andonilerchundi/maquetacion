@@ -132,6 +132,11 @@
   height: 1.5em;
 }
 
+.input-container #visible {
+  width: 2em;
+  height: 2em;
+}
+
 .table {
   width: 40%;
   margin-top: 2vh;

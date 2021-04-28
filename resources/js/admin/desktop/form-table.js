@@ -6,6 +6,7 @@ import axios from 'axios';
 const table = document.getElementById("table");
 const form = document.getElementById("form");
 const refreshForm = document.getElementById('refresh-form');
+let visibleSwitch = document.getElementById('visible');
 
 refreshForm.addEventListener('click', (event) =>{
 
@@ -45,6 +46,15 @@ export let renderForm = () => {
                 labels[i].classList.remove("active");
             }
         });
+    });
+
+    visibleSwitch.addEventListener("click", () => {
+
+        if(visibleSwitch.value == "true"){
+            visibleSwitch.value = "false";
+        }else{
+            visibleSwitch.value = "true";
+        }
     });
     
     enviar.addEventListener("click", (event) => {

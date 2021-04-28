@@ -2,7 +2,7 @@
 
     <div class="filter" >
         
-        <form class="filter-form" id="filter-form" action="{{route("faqs_filter")}}" autocomplete="off">             
+        <form class="filter-form" id="filter-form" action="{{route($route.'_filter')}}" autocomplete="off">             
 
             {{ csrf_field() }}
 
