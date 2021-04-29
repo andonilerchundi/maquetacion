@@ -48,15 +48,18 @@ export let renderForm = () => {
         });
     });
 
-    visibleSwitch.addEventListener("click", () => {
+    if(visibleSwitch != null){
 
-        if(visibleSwitch.value == "true"){
-            visibleSwitch.value = "false";
-        }else{
-            visibleSwitch.value = "true";
-        }
-    });
-    
+        visibleSwitch.addEventListener("click", () => {
+
+            if(visibleSwitch.value == "true"){
+                visibleSwitch.value = "false";
+            }else{
+                visibleSwitch.value = "true";
+            }
+        });
+    }
+ 
     enviar.addEventListener("click", (event) => {
 
         event.preventDefault ()

@@ -1,65 +1,49 @@
 import {renderTable} from './form-table';
 
-const buttonFilters = document.querySelectorAll('.filter-button');
-const openFilters = document.querySelectorAll('.filter');
+const buttonFilter = document.getElementById('filter-button');
+const filter = document.getElementById("filter");
 const filterForm = document.getElementById("filter-form");
-const filter = document.getElementById('filter');
+const applyFilter = document.getElementById('apply-filter');
 
-buttonFilters.forEach(buttonFilter => { 
+buttonFilter.addEventListener("click", () => {
 
-    buttonFilter.addEventListener("click", () => {
-
-        let appearElements = document.querySelectorAll(".appear");
-
-        if(buttonFilter.classList.contains("appear")){
-
-            buttonFilter.classList.remove("appear");
-
-            appearElements.forEach(appearElement => {
-                appearElement.classList.remove("appear");
-            });
-
-        }else{
-
-            appearElements.forEach(appearElement => {
-                appearElement.classList.remove("appear");
-            });
-            
-            buttonFilter.classList.add("appear");
-
-            openFilters.forEach(openFilter => {
-
-                if(openFilter.dataset.content == buttonFilter.dataset.button){
-                    openFilter.classList.add("appear"); 
-                }else{
-                }
-            });
-        }
-    });
-    
+    filter.classList.toggle('appear');
 });
 
-filter.addEventListener( 'click', () => {   
+applyFilter .addEventListener( 'click', () => {   
     
     let data = new FormData(filterForm);
+    let filters = {};
+
+    data.forEach(function(value, key){
+        filters[key] = value;
+    });
+
+    let json = JSON.stringify(filters);
+
     let url = filterForm.action;
 
     let sendPostRequest = async () => {
 
         try {
-            await axios.post(url, data).then(response => {
+            axios.get(url, {
+                params: {
+                  filters: json
+                }
+            }).then(response => {
+               
                 table.innerHTML = response.data.table;
                 renderTable();
-                
+
+                filter.classList.remove("appear");
             });
+           
             
         } catch (error) {
 
         }
-    };
-
+    }
     
-
     sendPostRequest();
     
 });

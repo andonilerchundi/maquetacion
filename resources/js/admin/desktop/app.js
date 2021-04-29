@@ -5,7 +5,6 @@ require('./sidebar');
 require('./filter');
 require('./loader');
 require('./message');
-require('./menubutton_transform')
 
 
 /**

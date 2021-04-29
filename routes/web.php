@@ -28,8 +28,7 @@ Route::group(['prefix' => 'admin'], function () {
         ]
     ]);
 
-    // Route::get('/faqs/json', 'App\Http\Controllers\Admin\FaqController@indexJson')->name('faqs_json');
-    Route::post('/faqs/filter', 'App\Http\Controllers\Admin\FaqController@filter')->name('faqs_filter');
+    Route::get('/faqs/filter/{filters?}', 'App\Http\Controllers\Admin\FaqController@filter')->name('faqs_filter');
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
         'names' => [
             'index' => 'faqs',

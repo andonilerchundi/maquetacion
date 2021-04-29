@@ -2011,34 +2011,20 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-var buttonFilters = document.querySelectorAll('.filter-button');
-var openFilter = document.querySelectorAll('.filter');
+var buttonFilter = document.getElementById('filter-button');
+var filter = document.getElementById("filter");
 var filterForm = document.getElementById("filter-form");
-var filter = document.getElementById('filter');
-buttonFilters.forEach(function (buttonFilter) {
-  buttonFilter.addEventListener("click", function () {
-    var appearElements = document.querySelectorAll(".appear");
-
-    if (buttonFilter.classList.contains("appear")) {
-      buttonFilter.classList.remove("appear");
-      appearElements.forEach(function (appearElement) {
-        appearElement.classList.remove("appear");
-      });
-    } else {
-      appearElements.forEach(function (appearElement) {
-        appearElement.classList.remove("appear");
-      });
-      buttonFilter.classList.add("appear");
-      openFilter.forEach(function (filter) {
-        if (filter.dataset.content == buttonFilter.dataset.button) {
-          filter.classList.add("appear");
-        } else {}
-      });
-    }
-  });
+var applyFilter = document.getElementById('apply-filter');
+buttonFilter.addEventListener("click", function () {
+  filter.classList.toggle('appear');
 });
-filter.addEventListener('click', function () {
+applyFilter.addEventListener('click', function () {
   var data = new FormData(filterForm);
+  var filters = {};
+  data.forEach(function (value, key) {
+    filters[key] = value;
+  });
+  var json = JSON.stringify(filters);
   var url = filterForm.action;
 
   var sendPostRequest = /*#__PURE__*/function () {
@@ -2047,27 +2033,24 @@ filter.addEventListener('click', function () {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios.post(url, data).then(function (response) {
-                table.innerHTML = response.data.table;
-                (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-              });
+              try {
+                axios.get(url, {
+                  params: {
+                    filters: json
+                  }
+                }).then(function (response) {
+                  table.innerHTML = response.data.table;
+                  (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                  filter.classList.remove("appear");
+                });
+              } catch (error) {}
 
-            case 3:
-              _context.next = 7;
-              break;
-
-            case 5:
-              _context.prev = 5;
-              _context.t0 = _context["catch"](0);
-
-            case 7:
+            case 1:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 5]]);
+      }, _callee);
     }));
 
     return function sendPostRequest() {
@@ -2160,13 +2143,17 @@ var renderForm = function renderForm() {
       }
     });
   });
-  visibleSwitch.addEventListener("click", function () {
-    if (visibleSwitch.value == "true") {
-      visibleSwitch.value = "false";
-    } else {
-      visibleSwitch.value = "true";
-    }
-  });
+
+  if (visibleSwitch != null) {
+    visibleSwitch.addEventListener("click", function () {
+      if (visibleSwitch.value == "true") {
+        visibleSwitch.value = "false";
+      } else {
+        visibleSwitch.value = "true";
+      }
+    });
+  }
+
   enviar.addEventListener("click", function (event) {
     event.preventDefault();
     forms.forEach(function (form) {
@@ -2440,26 +2427,6 @@ var stopLoading = function stopLoading() {
 
 /***/ }),
 
-/***/ "./resources/js/admin/mobile/menubutton_transform.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/admin/mobile/menubutton_transform.js ***!
-  \***********************************************************/
-/***/ (() => {
-
-var menuBtn = document.querySelectorAll('.menu-btn');
-var menuOpen = false;
-menuOpen.addEventListener('click', function () {
-  if (!menuOpen) {
-    menuBtn.classList.add('active');
-    menuOpen = true;
-  } else {
-    menuBtn.classList.remove('active');
-    menuOpen = false;
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/admin/mobile/message.js":
 /*!**********************************************!*\
   !*** ./resources/js/admin/mobile/message.js ***!
@@ -2515,9 +2482,10 @@ var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 var table = document.getElementById("table");
 var form = document.getElementById("form");
 var links = document.querySelectorAll(".link");
-var sidebar = document.querySelectorAll(".sidebar");
-var sidebarButton = document.querySelectorAll(".sidebar-button");
+var sidebar = document.getElementById("sidebar");
+var sidebarButton = document.getElementById("sidebar-button");
 var title = document.getElementById('title-page');
+var menuBtn = document.getElementById('menu-btn');
 links.forEach(function (link) {
   link.addEventListener("click", function () {
     var url = link.dataset.url;
@@ -2564,27 +2532,9 @@ links.forEach(function (link) {
     RefreshRequest();
   });
 });
-sidebarButton.forEach(function (sidebarButton) {
-  sidebarButton.addEventListener("click", function () {
-    var activeElements = document.querySelectorAll(".active");
-
-    if (sidebarButton.classList.contains("active")) {
-      sidebarButton.classList.remove("active");
-      activeElements.forEach(function (activeElement) {
-        activeElement.classList.remove("active");
-      });
-    } else {
-      activeElements.forEach(function (activeElement) {
-        activeElement.classList.remove("active");
-      });
-      sidebarButton.classList.add("active");
-      sidebar.forEach(function (sidebar) {
-        if (sidebar.dataset.content == sidebarButton.dataset.button) {
-          sidebar.classList.add("active");
-        } else {}
-      });
-    }
-  });
+sidebarButton.addEventListener('click', function () {
+  sidebarButton.classList.toggle("active");
+  sidebar.classList.toggle("active");
 });
 
 /***/ }),
@@ -20897,8 +20847,6 @@ __webpack_require__(/*! ./filter */ "./resources/js/admin/mobile/filter.js");
 __webpack_require__(/*! ./loader */ "./resources/js/admin/mobile/loader.js");
 
 __webpack_require__(/*! ./message */ "./resources/js/admin/mobile/message.js");
-
-__webpack_require__(/*! ./menubutton_transform */ "./resources/js/admin/mobile/menubutton_transform.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when

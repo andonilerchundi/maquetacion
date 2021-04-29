@@ -163,16 +163,14 @@ class FaqController extends Controller
 
 
         }
-
-
-
-        
     }
-    public function filter(Request $request){
 
+    public function filter(Request $request, $filters = null){
+
+        $filters = json_decode($request->input('filters'));
         $query = $this->faq->query();
 
-        $query->when(request('category_id'), function ($q, $category_id) {
+        $query->when($filters->category_id, function ($q, $category_id) {
 
             if($category_id == 'all'){
                 return $q;
@@ -183,7 +181,7 @@ class FaqController extends Controller
         });
         
 
-        $query->when(request('search'), function ($q, $search) {
+        $query->when($filters->search, function ($q, $search) {
 
             if($search == null){
                 return $q;
@@ -193,7 +191,7 @@ class FaqController extends Controller
             }
         });
 
-        $query->when(request('created_at_from'), function ($q, $created_at_from) {
+        $query->when($filters->created_at_from, function ($q, $created_at_from) {
 
             if($created_at_from == null){
                 return $q;
@@ -203,7 +201,7 @@ class FaqController extends Controller
             }
         });
 
-        $query->when(request('created_at_since'), function ($q, $created_at_since) {
+        $query->when($filters->created_at_since, function ($q, $created_at_since) {
 
             if( $created_at_since == null){
                 return $q;
@@ -214,15 +212,18 @@ class FaqController extends Controller
         });
         
         if($this->agent->isDesktop()){
-            $faqs = $query->where('active', 1)->paginate(12);
-
+            $faqs = $query->where('active', 1)
+                    ->paginate(12)
+                    ->appends(['filters' => json_encode($filters)]);
         }
-        if($this->agent->isDesktop()){
-            $faqs = $query->where('active', 1)->paginate(7);
+
+        if($this->agent->isMobile()){
+            $faqs = $query->where('active', 1)
+                    ->paginate(7)
+                    ->appends(['filters' => json_encode($filters)]);
 
         }
         
-
         $view = View::make('admin.faqs.index')
             ->with('faqs', $faqs)
             ->renderSections();

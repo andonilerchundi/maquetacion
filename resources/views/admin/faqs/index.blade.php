@@ -13,7 +13,7 @@
         <table class="table table-sortable">
             <thead>
                 <tr>
-                    <th> Pregunta</th>
+                    <th>Pregunta</th>
                     <th>Rpta.</th>
                     <th>Categoria</th>
                     <th>Fecha</th>
