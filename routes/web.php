@@ -74,7 +74,7 @@ Route::group(['prefix' => 'admin'], function () {
             'show' => 'customers_show',
         ]
     ]);
-    Route::post('/sliders/filter', 'App\Http\Controllers\Admin\SliderController@filter')->name('sliders_filter');
+    Route::get('/sliders/filter{filters?}', 'App\Http\Controllers\Admin\SliderController@filter')->name('sliders_filter');
     Route::resource('sliders', 'App\Http\Controllers\Admin\SliderController', [
         'parameters' => [
             'sliders' => 'slider', 

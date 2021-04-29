@@ -168,11 +168,12 @@ class SliderController extends Controller
 
         
     }
-    public function filter(Request $request){
+    public function filter(Request $request,$filters = null){
 
+        $filters = json_decode($request->input('filters'));
         $query = $this->slider->query();
 
-        $query->when(request('search'), function ($q, $search) {
+        $query->when($filters->search, function ($q, $search) {
 
             if($search == null){
                 return $q;
@@ -182,7 +183,7 @@ class SliderController extends Controller
             }
         });
 
-        $query->when(request('created_at_from'), function ($q, $created_at_from) {
+        $query->when($filters->created_at_from, function ($q, $created_at_from) {
 
             if($created_at_from == null){
                 return $q;
@@ -192,7 +193,7 @@ class SliderController extends Controller
             }
         });
 
-        $query->when(request('created_at_since'), function ($q, $created_at_since) {
+        $query->when($filters->created_at_since, function ($q, $created_at_since) {
 
             if( $created_at_since == null){
                 return $q;
@@ -203,11 +204,15 @@ class SliderController extends Controller
         });
         
         if($this->agent->isDesktop()){
-            $sliders = $query->where('active', 1)->paginate(12);
+            $sliders = $query->where('active', 1)
+            ->paginate(12);
+            ->appends(['filters' => json_encode($filters)]);
 
         }
         if($this->agent->isDesktop()){
-            $sliders = $query->where('active', 1)->paginate(7);
+            $sliders = $query->where('active', 1)
+            ->paginate(7);
+            ->appends(['filters' => json_encode($filters)]);
 
         }
         
