@@ -2445,7 +2445,6 @@ var links = document.querySelectorAll(".link");
 var sidebar = document.getElementById("sidebar");
 var sidebarButton = document.getElementById("sidebar-button");
 var title = document.getElementById('title-page');
-var menuBtn = document.getElementById('menu-btn');
 links.forEach(function (link) {
   link.addEventListener("click", function () {
     var url = link.dataset.url;
@@ -2462,6 +2461,8 @@ links.forEach(function (link) {
                   form.innerHTML = response.data.form;
                   table.innerHTML = response.data.table;
                   title.textContent = link.textContent;
+                  sidebar.classList.remove("active");
+                  sidebarButton.classList.remove('active');
                   window.history.pushState('', '', url);
                   (0,_form_table_js__WEBPACK_IMPORTED_MODULE_1__.renderForm)();
                   (0,_form_table_js__WEBPACK_IMPORTED_MODULE_1__.renderTable)();

@@ -34,7 +34,7 @@ class FaqController extends Controller
         if($this->agent->isMobile()){
             $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(7));
+            ->with('faqs', $this->faq->where('active', 1)->paginate(9));
         }
 
         if(request()->ajax()) {
@@ -88,7 +88,7 @@ class FaqController extends Controller
 
         if($this->agent->isMobile()){
             $view = View::make('admin.faqs.index')
-            ->with('faqs', $this->faq->where('active', 1)->paginate(7))
+            ->with('faqs', $this->faq->where('active', 1)->paginate(9))
             ->with('faq', $faq)
             ->renderSections();
 
@@ -114,7 +114,7 @@ class FaqController extends Controller
 
             $view = View::make('admin.faqs.index')
             ->with('faq', $faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(7)); 
+            ->with('faqs', $this->faq->where('active', 1)->paginate(9)); 
         }
          
         
@@ -153,7 +153,7 @@ class FaqController extends Controller
         if($this->agent->isMobile()){
             $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(7))
+            ->with('faqs', $this->faq->where('active', 1)->paginate(9))
             ->renderSections();
         
             return response()->json([
@@ -219,7 +219,7 @@ class FaqController extends Controller
 
         if($this->agent->isMobile()){
             $faqs = $query->where('active', 1)
-                    ->paginate(7)
+                    ->paginate(9)
                     ->appends(['filters' => json_encode($filters)]);
 
         }

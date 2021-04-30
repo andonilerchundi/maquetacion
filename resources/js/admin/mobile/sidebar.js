@@ -8,7 +8,7 @@ const sidebar = document.getElementById("sidebar");
 const sidebarButton = document.getElementById("sidebar-button");
 const title = document.getElementById('title-page');
 
-const menuBtn = document.getElementById('menu-btn');
+
 
 
 
@@ -25,6 +25,9 @@ links.forEach(link =>{
                     form.innerHTML = response.data.form;
                     table.innerHTML = response.data.table;
                     title.textContent = link.textContent;
+
+                    sidebar.classList.remove("active");
+                    sidebarButton.classList.remove('active');
 
                     window.history.pushState('','',url);
 

@@ -73,7 +73,12 @@
         @if($agent->isMobile())
             @include('admin.layout.partials.table_pagination_mobile', ['items' => $faqs])
         @endif
+       
     @endif
+
+   
+    
+ 
 
 @endsection
 
@@ -135,7 +140,7 @@
                 <label for="respuesta">Respuesta:</label>
             </div>
 
-            <div class="input-container">
+            <div class="textarea-container">
                 <textarea id="textarea" class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
             </div> 
             

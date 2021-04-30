@@ -205,13 +205,13 @@ class SliderController extends Controller
         
         if($this->agent->isDesktop()){
             $sliders = $query->where('active', 1)
-            ->paginate(12);
+            ->paginate(12)
             ->appends(['filters' => json_encode($filters)]);
 
         }
         if($this->agent->isDesktop()){
             $sliders = $query->where('active', 1)
-            ->paginate(7);
+            ->paginate(7)
             ->appends(['filters' => json_encode($filters)]);
 
         }

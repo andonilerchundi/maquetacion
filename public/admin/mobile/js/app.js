@@ -2114,21 +2114,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var table = document.getElementById("table");
 var form = document.getElementById("form");
+var refreshForm = document.getElementById('refresh-form');
 var visibleSwitch = document.getElementById('visible');
+refreshForm.addEventListener('click', function (event) {
+  event.preventDefault();
+  var url = refreshForm.dataset.url;
+  axios__WEBPACK_IMPORTED_MODULE_4___default().get(url).then(function (response) {
+    form.innerHTML = response.data.form;
+    renderForm();
+  });
+});
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var labels = document.getElementsByTagName('label');
   var inputs = document.querySelectorAll('.input');
   var enviar = document.getElementById("send");
-  var refreshForm = document.getElementById('refresh-form');
-  refreshForm.addEventListener('click', function (event) {
-    event.preventDefault();
-    var url = refreshForm.dataset.url;
-    axios__WEBPACK_IMPORTED_MODULE_4___default().get(url).then(function (response) {
-      form.innerHTML = response.data.form;
-      renderForm();
-    });
-  });
   inputs.forEach(function (input) {
     input.addEventListener('focusin', function () {
       for (var i = 0; i < labels.length; i++) {
@@ -2485,7 +2485,6 @@ var links = document.querySelectorAll(".link");
 var sidebar = document.getElementById("sidebar");
 var sidebarButton = document.getElementById("sidebar-button");
 var title = document.getElementById('title-page');
-var menuBtn = document.getElementById('menu-btn');
 links.forEach(function (link) {
   link.addEventListener("click", function () {
     var url = link.dataset.url;
@@ -2502,6 +2501,8 @@ links.forEach(function (link) {
                   form.innerHTML = response.data.form;
                   table.innerHTML = response.data.table;
                   title.textContent = link.textContent;
+                  sidebar.classList.remove("active");
+                  sidebarButton.classList.remove('active');
                   window.history.pushState('', '', url);
                   (0,_form_table_js__WEBPACK_IMPORTED_MODULE_1__.renderForm)();
                   (0,_form_table_js__WEBPACK_IMPORTED_MODULE_1__.renderTable)();

@@ -37,7 +37,7 @@ th{
 }
 
 .table td{
-    height: 4.25em;
+    height: 3.5em;
     font-size: 0.8em;
     width: 8em;
     
@@ -110,13 +110,12 @@ th{
 
 .table-pagination{
   
-    height: 4vh;
-    float: left;
+    height: 1.5vh;  
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2em;
+    margin-top: 1.75em;
 }
 
 .table-pagination-description{
@@ -143,6 +142,5 @@ th{
             height:2em ;
         }
     }
-    
     
 }

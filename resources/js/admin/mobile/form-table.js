@@ -5,8 +5,21 @@ import axios from 'axios';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
+const refreshForm = document.getElementById('refresh-form');
 let visibleSwitch = document.getElementById('visible');
 
+
+refreshForm.addEventListener('click', (event) =>{
+
+    event.preventDefault();
+
+    let url = refreshForm.dataset.url;
+
+    axios.get(url).then(response => {
+        form.innerHTML = response.data.form;
+        renderForm();
+    });    
+})
 
 
 export let renderForm = () => {
@@ -15,22 +28,7 @@ export let renderForm = () => {
     let labels = document.getElementsByTagName('label');
     let inputs = document.querySelectorAll('.input');
     let enviar = document.getElementById("send");
-    const refreshForm = document.getElementById('refresh-form');
-
-
-    refreshForm.addEventListener('click', (event) =>{
-
-        event.preventDefault();
     
-        let url = refreshForm.dataset.url;
-    
-        axios.get(url).then(response => {
-            form.innerHTML = response.data.form;
-            renderForm();
-        });    
-    })
-    
-
     inputs.forEach(input => {
 
         input.addEventListener('focusin', () => {
