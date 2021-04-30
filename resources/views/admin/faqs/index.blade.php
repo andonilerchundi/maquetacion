@@ -76,10 +76,6 @@
        
     @endif
 
-   
-    
- 
-
 @endsection
 
 @section('form')
