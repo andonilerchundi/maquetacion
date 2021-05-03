@@ -15,27 +15,28 @@ class FaqController extends Controller
     protected $agent;
     protected $faq;
 
+
     function __construct(Faq $faq, Agent $agent)
     {
         $this->middleware('auth');
         $this->agent = $agent;
         $this->faq = $faq;
+
+        if ($this->agent->isMobile()) {
+            $this->paginate = 9;
+        }
+
+        if ($this->agent->isDesktop()) {
+            $this->paginate = 12;
+        }
     }
 
     public function index()
     {
-
-        if($this->agent->isDesktop()){
-            $view = View::make('admin.faqs.index')
-            ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(12));
-        }
-
-        if($this->agent->isMobile()){
-            $view = View::make('admin.faqs.index')
-            ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(9));
-        }
+        $view = View::make('admin.faqs.index')
+        ->with('faq', $this->faq)
+        ->with('faqs', $this->faq->where('active', 1)
+        ->paginate($this->paginate));
 
         if(request()->ajax()) {
 
@@ -78,22 +79,13 @@ class FaqController extends Controller
             $message = \Lang::get('admin/faqs.faq-create');
         }
 
-        if($this->agent->isDesktop()){
-            $view = View::make('admin.faqs.index')
-            ->with('faqs', $this->faq->where('active', 1)->paginate(12))
-            ->with('faq', $faq)
-            ->renderSections();
+        $view = View::make('admin.faqs.index')
+        ->with('faqs', $this->faq->where('active', 1)
+        ->paginate($this->paginate))
+        ->with('faq', $faq)
+        ->renderSections(); 
 
-        }
-
-        if($this->agent->isMobile()){
-            $view = View::make('admin.faqs.index')
-            ->with('faqs', $this->faq->where('active', 1)->paginate(9))
-            ->with('faq', $faq)
-            ->renderSections();
-
-        }
-
+       
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
@@ -104,20 +96,13 @@ class FaqController extends Controller
 
     public function show(Faq $faq)
     {
-        if($this->agent->isDesktop()){
 
-            $view = View::make('admin.faqs.index')
-            ->with('faq', $faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(12)); 
-        }
-        if($this->agent->isMobile()){
+        $view = View::make('admin.faqs.index')
+        ->with('faq', $faq)
+        ->with('faqs', $this->faq->where('active', 1)
+        ->paginate($this->paginate))
+        ->renderSections();   
 
-            $view = View::make('admin.faqs.index')
-            ->with('faq', $faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(9)); 
-        }
-         
-        
         if(request()->ajax()) {
 
             $sections = $view->renderSections(); 
@@ -137,32 +122,18 @@ class FaqController extends Controller
 
         // $faq->delete();
 
-        if($this->agent->isDesktop()){
-            $view = View::make('admin.faqs.index')
-            ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(12))
-            ->renderSections();
+        $view = View::make('admin.faqs.index')
+        ->with('faq', $this->faq)
+        ->with('faqs', $this->faq->where('active', 1)
+        ->paginate($this->paginate))
+        ->renderSections(); 
+
+        return response()->json([
+            'table' => $view['table'],
+            'form' => $view['form']
+        ]);
+
         
-            return response()->json([
-                'table' => $view['table'],
-                'form' => $view['form']
-            ]);
-
-
-        }
-        if($this->agent->isMobile()){
-            $view = View::make('admin.faqs.index')
-            ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->paginate(9))
-            ->renderSections();
-        
-            return response()->json([
-                'table' => $view['table'],
-                'form' => $view['form']
-            ]);
-
-
-        }
     }
 
     public function filter(Request $request, $filters = null){

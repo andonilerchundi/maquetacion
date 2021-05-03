@@ -43,22 +43,46 @@
                     </div>
                         
                 @endif
+                @if($agent->isMobile())
 
-                @if ($key == 'created_at')
+                    @if ($key == 'created_at')
+
+                        <div class="label-container">
+                            <label for="date" class="label">Fechas</label>
+                        </div>    
+                        <div id="date-container-filter">
+                            
+                            <div class="input-container">
+                                <input type="date" name="created_at_from" class="date-input">
+                            </div>
+                            <p>-</p> 
+                            <div class="input-container">
+                                <input type="date" name="created_at_since" class="date-input">
+                            </div>
+                        </div>
+                    @endif
+                @endif
+
+                @if($agent->isDesktop())
+
+                    @if ($key == 'created_at')
 
                     <div class="label-container">
                         <label for="date" class="label">Fechas</label>
                     </div>    
-                    <div id="date-container-filter">
+                   
                         
-                        <div class="input-container">
-                            <input type="date" name="created_at_from" class="date-input">
-                        </div>
-                        <p>-</p> 
-                        <div class="input-container">
-                            <input type="date" name="created_at_since" class="date-input">
-                        </div>
+                    <div class="input-container">
+                        <input type="date" name="created_at_from" class="date-input">
                     </div>
+                       
+                    <div class="input-container">
+                        <input type="date" name="created_at_since" class="date-input">
+                    </div>
+                    
+                @endif
+
+
                 @endif
                 
 

@@ -436,6 +436,8 @@ li:hover {
   font-weight: bold;
 }
 .filter .input-container {
+  display: flex;
+  justify-content: center;
   width: 30%;
 }
 .filter .input-container select {
