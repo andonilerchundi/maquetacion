@@ -84,13 +84,50 @@
         <form class="formulario admin-form" action="{{route("faqs_store")}}">
 
             {{ csrf_field() }}
-            <div class="column-container">
-                <div class="column">
 
-                    <div class="input-container">
-                        <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}">
-                    </div>
-                    
+
+            <div class="top-bar-form">
+
+                <div class="left-top-bar">
+
+                    <div class="tab-items tab-active" data-tab="contenido">
+                        <svg  viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,20H5V4H7V7H17V4H19M12,2A1,1 0 0,1 13,3A1,1 0 0,1 12,4A1,1 0 0,1 11,3A1,1 0 0,1 12,2M19,2H14.82C14.4,0.84 13.3,0 12,0C10.7,0 9.6,0.84 9.18,2H5A2,2 0 0,0 3,4V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V4A2,2 0 0,0 19,2Z" />
+                        </svg>
+                    </div> 
+                    <div class="tab-items" data-tab="imagen">
+                        <svg  viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z" />
+                        </svg>
+                    </div>  
+
+                </div>
+
+                <div class="right-top-bar">
+   
+                    <button id="send">
+                        <svg  viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+                        </svg>
+                    </button>
+                
+                    <button id="refresh-form" data-url="{{route('faqs_create')}}"> 
+                        <svg  viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z" />
+                        </svg>
+                    </button>
+
+                </div>
+               
+            </div>
+
+            <div class="input-container">
+                <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}">
+            </div>
+
+            <div class="tab-panel tab-active" data-tab="contenido">
+
+                <div class="two-columns">
 
                     <div class="form-group">
                         
@@ -102,22 +139,17 @@
                             <input name="title" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
                         </div>
                     </div>
-
                     
-                    
-                </div>
-
-                <div class="column">
                     <div class="form-group">
                         <div class="label-container">
                             <label for="category_id" class="label-highlight">
-                                Categoría 
+                                Categoría:
                             </label>
                         </div>
                         <div class="input-container">
                             <div class="category_id">
                                 
-                                <select class="categories" name="category_id"> 
+                                <select name="category_id"> 
                                     <option> </option>
 
                                     @foreach($faqs_categories as $faq_category_element)
@@ -128,37 +160,98 @@
                             </div>
                         </div>
                     </div> 
-                </div>
-            
-            </div>
-
-            <div class="label-container" id="ckeditor-label">
-                <label for="respuesta">Respuesta:</label>
-            </div>
-
-            <div class="textarea-container">
-                <textarea id="textarea" class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
-            </div> 
-            
-            <div class="button-form-container">
-                <div class="button">
-                    <button id="send">
-                        <svg  viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="button" >
-                    <button id="refresh-form" data-url="{{route('faqs_create')}}"> 
-                        <svg  viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z" />
-                        </svg>
-                    </button>
-                </div>
                 
+                </div>
+
+                @component('admin.layout.partials.locale')
+                    <div class="tab-panel-language language-active" data-tab="español">
+                        <div class="one-column" >
+
+                            <div class="form-group">
+                                
+                                <div class="label-container">
+                                    <label>Titulo:</label>
+                                </div>
+
+                                <div class="input-container">
+                                    <input>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="label-container">
+                                    <label for="respuesta">Respuesta:</label>
+                                </div>
+                    
+                                <div class="input-container">
+                                    <textarea class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel-language" data-tab="ingles">
+                        <div class="one-column" >
+
+                            <div class="form-group">
+                                
+                                <div class="label-container">
+                                    <label>Titulo:</label>
+                                </div>
+
+                                <div class="input-container">
+                                    <input>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="label-container">
+                                    <label for="respuesta">Respuesta:</label>
+                                </div>
+                    
+                                <div class="input-container">
+                                    <textarea class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                @endcomponent
+    
+                
+
             </div>
-           
+
+            <div class="tab-panel" data-tab="imagen">
+
+                @component('admin.layout.partials.locale')
+                    <div class="tab-panel-language language-active" data-tab="español">
+                        <div class="one-columns">
+
+                            <div class="drop-zone">
+                                <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                <input type="file" name="myFile" class="drop-zone__input">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="tab-panel-language" data-tab="ingles">
+                        <div class="one-columns">
+
+                            <div class="drop-zone">
+                                <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                <input type="file" name="myFile" class="drop-zone__input">
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                @endcomponent
+            
+            </div>
+ 
         </form>
     @endif
 @endsection

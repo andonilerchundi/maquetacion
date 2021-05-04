@@ -33,11 +33,6 @@
   flex-direction: column;
 }
 
-.button-form-container {
-  display: flex;
-  flex-direction: row;
-}
-
 .form form {
   width: 100%;
 }
@@ -46,95 +41,66 @@
   margin-bottom: 1em;
 }
 
-.column {
-  float: left;
-  width: 50%;
-  height: 100%;
-}
-
 .label-container {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  width: 90%;
-}
-
-.input-container {
-  width: 90%;
-}
-
-.input-container input {
   width: 100%;
 }
 
-.categories {
-  width: 91%;
+.input-container input, .input-container select {
+  width: 100%;
 }
 
-.county-box {
-  width: 91%;
+.input-container select {
+  padding: 0.1em;
 }
 
-.button button {
-  background-color: white;
-  border: solid #8ecacc;
-  color: white;
-  padding: 0.5em 0.8em;
-  text-align: center;
-  text-decoration: none;
-  color: black;
-  display: inline-block;
-  font-size: 1em;
-  margin: 0.5em;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  width: 4em;
+.drop-zone {
+  max-width: 200px;
+  height: 200px;
+  padding: 25px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  color: #cccccc;
+  border: 4px dashed #009578;
+  border-radius: 10px;
 }
 
-.button button:hover {
-  background-color: #8ecacc;
-  color: white;
+.drop-zone--over {
+  border-style: solid;
 }
 
-.category-name {
+.drop-zone__input {
+  display: none;
+}
+
+.drop-zone__thumb {
   width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #cccccc;
+  background-size: cover;
+  position: relative;
 }
-.category-name select {
+
+.drop-zone__thumb::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-}
-
-#ckeditor-label {
-  margin-top: 1em;
-}
-
-#textarea {
-  margin-top: 2em;
-  height: 20em;
-}
-
-#send {
-  margin-top: 12em;
-  height: 2em;
-}
-#send svg {
-  width: 1em;
-  height: 1em;
-}
-
-#refresh-form {
-  margin-top: 12em;
-  height: 2em;
-}
-#refresh-form svg {
-  width: 1.5em;
-  height: 1.5em;
-}
-
-.input-container #visible {
-  width: 2em;
-  height: 2em;
+  padding: 5px 0;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  text-align: center;
 }
 
 .table {
@@ -600,6 +566,170 @@ li:hover {
           animation-delay: 0.4s;
 }
 
+.top-bar-form {
+  width: 100%;
+  height: 2.5em;
+  background-color: black;
+  border-radius: 0.5em;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.left-top-bar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 2em;
+  margin-left: 1em;
+  cursor: pointer;
+}
+.left-top-bar .tab-items {
+  width: 5%;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.2em;
+}
+.left-top-bar svg {
+  width: 1.5em;
+  height: 1.5em;
+  color: white;
+}
+
+.right-top-bar {
+  display: flex;
+  flex-direction: row;
+  width: 15%;
+  height: 2em;
+}
+.right-top-bar #refresh-form {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  width: 2em;
+  background-color: #8ecacc;
+  border-width: 1;
+}
+.right-top-bar #refresh-form svg {
+  width: 2em;
+  height: 2em;
+  color: black;
+}
+.right-top-bar #send {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  width: 2em;
+  background-color: #8ecacc;
+  border-width: 1;
+}
+.right-top-bar #send svg {
+  width: 2em;
+  height: 2em;
+  color: black;
+}
+
+.tab-panel {
+  margin: 2em 0;
+  display: none;
+}
+
+.tab-panel.tab-active {
+  display: block;
+}
+
+.tab-items.tab-active {
+  background-color: #8ecacc;
+}
+.tab-items.tab-active svg {
+  color: black;
+}
+
+.language-bar-form {
+  width: 100%;
+  height: 2em;
+  cursor: pointer;
+  background-color: black;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: row;
+}
+
+.tab-item-language {
+  width: 15%;
+  height: 2em;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5em;
+}
+
+.tab-item-language.language-active {
+  background-color: #8ecacc;
+  color: black;
+}
+
+.tab-panel-language {
+  display: none;
+}
+
+.tab-panel-language.language-active {
+  display: block;
+}
+
+.drop-zone {
+  margin: 1em auto;
+  max-width: 200px;
+  height: 200px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  color: #cccccc;
+  border: 4px dashed #8ecacc;
+  border-radius: 10px;
+}
+
+.drop-zone--over {
+  border-style: solid;
+}
+
+.drop-zone__input {
+  display: none;
+}
+
+.drop-zone__thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #cccccc;
+  background-size: cover;
+  position: relative;
+}
+
+.drop-zone__thumb::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 0;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  text-align: center;
+}
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -1014,4 +1144,37 @@ th {
 ==============================================================================*/
 ol, ul {
   list-style: none;
+}
+
+/*Contents*/
+img {
+  max-width: 100%;
+}
+
+.one-column .form-group {
+  width: 100%;
+}
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.two-columns .form-group {
+  width: 47%;
+}
+
+.three-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.three-columns .form-group {
+  width: 32%;
+}
+
+.four-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.four-columns .form-group {
+  width: 23%;
 }

@@ -1,45 +1,5 @@
-.form {
-    background-color: hsl(0, 0%, 100%);
-    width: 50%;
-    height: 50vh;
-    margin-top: 4vh;
-    padding: 1em;
-    border-radius: 1em;
-    box-shadow: 0.2em 0.2em 0.2em 0.2em hsla(0, 0%, 0%, 0.226), 0.2em 0.2em 0.2em 0.2em rgba(0, 0%, 0%, 0.226);
-
-}
-
-.formulario{
-    display: flex;
-    flex-direction: column;
-
-}
-
-.form form{
-    
-    width: 100%;  
-}
-
-.form-group {
-    
-   margin-bottom: 1em; 
-}
-
-.label-container {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    width: 100%;
-}
-
-.input-container input, .input-container select{
-    width: 100%;
-}
-
-.input-container select{
-    padding: 0.1em;
-}
-
 .drop-zone {
+    margin: 1em auto;
     max-width: 200px;
     height: 200px;
     padding: 25px;
@@ -52,7 +12,7 @@
     font-size: 20px;
     cursor: pointer;
     color: #cccccc;
-    border: 4px dashed #009578;
+    border: 4px dashed hsl(182, 38%, 68%);;
     border-radius: 10px;
   }
   
@@ -87,4 +47,3 @@
     text-align: center;
   }
   
-

@@ -5,6 +5,10 @@ require('./sidebar');
 require('./filter');
 require('./loader');
 require('./message');
+require('./tab');
+require('./imagen');
+require('./language');
+
 
 
 /**

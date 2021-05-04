@@ -4,36 +4,36 @@ img {
     max-width: 100%;
 }
 
-.btn-main {
-    background-color: $button-color;
-    border-color: $button-color;
-    border-radius: 50%;
-    color: $button-color;
-    height: 3em;
-    margin: 0 2%;
+.one-column{
+
+    .form-group{
+        width: 100%;
+    }
 }
 
-.btn-main:hover{
-    background-color: $button-color-highlight;
-    border-color: $button-color-highlight;
+.two-columns{
+    display: flex;
+    justify-content: space-between;
+
+    .form-group{
+        width: 47%;
+    }
 }
 
-.hidden{
-    display: none;
+.three-columns{
+    display: flex;
+    justify-content: space-between;
+
+    .form-group{
+        width: 32%;
+    }
 }
 
-.hidden-xs{
-    display: none;
-}
+.four-columns{
+    display: flex;
+    justify-content: space-between;
 
-.hidden-sm{
-    display: none;
-}
-
-.hidden-md{
-    display: none;
-}
-
-.hidden-lg{
-    display: none;
+    .form-group{
+        width: 23%;
+    }
 }
