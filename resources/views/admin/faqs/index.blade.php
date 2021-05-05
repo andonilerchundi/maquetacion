@@ -13,8 +13,7 @@
         <table class="table table-sortable">
             <thead>
                 <tr>
-                    <th>Pregunta</th>
-                    <th>Rpta.</th>
+                    <th>Nombre</th>
                     <th>Categoria</th>
                     <th>Fecha</th>
                     <th></th>
@@ -25,13 +24,9 @@
                     <tr>
                         
                         <td>
-                            {{$faq_element->title}}
+                            {{$faq_element->name}}
                         </td>
                         
-                        <td>
-                            {{$faq_element->description}}
-                        </td>
-
                         <td>
                             {{$faq_element->category->name}}
                         </td>
@@ -132,11 +127,11 @@
                     <div class="form-group">
                         
                         <div class="label-container">
-                            <label for="pregunta">Pregunta:</label>
+                            <label for="name">Nombre:</label>
                         </div>
 
                         <div class="input-container">
-                            <input name="title" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
+                            <input name="name" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
                         </div>
                     </div>
                     
@@ -163,8 +158,8 @@
                 
                 </div>
 
-                @component('admin.layout.partials.locale')
-                    <div class="tab-panel-language language-active" data-tab="español">
+                @component('admin.layout.partials.locale', ['tab' => 'contenido'])
+                    <div class="tab-panel-language language-active" data-tab="contenido" data-localetab="es">
                         <div class="one-column" >
 
                             <div class="form-group">
@@ -174,7 +169,7 @@
                                 </div>
 
                                 <div class="input-container">
-                                    <input>
+                                    <input name="locale[title.es]" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
                                 </div>
                             </div>
 
@@ -185,13 +180,13 @@
                                 </div>
                     
                                 <div class="input-container">
-                                    <textarea class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
+                                    <textarea class="ckeditor" name="locale[description.es]"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
                                 </div> 
                             </div>
                         </div>
                     </div>
 
-                    <div class="tab-panel-language" data-tab="ingles">
+                    <div class="tab-panel-language" data-tab="contenido" data-localetab="en">
                         <div class="one-column" >
 
                             <div class="form-group">
@@ -201,7 +196,7 @@
                                 </div>
 
                                 <div class="input-container">
-                                    <input>
+                                    <input name="locale[title.en]" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
                                 </div>
                             </div>
 
@@ -212,7 +207,7 @@
                                 </div>
                     
                                 <div class="input-container">
-                                    <textarea class="ckeditor" name="description"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
+                                    <textarea class="ckeditor" name="locale[description.en]"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
                                 </div> 
                             </div>
                         </div>
@@ -225,8 +220,8 @@
 
             <div class="tab-panel" data-tab="imagen">
 
-                @component('admin.layout.partials.locale')
-                    <div class="tab-panel-language language-active" data-tab="español">
+                @component('admin.layout.partials.locale', ['tab' => 'imagen'])
+                    <div class="tab-panel-language language-active" data-tab="imagen" data-localetab="es">
                         <div class="one-columns">
 
                             <div class="drop-zone">
@@ -237,7 +232,7 @@
                         </div>
                     </div>
 
-                    <div class="tab-panel-language" data-tab="ingles">
+                    <div class="tab-panel-language" data-tab="imagen" data-localetab="en">
                         <div class="one-columns">
 
                             <div class="drop-zone">

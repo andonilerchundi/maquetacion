@@ -15,8 +15,7 @@ class CreateTFaqs extends Migration
     {
         Schema::create('t_faqs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
+            $table->string('name');
             $table->integer('category_id');
             $table->boolean('active');
             $table->timestamps();
