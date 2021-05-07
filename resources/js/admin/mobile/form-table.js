@@ -1,7 +1,8 @@
 import {renderCkeditor} from './ckeditor';
 import {showMessage} from './message';
 import {startLoading, stopLoading} from './loader';
-import axios from 'axios';
+import {renderTabs} from './tab';
+import {renderLanguages} from './languageTab';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -115,6 +116,8 @@ export let renderForm = () => {
     });
     
     renderCkeditor()
+    renderTabs()
+    renderLanguages()
 };
 
 

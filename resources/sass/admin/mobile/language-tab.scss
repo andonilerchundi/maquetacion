@@ -1,0 +1,43 @@
+.language-bar-form{
+    width: 80%;
+    height: 2em;
+    margin: auto;
+    cursor: pointer;
+    background-color: hsl(0, 0%, 0%);
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+
+    
+}
+
+.tab-item-language{
+    width: 20%;
+    height: 2em;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5em;
+    font-size: 0.8em;
+   
+}
+.tab-item-language.language-active{
+    background-color: hsl(182, 38%, 68%);
+    color: black;
+}
+
+.tab-panel-language{
+    display: none;
+}
+
+.tab-panel-language.language-active{
+    display: block;
+}
+
+
+
+
+

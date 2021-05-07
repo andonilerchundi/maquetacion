@@ -2080,8 +2080,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ckeditor */ "./resources/js/admin/mobile/ckeditor.js");
 /* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message */ "./resources/js/admin/mobile/message.js");
 /* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loader */ "./resources/js/admin/mobile/loader.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tab */ "./resources/js/admin/mobile/tab.js");
+/* harmony import */ var _languageTab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./languageTab */ "./resources/js/admin/mobile/languageTab.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2112,6 +2112,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var table = document.getElementById("table");
 var form = document.getElementById("form");
 var refreshForm = document.getElementById('refresh-form');
@@ -2119,7 +2120,7 @@ var visibleSwitch = document.getElementById('visible');
 refreshForm.addEventListener('click', function (event) {
   event.preventDefault();
   var url = refreshForm.dataset.url;
-  axios__WEBPACK_IMPORTED_MODULE_4___default().get(url).then(function (response) {
+  axios.get(url).then(function (response) {
     form.innerHTML = response.data.form;
     renderForm();
   });
@@ -2181,7 +2182,7 @@ var renderForm = function renderForm() {
                   (0,_loader__WEBPACK_IMPORTED_MODULE_3__.startLoading)();
                   _context.prev = 1;
                   _context.next = 4;
-                  return axios__WEBPACK_IMPORTED_MODULE_4___default().post(url, data).then(function (response) {
+                  return axios.post(url, data).then(function (response) {
                     form.id.value = response.data.id;
                     table.innerHTML = response.data.table;
                     (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
@@ -2224,6 +2225,8 @@ var renderForm = function renderForm() {
     });
   });
   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
+  (0,_tab__WEBPACK_IMPORTED_MODULE_4__.renderTabs)();
+  (0,_languageTab__WEBPACK_IMPORTED_MODULE_5__.renderLanguages)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit");
@@ -2241,7 +2244,7 @@ var renderTable = function renderTable() {
                 case 0:
                   _context2.prev = 0;
                   _context2.next = 3;
-                  return axios__WEBPACK_IMPORTED_MODULE_4___default().get(url).then(function (response) {
+                  return axios.get(url).then(function (response) {
                     form.innerHTML = response.data.form;
                     form.classList.add('visible');
                     table.classList.remove('visible');
@@ -2285,7 +2288,7 @@ var renderTable = function renderTable() {
                 case 0:
                   _context3.prev = 0;
                   _context3.next = 3;
-                  return axios__WEBPACK_IMPORTED_MODULE_4___default().delete(url).then(function (response) {
+                  return axios["delete"](url).then(function (response) {
                     table.innerHTML = response.data.table;
                     renderTable();
                   });
@@ -2369,7 +2372,7 @@ var renderTable = function renderTable() {
                 case 0:
                   _context4.prev = 0;
                   _context4.next = 3;
-                  return axios__WEBPACK_IMPORTED_MODULE_4___default().get(url).then(function (response) {
+                  return axios.get(url).then(function (response) {
                     table.innerHTML = response.data.table;
                     renderTable();
                   });
@@ -2402,6 +2405,116 @@ var renderTable = function renderTable() {
 };
 renderForm();
 renderTable();
+
+/***/ }),
+
+/***/ "./resources/js/admin/mobile/imagen.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/mobile/imagen.js ***!
+  \*********************************************/
+/***/ (() => {
+
+document.querySelectorAll(".drop-zone__input").forEach(function (inputElement) {
+  var dropZoneElement = inputElement.closest(".drop-zone");
+  dropZoneElement.addEventListener("click", function (e) {
+    inputElement.click();
+  });
+  inputElement.addEventListener("change", function (e) {
+    if (inputElement.files.length) {
+      updateThumbnail(dropZoneElement, inputElement.files[0]);
+    }
+  });
+  dropZoneElement.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    dropZoneElement.classList.add("drop-zone--over");
+  });
+  ["dragleave", "dragend"].forEach(function (type) {
+    dropZoneElement.addEventListener(type, function (e) {
+      dropZoneElement.classList.remove("drop-zone--over");
+    });
+  });
+  dropZoneElement.addEventListener("drop", function (e) {
+    e.preventDefault();
+
+    if (e.dataTransfer.files.length) {
+      inputElement.files = e.dataTransfer.files;
+      updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+    }
+
+    dropZoneElement.classList.remove("drop-zone--over");
+  });
+});
+/**
+ * Updates the thumbnail on a drop zone element.
+ *
+ * @param {HTMLElement} dropZoneElement
+ * @param {File} file
+ */
+
+function updateThumbnail(dropZoneElement, file) {
+  var thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb"); // First time - remove the prompt
+
+  if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+    dropZoneElement.querySelector(".drop-zone__prompt").remove();
+  } // First time - there is no thumbnail element, so lets create it
+
+
+  if (!thumbnailElement) {
+    thumbnailElement = document.createElement("div");
+    thumbnailElement.classList.add("drop-zone__thumb");
+    dropZoneElement.appendChild(thumbnailElement);
+  }
+
+  thumbnailElement.dataset.label = file.name; // Show thumbnail for image files
+
+  if (file.type.startsWith("image/")) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function () {
+      thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
+    };
+  } else {
+    thumbnailElement.style.backgroundImage = null;
+  }
+}
+
+/***/ }),
+
+/***/ "./resources/js/admin/mobile/languageTab.js":
+/*!**************************************************!*\
+  !*** ./resources/js/admin/mobile/languageTab.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderLanguages": () => (/* binding */ renderLanguages)
+/* harmony export */ });
+var renderLanguages = function renderLanguages() {
+  var tabsItemsLanguage = document.querySelectorAll(".tab-item-language");
+  var tabPanelsLanguage = document.querySelectorAll(".tab-panel-language");
+  tabsItemsLanguage.forEach(function (tabItemLanguage) {
+    tabItemLanguage.addEventListener("click", function () {
+      var activeElements = document.querySelectorAll(".language-active");
+      var activeTab = tabItemLanguage.dataset.tab;
+      activeElements.forEach(function (activeElement) {
+        if (activeElement.dataset.tab == activeTab) {
+          activeElement.classList.remove("language-active");
+        }
+      });
+      tabItemLanguage.classList.add("language-active");
+      tabPanelsLanguage.forEach(function (tabPanelLanguage) {
+        if (tabPanelLanguage.dataset.tab == activeTab) {
+          if (tabPanelLanguage.dataset.localetab == tabItemLanguage.dataset.localetab) {
+            tabPanelLanguage.classList.add("language-active");
+          }
+        }
+      });
+    });
+  });
+};
 
 /***/ }),
 
@@ -2537,6 +2650,38 @@ sidebarButton.addEventListener('click', function () {
   sidebarButton.classList.toggle("active");
   sidebar.classList.toggle("active");
 });
+
+/***/ }),
+
+/***/ "./resources/js/admin/mobile/tab.js":
+/*!******************************************!*\
+  !*** ./resources/js/admin/mobile/tab.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderTabs": () => (/* binding */ renderTabs)
+/* harmony export */ });
+var renderTabs = function renderTabs() {
+  var tabsItems = document.querySelectorAll(".tab-items");
+  var tabPanels = document.querySelectorAll(".tab-panel");
+  tabsItems.forEach(function (tabItem) {
+    tabItem.addEventListener("click", function () {
+      var activeElements = document.querySelectorAll(".tab-active");
+      activeElements.forEach(function (activeElement) {
+        activeElement.classList.remove("tab-active");
+      });
+      tabItem.classList.add("tab-active");
+      tabPanels.forEach(function (tabPanel) {
+        if (tabPanel.dataset.tab == tabItem.dataset.tab) {
+          tabPanel.classList.add("tab-active");
+        }
+      });
+    });
+  });
+};
 
 /***/ }),
 
@@ -20848,6 +20993,12 @@ __webpack_require__(/*! ./filter */ "./resources/js/admin/mobile/filter.js");
 __webpack_require__(/*! ./loader */ "./resources/js/admin/mobile/loader.js");
 
 __webpack_require__(/*! ./message */ "./resources/js/admin/mobile/message.js");
+
+__webpack_require__(/*! ./imagen */ "./resources/js/admin/mobile/imagen.js");
+
+__webpack_require__(/*! ./languageTab */ "./resources/js/admin/mobile/languageTab.js");
+
+__webpack_require__(/*! ./tab */ "./resources/js/admin/mobile/tab.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when

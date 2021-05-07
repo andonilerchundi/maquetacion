@@ -6,6 +6,9 @@ require('./bottombar');
 require('./filter');
 require('./loader');
 require('./message');
+require('./imagen');
+require('./languageTab');
+require('./tab');
 
 
 
