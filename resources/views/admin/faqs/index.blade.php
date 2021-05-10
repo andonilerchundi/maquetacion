@@ -131,7 +131,7 @@
                         </div>
 
                         <div class="input-container">
-                            <input name="name" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
+                            <input name="name" type="text" value="{{isset($faq->name) ? $faq->name : ''}}" >
                         </div>
                     </div>
                     
@@ -159,59 +159,36 @@
                 </div>
 
                 @component('admin.layout.partials.locale', ['tab' => 'contenido'])
-                    <div class="tab-panel-language language-active" data-tab="contenido" data-localetab="es">
-                        <div class="one-column" >
 
-                            <div class="form-group">
-                                
-                                <div class="label-container">
-                                    <label>Titulo:</label>
+                    @foreach ($localizations as $localization)
+                        <div class="tab-panel-language {{ $loop->first ? 'language-active':'' }}" data-tab="contenido" data-localetab="{{$localization->alias}}">
+                            <div class="one-column" >
+
+                                <div class="form-group">
+                                    
+                                    <div class="label-container">
+                                        <label>Titulo:</label>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <input type="text" name="locale[title.{{$localization->alias}}]" value="{{isset($locale["title.$localization->alias"]) ? $locale["title.$localization->alias"] : ''}}" class="input-highlight">
+                                    </div>
                                 </div>
 
-                                <div class="input-container">
-                                    <input name="locale[title.es]" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
-                                </div>
-                            </div>
+                                <div class="form-group">
 
-                            <div class="form-group">
-
-                                <div class="label-container">
-                                    <label for="respuesta">Respuesta:</label>
+                                    <div class="label-container">
+                                        <label for="respuesta">Respuesta:</label>
+                                    </div>
+                        
+                                    <div class="input-container">
+                                        <textarea class="ckeditor input-highlight" name="locale[description.{{$localization->alias}}]">{{isset($locale["description.$localization->alias"]) ? $locale["description.$localization->alias"] : ''}}</textarea>
+                                    </div> 
                                 </div>
-                    
-                                <div class="input-container">
-                                    <textarea class="ckeditor" name="locale[description.es]"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
-                                </div> 
                             </div>
                         </div>
-                    </div>
-
-                    <div class="tab-panel-language" data-tab="contenido" data-localetab="en">
-                        <div class="one-column" >
-
-                            <div class="form-group">
-                                
-                                <div class="label-container">
-                                    <label>Titulo:</label>
-                                </div>
-
-                                <div class="input-container">
-                                    <input name="locale[title.en]" type="text" value="{{isset($faq->title) ? $faq->title : ''}}" >
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-
-                                <div class="label-container">
-                                    <label for="respuesta">Respuesta:</label>
-                                </div>
+                    @endforeach
                     
-                                <div class="input-container">
-                                    <textarea class="ckeditor" name="locale[description.en]"  type="text" >{{isset($faq->description) ? $faq->description : ''}}</textarea>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
                 @endcomponent
     
                 
@@ -221,27 +198,31 @@
             <div class="tab-panel" data-tab="imagen">
 
                 @component('admin.layout.partials.locale', ['tab' => 'imagen'])
-                    <div class="tab-panel-language language-active" data-tab="imagen" data-localetab="es">
-                        <div class="one-columns">
+                    
+                    @foreach ($localizations as $localization)
 
-                            <div class="drop-zone">
-                                <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                <input type="file" name="myFile" class="drop-zone__input">
+                        <div class="tab-panel-language {{ $loop->first ? 'language-active':'' }}" data-tab="imagen" data-localetab="{{$localization->alias}}">
+                            <div class="one-columns">
+
+                                <div class="drop-zone">
+                                    <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                    <input type="file" name="myFile" class="drop-zone__input">
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
 
-                    <div class="tab-panel-language" data-tab="imagen" data-localetab="en">
-                        <div class="one-columns">
+                        <div class="tab-panel-language" data-tab="imagen" data-localetab="{{$localization->alias}}">
+                            <div class="one-columns">
 
-                            <div class="drop-zone">
-                                <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                <input type="file" name="myFile" class="drop-zone__input">
+                                <div class="drop-zone">
+                                    <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                    <input type="file" name="myFile" class="drop-zone__input">
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
+                    @endforeach
                     
                 @endcomponent
             

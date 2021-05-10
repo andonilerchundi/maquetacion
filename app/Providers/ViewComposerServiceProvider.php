@@ -19,6 +19,11 @@ class ViewComposerServiceProvider extends ServiceProvider
             'admin.client.index'],
             'App\Http\ViewComposers\Admin\Countries'
         );
+
+        view()->composer([
+            'admin.*'],
+            'App\Http\ViewComposers\Admin\LocaleLanguage'
+        );
     }
 
     
