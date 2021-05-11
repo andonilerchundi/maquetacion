@@ -55,6 +55,10 @@
   padding: 0.1em;
 }
 
+.ck-editor__editable {
+  height: 18vh;
+}
+
 .table {
   width: 40%;
   margin-top: 2vh;

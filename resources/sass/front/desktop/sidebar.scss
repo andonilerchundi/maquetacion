@@ -1,0 +1,35 @@
+.sidebar{
+    width: 0;
+    height: 100%;
+    background-color:hsl(0, 0%, 0%);
+    position:fixed;
+    right: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 3;
+}
+
+.sidebar.active{
+    width: 20%;
+}
+
+.link-menu{
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    ul{
+        padding: 0;
+        margin-top: 3em;
+    }
+    
+    li{
+        color: hsl(0, 0%, 100%);
+        cursor: pointer;
+        margin-top: 0.5em;
+        margin-left: 0.5em;
+    }
+}
+
+li:hover{
+    color:hsl(182, 38%, 68%);
+    
+}

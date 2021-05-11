@@ -1,6 +1,7 @@
 require('../../bootstrap');
 require('./faqs');
 require('./fingerprint');
+require('./sidebar');
 
 /**
  * First we will load all of this project's JavaScript dependencies which

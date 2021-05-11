@@ -1983,6 +1983,22 @@ sendFingerprintRequest();
 
 /***/ }),
 
+/***/ "./resources/js/front/desktop/sidebar.js":
+/*!***********************************************!*\
+  !*** ./resources/js/front/desktop/sidebar.js ***!
+  \***********************************************/
+/***/ (() => {
+
+var links = document.querySelectorAll(".link");
+var sidebar = document.getElementById("sidebar");
+var sidebarButton = document.getElementById("sidebar-button");
+sidebarButton.addEventListener('click', function () {
+  sidebarButton.classList.toggle("active");
+  sidebar.classList.toggle("active");
+});
+
+/***/ }),
+
 /***/ "./node_modules/clientjs/dist/client.min.js":
 /*!**************************************************!*\
   !*** ./node_modules/clientjs/dist/client.min.js ***!
@@ -20340,6 +20356,8 @@ __webpack_require__(/*! ../../bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./faqs */ "./resources/js/front/desktop/faqs.js");
 
 __webpack_require__(/*! ./fingerprint */ "./resources/js/front/desktop/fingerprint.js");
+
+__webpack_require__(/*! ./sidebar */ "./resources/js/front/desktop/sidebar.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when

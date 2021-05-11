@@ -2,22 +2,13 @@
 
 @section('content')
 
-    <div class="header">
-        <div class="menu-button">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
-            </svg>
-        </div>
-        <span>FAQ</span>
-    </div>
-
     <div class="faqs">
 
         @foreach($faqs as $faq)
             <div class="faq">
                 <div class="faq-header">
                     <div class="faq-title">
-                        <h2>{{$faq->title}}</h2>
+                        <h2>{{isset($faq->locale['title']) ? $faq->locale['title'] : ""}}</h2>
                     </div>
                     <div class="faq-button" data-button="{{$faq->id}}">
                         <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -26,7 +17,13 @@
                     </div>
                 </div>
                 <div class="faq-description" data-content="{{$faq->id}}">
-                    <p>{{$faq->description}}</p>
+                    <p>{!!isset($faq->locale['description']) ? $faq->locale['description'] : "" !!}</p>
+
+                    @isset($faq->image_featured->path)
+                        <div class="faq-description-image">
+                            <img src="{{Storage::url($faq->image_featured->path)}}" alt="{{$faq->image_featured->alt}}" title="{{$faq->image_featured->title}}" />
+                        </div>
+                    @endif
                 </div>
                 
             </div>

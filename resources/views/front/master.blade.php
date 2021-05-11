@@ -12,6 +12,10 @@
     @include('front.layout.style')
 </head>
 <body>
+    @include('front.components.topbar')
+    @include('front.components.sidebar')
+    
+    
     <div class="main-content">
         @yield('content')
     </div>
