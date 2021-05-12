@@ -115,6 +115,10 @@ select {
   transform: translateX(26px);
 }
 
+.ck-editor__editable {
+  height: 20vh;
+}
+
 #table {
   display: none;
   width: 100%;

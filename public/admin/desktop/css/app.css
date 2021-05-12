@@ -637,33 +637,40 @@ li:hover {
   display: block;
 }
 
-.drop-zone {
-  margin: 1em auto;
-  max-width: 200px;
-  height: 200px;
-  padding: 25px;
-  display: flex;
+.upload {
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  cursor: pointer;
+  border: 0.2em dashed #02a8b1;
   color: #cccccc;
-  border: 4px dashed #8ecacc;
-  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2em;
+  font-weight: 500;
+  height: 30vh;
+  justify-content: center;
+  margin-top: 1em;
+  padding: 1em;
+  text-align: center;
 }
 
-.drop-zone--over {
+.upload:hover {
+  border: 4px dashed #ff5100;
+}
+
+.upload-over {
   border-style: solid;
 }
 
-.drop-zone__input {
+.upload-prompt {
+  position: absolute;
+  width: 15%;
+  z-index: 999;
+}
+
+.upload-input {
   display: none;
 }
 
-.drop-zone__thumb {
+.upload-thumb {
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -673,7 +680,7 @@ li:hover {
   position: relative;
 }
 
-.drop-zone__thumb::after {
+.upload-thumb::after {
   content: attr(data-label);
   position: absolute;
   bottom: 0;

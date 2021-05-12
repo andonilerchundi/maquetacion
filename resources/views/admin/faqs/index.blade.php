@@ -204,24 +204,17 @@
                         <div class="tab-panel-language {{ $loop->first ? 'language-active':'' }}" data-tab="imagen" data-localetab="{{$localization->alias}}">
                             <div class="one-columns">
 
-                                <div class="drop-zone">
-                                    <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                    <input type="file" name="myFile" class="drop-zone__input">
-                                </div>
+                                @include('admin.layout.partials.upload', [
+                                    'type' => 'image', 
+                                    'content' => 'featured', 
+                                    'alias' => $localization->alias,
+                                    'files' => $faq->images_featured_preview,
+                                ])
 
                             </div>
                         </div>
 
-                        <div class="tab-panel-language" data-tab="imagen" data-localetab="{{$localization->alias}}">
-                            <div class="one-columns">
-
-                                <div class="drop-zone">
-                                    <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                    <input type="file" name="myFile" class="drop-zone__input">
-                                </div>
-
-                            </div>
-                        </div>
+                        
                     @endforeach
                     
                 @endcomponent

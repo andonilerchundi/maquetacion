@@ -1888,13 +1888,11 @@ __webpack_require__(/*! ./filter */ "./resources/js/admin/desktop/filter.js");
 
 __webpack_require__(/*! ./loader */ "./resources/js/admin/desktop/loader.js");
 
-__webpack_require__(/*! ./message */ "./resources/js/admin/desktop/message.js");
-
 __webpack_require__(/*! ./tab */ "./resources/js/admin/desktop/tab.js");
 
-__webpack_require__(/*! ./imagen */ "./resources/js/admin/desktop/imagen.js");
-
 __webpack_require__(/*! ./languageTab */ "./resources/js/admin/desktop/languageTab.js");
+
+__webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -2054,6 +2052,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loader */ "./resources/js/admin/desktop/loader.js");
 /* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tab */ "./resources/js/admin/desktop/tab.js");
 /* harmony import */ var _languageTab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./languageTab */ "./resources/js/admin/desktop/languageTab.js");
+/* harmony import */ var _upload__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2079,6 +2078,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2199,6 +2199,7 @@ var renderForm = function renderForm() {
   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
   (0,_tab__WEBPACK_IMPORTED_MODULE_4__.renderTabs)();
   (0,_languageTab__WEBPACK_IMPORTED_MODULE_5__.renderLanguages)();
+  (0,_upload__WEBPACK_IMPORTED_MODULE_6__.renderUpload)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit");
@@ -2371,79 +2372,6 @@ var renderTable = function renderTable() {
 };
 renderForm();
 renderTable();
-
-/***/ }),
-
-/***/ "./resources/js/admin/desktop/imagen.js":
-/*!**********************************************!*\
-  !*** ./resources/js/admin/desktop/imagen.js ***!
-  \**********************************************/
-/***/ (() => {
-
-document.querySelectorAll(".drop-zone__input").forEach(function (inputElement) {
-  var dropZoneElement = inputElement.closest(".drop-zone");
-  dropZoneElement.addEventListener("click", function (e) {
-    inputElement.click();
-  });
-  inputElement.addEventListener("change", function (e) {
-    if (inputElement.files.length) {
-      updateThumbnail(dropZoneElement, inputElement.files[0]);
-    }
-  });
-  dropZoneElement.addEventListener("dragover", function (e) {
-    e.preventDefault();
-    dropZoneElement.classList.add("drop-zone--over");
-  });
-  ["dragleave", "dragend"].forEach(function (type) {
-    dropZoneElement.addEventListener(type, function (e) {
-      dropZoneElement.classList.remove("drop-zone--over");
-    });
-  });
-  dropZoneElement.addEventListener("drop", function (e) {
-    e.preventDefault();
-
-    if (e.dataTransfer.files.length) {
-      inputElement.files = e.dataTransfer.files;
-      updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-    }
-
-    dropZoneElement.classList.remove("drop-zone--over");
-  });
-});
-/**
- * Updates the thumbnail on a drop zone element.
- *
- * @param {HTMLElement} dropZoneElement
- * @param {File} file
- */
-
-function updateThumbnail(dropZoneElement, file) {
-  var thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb"); // First time - remove the prompt
-
-  if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-    dropZoneElement.querySelector(".drop-zone__prompt").remove();
-  } // First time - there is no thumbnail element, so lets create it
-
-
-  if (!thumbnailElement) {
-    thumbnailElement = document.createElement("div");
-    thumbnailElement.classList.add("drop-zone__thumb");
-    dropZoneElement.appendChild(thumbnailElement);
-  }
-
-  thumbnailElement.dataset.label = file.name; // Show thumbnail for image files
-
-  if (file.type.startsWith("image/")) {
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = function () {
-      thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
-    };
-  } else {
-    thumbnailElement.style.backgroundImage = null;
-  }
-}
 
 /***/ }),
 
@@ -2647,6 +2575,80 @@ var renderTabs = function renderTabs() {
       });
     });
   });
+};
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/upload.js":
+/*!**********************************************!*\
+  !*** ./resources/js/admin/desktop/upload.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderUpload": () => (/* binding */ renderUpload)
+/* harmony export */ });
+var renderUpload = function renderUpload() {
+  var inputElements = document.querySelectorAll(".upload-input");
+  inputElements.forEach(function (inputElement) {
+    var uploadElement = inputElement.closest(".upload");
+    uploadElement.addEventListener("click", function (e) {
+      inputElement.click();
+    });
+    inputElement.addEventListener("change", function (e) {
+      if (inputElement.files.length) {
+        updateThumbnail(uploadElement, inputElement.files[0]);
+      }
+    });
+    uploadElement.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      uploadElement.classList.add("upload-over");
+    });
+    ["dragleave", "dragend"].forEach(function (type) {
+      uploadElement.addEventListener(type, function (e) {
+        uploadElement.classList.remove("upload-over");
+      });
+    });
+    uploadElement.addEventListener("drop", function (e) {
+      e.preventDefault();
+
+      if (e.dataTransfer.files.length) {
+        inputElement.files = e.dataTransfer.files;
+        updateThumbnail(uploadElement, e.dataTransfer.files[0]);
+      }
+
+      uploadElement.classList.remove("upload-over");
+    });
+  });
+
+  function updateThumbnail(uploadElement, file) {
+    var thumbnailElement = uploadElement.querySelector(".upload-thumb");
+
+    if (uploadElement.querySelector(".upload-prompt")) {
+      uploadElement.querySelector(".upload-prompt").remove();
+    }
+
+    if (!thumbnailElement) {
+      thumbnailElement = document.createElement("div");
+      thumbnailElement.classList.add("upload-thumb");
+      uploadElement.appendChild(thumbnailElement);
+    }
+
+    thumbnailElement.dataset.label = file.name;
+
+    if (file.type.startsWith("image/")) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = function () {
+        thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
+      };
+    } else {
+      thumbnailElement.style.backgroundImage = null;
+    }
+  }
 };
 
 /***/ }),

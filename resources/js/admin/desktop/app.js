@@ -4,10 +4,9 @@ require('./ckeditor');
 require('./sidebar');
 require('./filter');
 require('./loader');
-require('./message');
 require('./tab');
-require('./imagen');
 require('./languageTab');
+require('./upload');
 
 
 

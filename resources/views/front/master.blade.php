@@ -17,8 +17,11 @@
     
     
     <div class="main-content">
+
         @yield('content')
+  
     </div>
+        
 
     @include('front.layout.js')   
 </body>

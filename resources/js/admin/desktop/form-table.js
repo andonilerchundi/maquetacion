@@ -3,6 +3,7 @@ import {showMessage} from './message';
 import {startLoading, stopLoading} from './loader';
 import {renderTabs} from './tab';
 import {renderLanguages} from './languageTab';
+import {renderUpload} from './upload';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -118,6 +119,7 @@ export let renderForm = () => {
     renderCkeditor()
     renderTabs()
     renderLanguages()
+    renderUpload()
     
 };
 
