@@ -96,6 +96,7 @@ class ProcessImage implements ShouldQueue
             Storage::disk($this->disk)->put($this->path, (string) $buffer);
 
             $path = public_path(Storage::url($this->disk . $this->path));
+            Debugbar::info($path);
             $size = filesize($path);
             $data = getimagesize($path);
             $height = $data[1];
