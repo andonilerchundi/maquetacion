@@ -13,7 +13,7 @@ class StockController extends Controller{
 
     function __construct(Stock $stock)
     {     
-        $this->middleware('auth');     
+        // $this->middleware('auth');     
         $this->stock = $stock;
     }
 

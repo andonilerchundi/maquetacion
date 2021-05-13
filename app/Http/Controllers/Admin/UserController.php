@@ -15,7 +15,7 @@ class UserController extends Controller
 
     function __construct(User $user)
     {
-        $this->middleware('auth'); 
+        // $this->middleware('auth'); 
         $this->user = $user;
     }
 
