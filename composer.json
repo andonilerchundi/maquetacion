@@ -15,8 +15,10 @@
         "jcupitt/vips": "^1.0",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^8.12",
+        "laravel/horizon": "^5.7",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.2"
+        "laravel/ui": "^3.2",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
