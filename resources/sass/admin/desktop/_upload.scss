@@ -49,3 +49,50 @@ content: attr(data-label);
     font-size: 14px;
     text-align: center;
 }
+
+.boximages{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.single-image{
+    width: 40%;
+
+}
+
+.collection-box{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    
+    
+}
+
+.upload-collection{
+    margin: 0.5em;
+    border: 0.2em dashed hsl(183, 98%, 35%);
+    color: #cccccc;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4em ;
+    height:7vh ;
+}
+
+.multiple-images{
+
+    width: 40%;
+}
+
+.p{
+    height: 2vh;
+    text-align: center;
+    background-color: black;
+    color: white;
+    border-radius: 0.2em;
+}

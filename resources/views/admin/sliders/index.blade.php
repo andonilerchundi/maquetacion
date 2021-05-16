@@ -1,5 +1,5 @@
 @php
-    $route="sliders";
+    // $route="sliders";
     $filters = ['created_at' => true, 'search' => true]; 
 @endphp
 
