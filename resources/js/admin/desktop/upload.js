@@ -1,7 +1,9 @@
 export let renderUpload = () => {
 
     let inputElements = document.querySelectorAll(".upload-input");
-
+    
+    
+    
     inputElements.forEach(inputElement => {
     
         let uploadElement = inputElement.closest(".upload");
@@ -14,6 +16,7 @@ export let renderUpload = () => {
             if (inputElement.files.length) {
                 updateThumbnail(uploadElement, inputElement.files[0]);
             }
+            
         });
       
         uploadElement.addEventListener("dragover", (e) => {
@@ -42,9 +45,17 @@ export let renderUpload = () => {
     function updateThumbnail(uploadElement, file) {
     
         let thumbnailElement = uploadElement.querySelector(".upload-thumb");
+       
+        if(thumbnailElement.style.backgroundImage == null){
+           let newuploadElement = uploadElement.cloneNode(true);
+           
+
+        }
       
         if (uploadElement.querySelector(".upload-prompt")) {
             uploadElement.querySelector(".upload-prompt").remove();
+            
+           
         }
       
         if (!thumbnailElement) {
@@ -54,9 +65,11 @@ export let renderUpload = () => {
         }
       
         thumbnailElement.dataset.label = file.name;
+       
       
         if (file.type.startsWith("image/")) {
             let reader = new FileReader();
+            
         
             reader.readAsDataURL(file);
     

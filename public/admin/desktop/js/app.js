@@ -2626,6 +2626,10 @@ var renderUpload = function renderUpload() {
   function updateThumbnail(uploadElement, file) {
     var thumbnailElement = uploadElement.querySelector(".upload-thumb");
 
+    if (thumbnailElement.style.backgroundImage == null) {
+      var newuploadElement = uploadElement.cloneNode(true);
+    }
+
     if (uploadElement.querySelector(".upload-prompt")) {
       uploadElement.querySelector(".upload-prompt").remove();
     }

@@ -1,0 +1,34 @@
+.main-image{
+    width:100% ;
+    height:100vh ;
+    background-color: rgba(0, 0, 0, 0.397);
+    position: fixed;
+    z-index: 90;
+    
+}
+
+.image-box{
+    width: 80%;
+    height: 60vh;
+    background-color: hsl(0, 0%, 100%);
+    position: fixed;
+    z-index: 100;
+    top: 10%;
+    left: 10%;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.image{
+    width: 50%;
+    height: 60vh;
+    border: solid 2px black;
+
+}
+
+.image-especifications{
+    width: 50%;
+    height: 60vh;
+    border: solid 2px black;
+
+}
