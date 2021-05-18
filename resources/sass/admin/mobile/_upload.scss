@@ -1,4 +1,4 @@
-.upload-image-add {
+.upload {
     align-items: center;
     border: 0.2em dashed hsl(183, 98%, 35%);
     color: #cccccc;
@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-.upload-image-add:hover{
+.upload:hover{
     border: 4px dashed hsl(19, 100%, 50%);
 }
   
@@ -53,34 +53,54 @@ content: attr(data-label);
 .gridbox{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 0.2em
-    
+    grid-template-columns: repeat(1);
+    margin:0 auto;
     
     
 }
 
-.upload-image-add.collection{
+.grid{
     border: 0.2em dashed hsl(183, 98%, 35%);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 4em;
-    height: 6vh;
+    width: 100%;
+    height: 7vh;
     cursor: pointer;
     margin-top: 0.5em;
-    
-    
-}
-.upload-image-add.collection:hover{
-    border: 4px dashed hsl(19, 100%, 50%);
+
 }
 
 
+.svg-box{
+    width: 100%;
+    height: 3vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
+}
+.edit-image{
+    width: 1.5em ;
+    height:1.5em ;
+    color: black;
+}
+.edit-image:hover{
+    color:hsl(183, 98%, 35%);
+}
+
+.delete-image{
+    width: 1.5em ;
+    height:1.5em ;
+    color: black;
+}
+.delete-image:hover{
+    color:hsl(19, 100%, 50%);
+}
 
 .p{
-    height: 2vh;
+    height: 3vh;
+    width: 100%;
     text-align: center;
     background-color: black;
     color: white;

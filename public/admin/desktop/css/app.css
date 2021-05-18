@@ -637,7 +637,7 @@ li:hover {
   display: block;
 }
 
-.upload {
+.upload-image-add {
   align-items: center;
   border: 0.2em dashed #02a8b1;
   color: #cccccc;
@@ -648,11 +648,10 @@ li:hover {
   height: 30vh;
   justify-content: center;
   margin-top: 1em;
-  padding: 1em;
   text-align: center;
 }
 
-.upload:hover {
+.upload-image-add:hover {
   border: 4px dashed #ff5100;
 }
 
@@ -671,12 +670,10 @@ li:hover {
   overflow: hidden;
   background-color: #cccccc;
   background-size: cover;
-  position: relative;
 }
 
 .upload-thumb::after {
   content: attr(data-label);
-  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -687,39 +684,26 @@ li:hover {
   text-align: center;
 }
 
-.boximages {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.single-image {
-  width: 40%;
-}
-
-.collection-box {
+.gridbox {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0.2em;
 }
 
-.upload-collection {
-  margin: 0.5em;
+.upload-image-add.collection {
   border: 0.2em dashed #02a8b1;
-  color: #cccccc;
-  cursor: pointer;
-  font-size: 1.2em;
-  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 4em;
-  height: 7vh;
+  height: 6vh;
+  cursor: pointer;
+  margin-top: 0.5em;
 }
 
-.multiple-images {
-  width: 40%;
+.upload-image-add.collection:hover {
+  border: 4px dashed #ff5100;
 }
 
 .p {
@@ -728,6 +712,83 @@ li:hover {
   background-color: black;
   color: white;
   border-radius: 0.2em;
+}
+
+.main-image {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.397);
+  position: fixed;
+  z-index: 90;
+}
+
+.modal {
+  width: 80%;
+  height: 60vh;
+  background-color: #cacaca;
+  position: fixed;
+  z-index: 100;
+  top: 15%;
+  left: 10%;
+  border-radius: 1em;
+  border: solid 0.15em black;
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+}
+
+.modal-image {
+  border: black solid 2px;
+  width: 60%;
+  height: 60vh;
+}
+
+.modal-image-attributes {
+  border: black solid 2px;
+  width: 40%;
+  height: 60vh;
+}
+
+.image-form {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-image-store-button {
+  width: 4em;
+  height: 4vh;
+  background-color: #8ecacc;
+  border: black solid 0.2em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  margin-left: 20em;
+}
+.modal-image-store-button svg {
+  width: 4em;
+  height: 4vh;
+}
+
+.modal-image-delete-button {
+  border: black solid 0.2em;
+  width: 12em;
+  height: 3vh;
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+  cursor: pointer;
+  margin-top: 12em;
+  margin-left: 12.2em;
+}
+.modal-image-delete-button svg {
+  height: 3vh;
+  width: 3em;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

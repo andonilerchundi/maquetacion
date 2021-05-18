@@ -1,12 +1,21 @@
+//importar modalImage
+
 export let renderUpload = () => {
 
     let inputElements = document.querySelectorAll(".upload-input");
+    let uploadImages = document.querySelectorAll(".upload");
 
     inputElements.forEach(inputElement => {
     
-        let uploadElement = inputElement.closest(".upload");
-      
-        uploadElement.addEventListener("click", (e) => {
+        uploadImage(inputElement);
+    });
+    
+    function uploadImage(inputElement){
+
+        let uploadElement = inputElement.closest(".upload-image-add");
+
+        uploadElement.addEventListener("click", (event) => {
+
             inputElement.click();
         });
       
@@ -31,31 +40,42 @@ export let renderUpload = () => {
             e.preventDefault();
         
             if (e.dataTransfer.files.length) {
-                    inputElement.files = e.dataTransfer.files;
-                    updateThumbnail(uploadElement, e.dataTransfer.files[0]);
+                inputElement.files = e.dataTransfer.files;
+                updateThumbnail(uploadElement, e.dataTransfer.files[0]);
             }
         
             uploadElement.classList.remove("upload-over");
         });
-    });
+    }
       
     function updateThumbnail(uploadElement, file) {
     
         let thumbnailElement = uploadElement.querySelector(".upload-thumb");
-      
+
+        if(uploadElement.classList.contains('collection')){
+
+            if(thumbnailElement == null){
+
+                let cloneUploadElement = uploadElement.cloneNode(true);
+                let cloneInput = cloneUploadElement.querySelector('.upload-input');
+
+                uploadImage(cloneInput);
+                uploadElement.parentElement.appendChild(cloneUploadElement);
+            }
+        }
+    
         if (uploadElement.querySelector(".upload-prompt")) {
             uploadElement.querySelector(".upload-prompt").remove();
         }
-      
+        
         if (!thumbnailElement) {
             thumbnailElement = document.createElement("div");
             thumbnailElement.classList.add("upload-thumb");
             uploadElement.appendChild(thumbnailElement);
         }
-      
-        thumbnailElement.dataset.label = file.name;
-      
+                
         if (file.type.startsWith("image/")) {
+
             let reader = new FileReader();
         
             reader.readAsDataURL(file);
@@ -63,8 +83,46 @@ export let renderUpload = () => {
             reader.onload = () => {
                 thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
             };
+
+            if(uploadElement.classList.contains('collection')){
+
+                let content = uploadElement.dataset.content;
+                let alias = uploadElement.dataset.alias;
+                let inputElement = uploadElement.getElementsByClassName("upload-input")[0];
+        
+                inputElement.name = "images[" + content + "-" + Math.floor((Math.random() * 99999) + 1) + "." + alias  + "]"; 
+            }
+            
         } else {
             thumbnailElement.style.backgroundImage = null;
         }
     }
+
+    uploadImages.forEach(uploadImage => {
+    
+        uploadImage.addEventListener("click", (e) => {
+            
+            let url = uploadImage.dataset.url;
+    
+            let sendImageRequest = async () => {
+    
+                try {
+                    axios.get(url).then(response => {
+
+                        openImageModal(response.data);
+                      
+                    });
+                    
+                } catch (error) {
+    
+                }
+            };
+    
+            sendImageRequest();
+
+        });
+    });
+    
+    
+   
 }

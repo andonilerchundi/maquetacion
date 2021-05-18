@@ -1,56 +1,62 @@
 
 @if($type == "image" )
-    <div class="upload">      
-        @foreach ($files as $image)
-            @if($image->language == $alias)
-                <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
-            @endif
-        @endforeach
 
+    @foreach ($files as $image)
+        @if($image->language == $alias)
+            <div class="upload single {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
+
+                <div class="upload-image-options">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                    </svg>
+                </div>
+
+                <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
+                    
+            </div>
+        @endif
+    @endforeach
+
+    <div class="upload-image-add single">
         <span class="upload-prompt">@lang('admin/upload.image')</span>
         <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]">
     </div>
+
     
     <p class="p">@lang('admin/form-titulos.image-single')</p>
     
     
 @endif
 
-@if($type == "multiple-images" )
+@if($type == "images" )
 
-    <div class="collection-box">
-        <div class="upload-collection">      
-            @foreach ($files as $image)
-                @if($image->language == $alias)
-                    <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
-                @endif
-            @endforeach
-    
+    <div class="upload gridbox" >
+        @foreach ($files as $image)
+            @if($image->language == $alias)
+
+            <div class="grid upload {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
+                
+                <div class="upload-image-options">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                    </svg>
+                </div>
+            
+                
+                <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
+            </div>
+
+            @endif
+        @endforeach
+
+        <div class="upload-image-add collection" data-content="{{$content}}" data-alias="{{$alias}}">
             <span class="upload-prompt">+</span>
             <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]" multiple>
-            
         </div>
-
+      
     </div>
 
-    <div class="collection-box">
-        <div class="upload-collection">      
-            @foreach ($files as $image)
-                @if($image->language == $alias)
-                    <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
-                @endif
-            @endforeach
-    
-            <span class="upload-prompt">+</span>
-            <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]" multiple>
-            
-        </div>
-
-    </div>
-
-    
-   
-   
     <p class="p">@lang('admin/form-titulos.image-multiple')</p>
+
     
 @endif

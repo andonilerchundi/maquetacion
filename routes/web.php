@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
 
+    Route::get('/image/delete/{image?}', 'App\Vendor\Image\Image@destroy')->name('delete_image');
+    Route::get('/image/{image}', 'App\Vendor\Image\Image@showImageSeo')->name('show_image_seo');
+    Route::post('/image', 'App\Vendor\Image\Image@storeImageSeo')->name('store_image_seo');
+
     Route::resource('faqs/categorias', 'App\Http\Controllers\Admin\FaqCategoryController', [
         'parameters' => [
             'categorias' => 'faq_category', 
@@ -74,19 +78,19 @@ Route::group(['prefix' => 'admin'], function () {
             'show' => 'customers_show',
         ]
     ]);
-    // Route::get('/sliders/filter/{filters?}', 'App\Http\Controllers\Admin\SliderController@filter')->name('sliders_filter');
-    // Route::resource('sliders', 'App\Http\Controllers\Admin\SliderController', [
-    //     'parameters' => [
-    //         'sliders' => 'slider', 
-    //     ],
-    //     'names' => [
-    //         'index' => 'sliders',
-    //         'create' => 'sliders_create',
-    //         'store' => 'sliders_store',
-    //         'destroy' => 'sliders_destroy',
-    //         'show' => 'sliders_show',
-    //     ]
-    // ]);
+    Route::get('/sliders/filter/{filters?}', 'App\Http\Controllers\Admin\SliderController@filter')->name('sliders_filter');
+    Route::resource('sliders', 'App\Http\Controllers\Admin\SliderController', [
+        'parameters' => [
+            'sliders' => 'slider', 
+        ],
+        'names' => [
+            'index' => 'sliders',
+            'create' => 'sliders_create',
+            'store' => 'sliders_store',
+            'destroy' => 'sliders_destroy',
+            'show' => 'sliders_show',
+        ]
+    ]);
 
 });
 

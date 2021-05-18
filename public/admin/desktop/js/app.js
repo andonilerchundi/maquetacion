@@ -2590,11 +2590,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderUpload": () => (/* binding */ renderUpload)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//importar modalImage
 var renderUpload = function renderUpload() {
   var inputElements = document.querySelectorAll(".upload-input");
+  var uploadImages = document.querySelectorAll(".upload");
   inputElements.forEach(function (inputElement) {
-    var uploadElement = inputElement.closest(".upload");
-    uploadElement.addEventListener("click", function (e) {
+    uploadImage(inputElement);
+  });
+
+  function uploadImage(inputElement) {
+    var uploadElement = inputElement.closest(".upload-image-add");
+    uploadElement.addEventListener("click", function (event) {
       inputElement.click();
     });
     inputElement.addEventListener("change", function (e) {
@@ -2621,10 +2635,19 @@ var renderUpload = function renderUpload() {
 
       uploadElement.classList.remove("upload-over");
     });
-  });
+  }
 
   function updateThumbnail(uploadElement, file) {
     var thumbnailElement = uploadElement.querySelector(".upload-thumb");
+
+    if (uploadElement.classList.contains('collection')) {
+      if (thumbnailElement == null) {
+        var cloneUploadElement = uploadElement.cloneNode(true);
+        var cloneInput = cloneUploadElement.querySelector('.upload-input');
+        uploadImage(cloneInput);
+        uploadElement.parentElement.appendChild(cloneUploadElement);
+      }
+    }
 
     if (uploadElement.querySelector(".upload-prompt")) {
       uploadElement.querySelector(".upload-prompt").remove();
@@ -2636,8 +2659,6 @@ var renderUpload = function renderUpload() {
       uploadElement.appendChild(thumbnailElement);
     }
 
-    thumbnailElement.dataset.label = file.name;
-
     if (file.type.startsWith("image/")) {
       var reader = new FileReader();
       reader.readAsDataURL(file);
@@ -2645,10 +2666,50 @@ var renderUpload = function renderUpload() {
       reader.onload = function () {
         thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
       };
+
+      if (uploadElement.classList.contains('collection')) {
+        var content = uploadElement.dataset.content;
+        var alias = uploadElement.dataset.alias;
+        var inputElement = uploadElement.getElementsByClassName("upload-input")[0];
+        inputElement.name = "images[" + content + "-" + Math.floor(Math.random() * 99999 + 1) + "." + alias + "]";
+      }
     } else {
       thumbnailElement.style.backgroundImage = null;
     }
   }
+
+  uploadImages.forEach(function (uploadImage) {
+    uploadImage.addEventListener("click", function (e) {
+      var url = uploadImage.dataset.url;
+
+      var sendImageRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  try {
+                    axios.get(url).then(function (response) {
+                      openImageModal(response.data);
+                    });
+                  } catch (error) {}
+
+                case 1:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function sendImageRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendImageRequest();
+    });
+  });
 };
 
 /***/ }),

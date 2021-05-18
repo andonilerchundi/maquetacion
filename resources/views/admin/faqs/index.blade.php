@@ -202,9 +202,9 @@
                     @foreach ($localizations as $localization)
 
                         <div class="tab-panel-language {{ $loop->first ? 'language-active':'' }}" data-tab="imagen" data-localetab="{{$localization->alias}}">
-                            <div class="boximages">
+                            <div class="two-columns">
 
-                                <div class="single-image">
+                                <div class="form-group">
                                     @include('admin.layout.partials.upload', [
                                         'type' => 'image', 
                                         'content' => 'featured', 
@@ -214,10 +214,10 @@
 
                                 </div>
 
-                                <div class="multiple-images">
+                                <div class="form-group">
 
                                     @include('admin.layout.partials.upload', [
-                                        'type' => 'multiple-images', 
+                                        'type' => 'images', 
                                         'content' => 'grid', 
                                         'alias' => $localization->alias,
                                         'files' => $faq->images_featured_preview,
