@@ -1,4 +1,4 @@
-.upload {
+.upload-image-add {
     align-items: center;
     border: 0.2em dashed hsl(183, 98%, 35%);
     color: #cccccc;
@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-.upload:hover{
+.upload-image-add:hover{
     border: 4px dashed hsl(19, 100%, 50%);
 }
   
@@ -54,49 +54,30 @@ content: attr(data-label);
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.2em
+    
     
     
 }
 
-.grid{
+.upload-image-add.collection{
     border: 0.2em dashed hsl(183, 98%, 35%);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 5em;
-    height: 7vh;
+    width: 4em;
+    height: 6vh;
     cursor: pointer;
     margin-top: 0.5em;
     
     
 }
-
-
-.svg-box{
-    width: 92%;
-    height: 3vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-
-}
-.edit-image{
-    width: 1.5em ;
-    height:1.5em ;
-    color: black;
-}
-.edit-image:hover{
-    color:hsl(183, 98%, 35%);
+.upload-image-add.collection:hover{
+    border: 4px dashed hsl(19, 100%, 50%);
 }
 
-.delete-image{
-    width: 1.5em ;
-    height:1.5em ;
-    color: black;
-}
-.delete-image:hover{
-    color:hsl(19, 100%, 50%);
-}
+
+
 
 .p{
     height: 2vh;

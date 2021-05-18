@@ -217,7 +217,7 @@
                                 <div class="form-group">
 
                                     @include('admin.layout.partials.upload', [
-                                        'type' => 'multiple-images', 
+                                        'type' => 'images', 
                                         'content' => 'grid', 
                                         'alias' => $localization->alias,
                                         'files' => $faq->images_featured_preview,

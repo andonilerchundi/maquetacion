@@ -1,78 +1,59 @@
 
 @if($type == "image" )
 
-    <div class="wrap-single">
-        <div class="upload"> 
-        
-            @foreach ($files as $image)
-                @if($image->language == $alias)
-                    <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
-                @endif
-            @endforeach
-    
-            <span class="upload-prompt">@lang('admin/upload.image')</span>
-            <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]">
-    
-        </div>
+    @foreach ($files as $image)
+        @if($image->language == $alias)
+            <div class="upload single {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
 
-        <div class="svg-box">
-            <div class="edit-image">
-                <svg  viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-                </svg>
+                <div class="upload-image-options">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                    </svg>
+                </div>
 
+                <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
+                    
             </div>
+        @endif
+    @endforeach
 
-            <div class="delete-image">
-                <svg viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-                </svg>
-
-            </div>
-        </div>
-
+    <div class="upload-image-add single">
+        <span class="upload-prompt">@lang('admin/upload.image')</span>
+        <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]">
     </div>
-   
+
+    
     <p class="p">@lang('admin/form-titulos.image-single')</p>
     
     
 @endif
 
-@if($type == "multiple-images" )
+@if($type == "images" )
 
-    <div class="gridbox" >
+    <div class="upload gridbox" >
+        @foreach ($files as $image)
+            @if($image->language == $alias)
 
-        <div class="grid-wrapp">
-
-            <div class="grid upload" >      
-                @foreach ($files as $image)
-                    @if($image->language == $alias)
-                        <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
-                    @endif
-                @endforeach
-    
-                <span class="upload-prompt">+</span>
-                <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]" multiple>
+            <div class="grid upload {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
                 
-            </div>
-            <div class="svg-box">
-                <div class="edit-image">
-                    <svg  viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-                    </svg>
-    
-                </div>
-    
-                <div class="delete-image">
+                <div class="upload-image-options">
                     <svg viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                        <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
                     </svg>
-    
                 </div>
+            
+                
+                <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
             </div>
 
-        </div>
+            @endif
+        @endforeach
 
+        <div class="upload-image-add collection" data-content="{{$content}}" data-alias="{{$alias}}">
+            <span class="upload-prompt">+</span>
+            <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]" multiple>
+        </div>
+      
     </div>
 
     <p class="p">@lang('admin/form-titulos.image-multiple')</p>
