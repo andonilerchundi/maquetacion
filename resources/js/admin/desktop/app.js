@@ -6,7 +6,9 @@ require('./filter');
 require('./loader');
 require('./tab');
 require('./languageTab');
-require('./upload');
+require('./upload-image');
+require('./modal-image');
+
 
 
 

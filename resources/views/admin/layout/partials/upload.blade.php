@@ -1,5 +1,5 @@
 
-@if($type == "image" )
+@if($type == "single" )
 
     @foreach ($files as $image)
         @if($image->language == $alias)
@@ -17,10 +17,12 @@
         @endif
     @endforeach
 
-    <div class="upload-image-add single">
-        <span class="upload-prompt">@lang('admin/upload.image')</span>
-        <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]">
-    </div>
+    @if($files->count() == 0)
+        <div class="upload-image-add single" data-entity="{{$entity}}" data-content="{{$content}}" data-alias="{{$alias}}">
+            <span class="upload-prompt">@lang('admin/upload.image')</span>
+            <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]">
+        </div>
+    @endif
 
     
     <p class="p">@lang('admin/form-titulos.image-single')</p>
@@ -28,13 +30,14 @@
     
 @endif
 
-@if($type == "images" )
+@if($type == "collection" )
 
-    <div class="upload gridbox" >
+    <div class="upload-gridbox" >
+
         @foreach ($files as $image)
             @if($image->language == $alias)
 
-            <div class="grid upload {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
+            <div class="collection upload {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
                 
                 <div class="upload-image-options">
                     <svg viewBox="0 0 24 24">
@@ -53,7 +56,7 @@
             <span class="upload-prompt">+</span>
             <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]" multiple>
         </div>
-      
+
     </div>
 
     <p class="p">@lang('admin/form-titulos.image-multiple')</p>

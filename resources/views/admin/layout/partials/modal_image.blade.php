@@ -1,11 +1,22 @@
-<div class="main-image">
+<div id="main-image">
     <div id="upload-image-modal" class="modal">
 
         <div class="modal-image">
-            <img id="modal-image-original">
+            
+            <div class="modal-image-container">
+
+                <img id="modal-image-original">
+
+            </div>
+            
         </div>
 
         <div  class="modal-image-attributes">
+            <div class="form-button modal-image-back-button" id="modal-image-back-button"> 
+                <svg  viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M21,12L14,5V9C7,10 4,15 3,20C5.5,16.5 9,14.9 14,14.9V19L21,12Z" />
+                </svg>
+            </div>
             <form class="image-form" id="image-form" action="{{route('store_image_seo')}}" autocomplete="off">             
 
                 {{ csrf_field() }}
@@ -49,6 +60,7 @@
                     <path class="store-button-icon" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
                 </svg>
             </div>
+           
     
             <div class="form-button modal-image-delete-button" data-route="{{route('delete_image')}}" id="modal-image-delete-button"> 
                 <p>

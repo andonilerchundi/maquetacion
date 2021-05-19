@@ -206,7 +206,8 @@
 
                                 <div class="form-group">
                                     @include('admin.layout.partials.upload', [
-                                        'type' => 'image', 
+                                        'entity' => 'faqs',
+                                        'type' => 'single', 
                                         'content' => 'featured', 
                                         'alias' => $localization->alias,
                                         'files' => $faq->images_featured_preview,
@@ -217,7 +218,8 @@
                                 <div class="form-group">
 
                                     @include('admin.layout.partials.upload', [
-                                        'type' => 'images', 
+                                        'entity' => 'faqs',
+                                        'type' => 'collection', 
                                         'content' => 'grid', 
                                         'alias' => $localization->alias,
                                         'files' => $faq->images_featured_preview,

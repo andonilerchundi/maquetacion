@@ -1,4 +1,5 @@
-.upload-image-add {
+.upload-image-add.single,
+.upload.single {
     align-items: center;
     border: 0.2em dashed hsl(183, 98%, 35%);
     color: #cccccc;
@@ -19,8 +20,6 @@
 .upload-over {
     border-style: solid;
 }
-
-
 
 .upload-input {
     display: none;
@@ -50,17 +49,16 @@ content: attr(data-label);
 }
 
 
-.gridbox{
+.upload-gridbox{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 0.2em
-    
-    
-    
+     
 }
 
-.upload-image-add.collection{
+.upload-image-add.collection,
+.upload.collection{
     border: 0.2em dashed hsl(183, 98%, 35%);
     display: flex;
     justify-content: center;
@@ -76,8 +74,25 @@ content: attr(data-label);
     border: 4px dashed hsl(19, 100%, 50%);
 }
 
+.upload-image-options{
+    display: none;
+}
 
+.upload:hover .upload-image-options{
+    display: initial;
+    position: absolute;
+    width: 2em;
+    z-index: 300;
 
+    svg{
+        height: 2em;
+        width: 2em;
+
+        path{
+            fill: hsl(0, 0%, 100%);
+        }
+    }
+}
 
 .p{
     height: 2vh;

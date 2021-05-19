@@ -3,7 +3,7 @@ import {showMessage} from './message';
 import {startLoading, stopLoading} from './loader';
 import {renderTabs} from './tab';
 import {renderLanguages} from './languageTab';
-import {renderUpload} from './upload';
+import {renderUpload} from './upload-image';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");

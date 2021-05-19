@@ -1892,7 +1892,9 @@ __webpack_require__(/*! ./tab */ "./resources/js/admin/desktop/tab.js");
 
 __webpack_require__(/*! ./languageTab */ "./resources/js/admin/desktop/languageTab.js");
 
-__webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
+__webpack_require__(/*! ./upload-image */ "./resources/js/admin/desktop/upload-image.js");
+
+__webpack_require__(/*! ./modal-image */ "./resources/js/admin/desktop/modal-image.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -2052,7 +2054,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loader */ "./resources/js/admin/desktop/loader.js");
 /* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tab */ "./resources/js/admin/desktop/tab.js");
 /* harmony import */ var _languageTab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./languageTab */ "./resources/js/admin/desktop/languageTab.js");
-/* harmony import */ var _upload__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
+/* harmony import */ var _upload_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./upload-image */ "./resources/js/admin/desktop/upload-image.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2199,7 +2201,7 @@ var renderForm = function renderForm() {
   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
   (0,_tab__WEBPACK_IMPORTED_MODULE_4__.renderTabs)();
   (0,_languageTab__WEBPACK_IMPORTED_MODULE_5__.renderLanguages)();
-  (0,_upload__WEBPACK_IMPORTED_MODULE_6__.renderUpload)();
+  (0,_upload_image__WEBPACK_IMPORTED_MODULE_6__.renderUpload)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit");
@@ -2464,6 +2466,163 @@ var showMessage = function showMessage(state, messageText) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/modal-image.js":
+/*!***************************************************!*\
+  !*** ./resources/js/admin/desktop/modal-image.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "openModal": () => (/* binding */ openModal),
+/* harmony export */   "openImageModal": () => (/* binding */ openImageModal),
+/* harmony export */   "updateImageModal": () => (/* binding */ updateImageModal)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var modalImageStoreButton = document.getElementById('modal-image-store-button');
+var modalImageDeleteButton = document.getElementById('modal-image-delete-button');
+var modalImageReturnButton = document.getElementById('modal-image-back-button');
+modalImageReturnButton.addEventListener('click', function () {
+  var modal = document.getElementById('main-image');
+  modal.classList.toggle('modal-active');
+});
+var openModal = function openModal() {
+  var modal = document.getElementById('main-image');
+  modal.classList.add('modal-active');
+};
+var openImageModal = function openImageModal(image) {
+  var modal = document.getElementById('main-image');
+  var imageContainer = document.getElementById('modal-image-original');
+  var imageForm = document.getElementById('image-form');
+
+  if (image.path) {
+    imageContainer.src = '../storage/' + image.path;
+  }
+
+  for (var _i = 0, _Object$entries = Object.entries(image); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        val = _Object$entries$_i[1];
+
+    var input = imageForm.elements[key];
+
+    if (input) {
+      switch (input.type) {
+        case 'checkbox':
+          input.checked = !!val;
+          break;
+
+        default:
+          input.value = val;
+          break;
+      }
+    }
+  }
+
+  modal.classList.add('modal-active');
+};
+var updateImageModal = function updateImageModal(image) {
+  var imageContainer = document.getElementById('modal-image-original');
+  imageContainer.src = image;
+};
+modalImageStoreButton.addEventListener("click", function (e) {
+  var modal = document.getElementById('main-image');
+  var imageForm = document.getElementById('image-form');
+  var data = new FormData(imageForm);
+  var url = imageForm.action;
+
+  var sendImagePostRequest = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              try {
+                axios.post(url, data).then(function (response) {
+                  modal.classList.remove('modal-active');
+                });
+              } catch (error) {}
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function sendImagePostRequest() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  sendImagePostRequest();
+});
+modalImageDeleteButton.addEventListener("click", function (e) {
+  var modal = document.getElementById('main-image');
+  var url = modalImageDeleteButton.dataset.route;
+  var imageId = document.getElementById('modal-image-id').value;
+
+  var sendImageDeleteRequest = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              try {
+                axios.get(url, {
+                  params: {
+                    'image': imageId
+                  }
+                }).then(function (response) {
+                  modal.classList.remove('modal-active');
+                  var uploadImages = document.querySelectorAll(".upload");
+                  uploadImages.forEach(function (uploadImage) {
+                    if (uploadImage.classList.contains(imageId)) {
+                      uploadImage.remove();
+                    }
+                  });
+                });
+              } catch (error) {}
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function sendImageDeleteRequest() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  sendImageDeleteRequest();
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/sidebar.js":
 /*!***********************************************!*\
   !*** ./resources/js/admin/desktop/sidebar.js ***!
@@ -2579,10 +2738,10 @@ var renderTabs = function renderTabs() {
 
 /***/ }),
 
-/***/ "./resources/js/admin/desktop/upload.js":
-/*!**********************************************!*\
-  !*** ./resources/js/admin/desktop/upload.js ***!
-  \**********************************************/
+/***/ "./resources/js/admin/desktop/upload-image.js":
+/*!****************************************************!*\
+  !*** ./resources/js/admin/desktop/upload-image.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2592,24 +2751,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modal_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal-image */ "./resources/js/admin/desktop/modal-image.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//importar modalImage
+
 var renderUpload = function renderUpload() {
   var inputElements = document.querySelectorAll(".upload-input");
   var uploadImages = document.querySelectorAll(".upload");
   inputElements.forEach(function (inputElement) {
     uploadImage(inputElement);
   });
+  uploadImages.forEach(function (uploadImage) {
+    uploadImage.addEventListener("click", function (e) {
+      openImage(uploadImage);
+    });
+  });
 
   function uploadImage(inputElement) {
-    var uploadElement = inputElement.closest(".upload-image-add");
-    uploadElement.addEventListener("click", function (event) {
-      inputElement.click();
+    var uploadElement = inputElement.parentElement;
+    uploadElement.addEventListener("click", function (e) {
+      var thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
+
+      if (!thumbnailElement) {
+        inputElement.click();
+      } else {
+        openImage(uploadElement);
+      }
+
+      ;
     });
     inputElement.addEventListener("change", function (e) {
       if (inputElement.files.length) {
@@ -2641,11 +2814,11 @@ var renderUpload = function renderUpload() {
     var thumbnailElement = uploadElement.querySelector(".upload-thumb");
 
     if (uploadElement.classList.contains('collection')) {
-      if (thumbnailElement == null) {
+      if (!thumbnailElement) {
         var cloneUploadElement = uploadElement.cloneNode(true);
         var cloneInput = cloneUploadElement.querySelector('.upload-input');
         uploadImage(cloneInput);
-        uploadElement.parentElement.appendChild(cloneUploadElement);
+        uploadElement.parentElement.insertBefore(cloneUploadElement, uploadElement);
       }
     }
 
@@ -2665,7 +2838,12 @@ var renderUpload = function renderUpload() {
 
       reader.onload = function () {
         thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
+        (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.updateImageModal)(reader.result);
+        (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.openModal)();
       };
+
+      uploadElement.classList.remove('upload-image-add');
+      uploadElement.classList.add('upload');
 
       if (uploadElement.classList.contains('collection')) {
         var content = uploadElement.dataset.content;
@@ -2678,10 +2856,10 @@ var renderUpload = function renderUpload() {
     }
   }
 
-  uploadImages.forEach(function (uploadImage) {
-    uploadImage.addEventListener("click", function (e) {
-      var url = uploadImage.dataset.url;
+  function openImage(image) {
+    var url = image.dataset.url;
 
+    if (url) {
       var sendImageRequest = /*#__PURE__*/function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -2690,7 +2868,7 @@ var renderUpload = function renderUpload() {
                 case 0:
                   try {
                     axios.get(url).then(function (response) {
-                      openImageModal(response.data);
+                      (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.openImageModal)(response.data);
                     });
                   } catch (error) {}
 
@@ -2708,8 +2886,10 @@ var renderUpload = function renderUpload() {
       }();
 
       sendImageRequest();
-    });
-  });
+    } else {
+      (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.openModal)();
+    }
+  }
 };
 
 /***/ }),
