@@ -3,7 +3,7 @@
 
     @foreach ($files as $image)
         @if($image->language == $alias)
-            <div class="upload single {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
+            <div class="upload single {{$image->id}}" data-temporalId="{{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
 
                 <div class="upload-image-options">
                     <svg viewBox="0 0 24 24">
@@ -11,18 +11,19 @@
                     </svg>
                 </div>
 
+               
                 <div class="upload-thumb" data-label="{{$image->filename}}" style="background-image: url({{Storage::url($image->path)}})"></div>
-                    
+                
             </div>
         @endif
     @endforeach
 
     @if($files->count() == 0)
-        <div class="upload-image-add single" data-entity="{{$entity}}" data-content="{{$content}}" data-alias="{{$alias}}">
+        <div class="upload-image-add single" data-entity="{{$entity}}" data-content="{{$content}}" data-language="{{$alias}}">
             <span class="upload-prompt">@lang('admin/upload.image')</span>
-            <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]">
+            <input class="upload-input" type="file">
         </div>
-    @endif
+    @endif  
 
     
     <p class="p">@lang('admin/form-titulos.image-single')</p>
@@ -35,6 +36,7 @@
     <div class="upload-gridbox" >
 
         @foreach ($files as $image)
+        
             @if($image->language == $alias)
 
             <div class="collection upload {{$image->id}}" data-url="{{route('show_image_seo', ['image' => $image->id])}}"> 
@@ -52,7 +54,7 @@
             @endif
         @endforeach
 
-        <div class="upload-image-add collection" data-content="{{$content}}" data-alias="{{$alias}}">
+        <div class="upload-image-add collection"  data-entity="{{$entity}}" data-content="{{$content}}" data-language="{{$alias}}"> 
             <span class="upload-prompt">+</span>
             <input class="upload-input" type="file" name="images[{{$content}}.{{$alias}}]" multiple>
         </div>

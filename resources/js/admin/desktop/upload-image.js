@@ -1,6 +1,6 @@
 import {openImageModal, openModal, updateImageModal} from './modal-image'
 
-export let renderUpload = () => {
+export let renderUploadImage = () => {
 
     let inputElements = document.querySelectorAll(".upload-input");
     let uploadImages = document.querySelectorAll(".upload");
@@ -17,53 +17,56 @@ export let renderUpload = () => {
             openImage(uploadImage);
         });
     });
-    
-    function uploadImage(inputElement){
+}
 
-        let uploadElement = inputElement.parentElement;
+function uploadImage(inputElement){
 
-        uploadElement.addEventListener("click", (e) => {
-            
-            let thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
+    let uploadElement = inputElement.parentElement;
 
-            if(!thumbnailElement){
-                inputElement.click();
-            }else{
-                openImage(uploadElement);
-            };
-        });
-      
-        inputElement.addEventListener("change", (e) => {
-            if (inputElement.files.length) {
-                updateThumbnail(uploadElement, inputElement.files[0]);
-            }
-        });
-      
-        uploadElement.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            uploadElement.classList.add("upload-over");
-        });
-      
-        ["dragleave", "dragend"].forEach((type) => {
-            uploadElement.addEventListener(type, (e) => {
-                uploadElement.classList.remove("upload-over");
-            });
-        });
-      
-        uploadElement.addEventListener("drop", (e) => {
-            e.preventDefault();
+    uploadElement.addEventListener("click", (e) => {
         
-            if (e.dataTransfer.files.length) {
-                inputElement.files = e.dataTransfer.files;
-                updateThumbnail(uploadElement, e.dataTransfer.files[0]);
-            }
-        
+        let thumbnailElement = uploadElement.querySelector(".upload-thumb");
+
+        if(!thumbnailElement){
+            inputElement.click();
+        }else{
+            openImage(uploadElement);
+        };
+    });
+  
+    inputElement.addEventListener("change", (e) => {
+        if (inputElement.files.length) {
+            updateThumbnail(uploadElement, inputElement.files[0]);
+        }
+    });
+  
+    uploadElement.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadElement.classList.add("upload-over");
+    });
+  
+    ["dragleave", "dragend"].forEach((type) => {
+        uploadElement.addEventListener(type, (e) => {
             uploadElement.classList.remove("upload-over");
         });
-    }
-      
-    function updateThumbnail(uploadElement, file) {
+    });
+  
+    uploadElement.addEventListener("drop", (e) => {
+        e.preventDefault();
     
+        if (e.dataTransfer.files.length) {
+            inputElement.files = e.dataTransfer.files;
+            updateThumbnail(uploadElement, e.dataTransfer.files[0]);
+        }
+    
+        uploadElement.classList.remove("upload-over");
+    });
+}
+  
+function updateThumbnail(uploadElement, file) {
+            
+    if (file.type.startsWith("image/")) {
+
         let thumbnailElement = uploadElement.querySelector(".upload-thumb");
 
         if(uploadElement.classList.contains('collection')){
@@ -79,7 +82,7 @@ export let renderUpload = () => {
         }
     
         if (uploadElement.querySelector(".upload-prompt")) {
-            uploadElement.querySelector(".upload-prompt").remove();
+            uploadElement.querySelector(".upload-prompt").classList.add('hidden');
         }
         
         if (!thumbnailElement) {
@@ -87,62 +90,87 @@ export let renderUpload = () => {
             thumbnailElement.classList.add("upload-thumb");
             uploadElement.appendChild(thumbnailElement);
         }
-                
-        if (file.type.startsWith("image/")) {
 
-            let reader = new FileReader();
+        let reader = new FileReader();
+
+        reader.readAsDataURL(file);
         
-            reader.readAsDataURL(file);
-    
-            reader.onload = () => {
-                thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-                updateImageModal(reader.result);
+        reader.onload = () => {
 
-                openModal();
-            };
+            let temporalId = Math.floor((Math.random() * 99999) + 1);
+            let content = uploadElement.dataset.content;
+            let language = uploadElement.dataset.language;
+
+            let inputElement = uploadElement.getElementsByClassName("upload-input")[0];
+
+            thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+            uploadElement.dataset.temporalId = temporalId;
+            uploadElement.dataset.image = reader.result;
+            inputElement.name = "images[" + content + "-" + temporalId + "." + language  + "]"; 
 
             uploadElement.classList.remove('upload-image-add');
             uploadElement.classList.add('upload');
 
-            if(uploadElement.classList.contains('collection')){
-
-                let content = uploadElement.dataset.content;
-                let alias = uploadElement.dataset.alias;
-                let inputElement = uploadElement.getElementsByClassName("upload-input")[0];
-        
-                inputElement.name = "images[" + content + "-" + Math.floor((Math.random() * 99999) + 1) + "." + alias  + "]"; 
-            }
-            
-        } else {
-            thumbnailElement.style.backgroundImage = null;
-        }
-    }
-
-    function openImage(image){
-
-        let url = image.dataset.url;
-
-        if(url){
-
-            let sendImageRequest = async () => {
-
-                try {
-                    axios.get(url).then(response => {
-    
-                        openImageModal(response.data);
-                        
-                    });
-                    
-                } catch (error) {
-    
-                }
-            };
-    
-            sendImageRequest();
-
-        }else{            
-
+            updateImageModal(uploadElement);
             openModal();
-        }
+        };
+        
+    }else{
+        thumbnailElement.style.backgroundImage = null;
     }
+}
+
+function openImage(image){
+
+    let url = image.dataset.url;
+
+    if(url){
+
+        let sendImageRequest = async () => {
+
+            try {
+                axios.get(url).then(response => {
+
+                    openImageModal(response.data);
+                    
+                });
+                
+            } catch (error) {
+
+            }
+        };
+
+        sendImageRequest();
+
+    }else{       
+        
+        updateImageModal(image);
+        openModal();
+    }
+}
+
+export function deleteThumbnail(imageId) {
+
+    let uploadImages = document.querySelectorAll(".upload");
+
+    uploadImages.forEach(uploadImage => {
+    
+        if(uploadImage.classList.contains('collection') && uploadImage.dataset.imageid == imageId){
+
+            uploadImage.remove();
+        }
+
+        if(uploadImage.classList.contains('single') && uploadImage.dataset.imageid == imageId){
+
+            uploadImage.querySelector(".upload-thumb").remove();
+            uploadImage.dataset.imageid == '';
+            uploadImage.querySelector(".upload-prompt").classList.remove('hidden');
+            uploadImage.classList.remove('upload');
+            uploadImage.classList.add('upload-image-add');
+
+            if(uploadImage.querySelector(".upload-input")){
+                uploadImage.querySelector(".upload-input").value = "";
+            }
+        }
+    });
 }

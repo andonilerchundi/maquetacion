@@ -101,3 +101,7 @@ content: attr(data-label);
     color: white;
     border-radius: 0.2em;
 }
+
+.upload-prompt.hidden{
+    display: none;
+}

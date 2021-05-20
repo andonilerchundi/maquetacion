@@ -187,7 +187,7 @@ class Image
 		
 	}
 
-	public function storeImageSeo(Request $request)
+	public function storeSeo(Request $request)
 	{
 		$images = ImageResized::getImagesSeo(request('filename'), request('entity_id'), request('language'))->get();
 
@@ -216,9 +216,9 @@ class Image
         ]);
 	}
 
-	public function show($entity_id, $language)
-	{
-		return ImageOriginal::getPreviewImage($this->entity, $entity_id, $language)->first();
+	public function show(Request $request, $image)
+	{		
+		return ImageResized::find($image)->original_image;
 	}
 
 	public function preview($entity_id)

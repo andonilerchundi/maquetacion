@@ -222,7 +222,7 @@
                                         'type' => 'collection', 
                                         'content' => 'grid', 
                                         'alias' => $localization->alias,
-                                        'files' => $faq->images_featured_preview,
+                                        'files' => $faq->images_grid_preview,
                                     ])
 
                                 </div>

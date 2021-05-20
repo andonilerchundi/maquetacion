@@ -734,6 +734,10 @@ li:hover {
   border-radius: 0.2em;
 }
 
+.upload-prompt.hidden {
+  display: none;
+}
+
 #main-image.modal-active {
   width: 100%;
   height: 100vh;
