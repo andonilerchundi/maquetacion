@@ -2476,12 +2476,13 @@ var showMessage = function showMessage(state, messageText) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "openModal": () => (/* binding */ openModal),
-/* harmony export */   "openImageModal": () => (/* binding */ openImageModal),
 /* harmony export */   "updateImageModal": () => (/* binding */ updateImageModal)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _upload_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./upload-image */ "./resources/js/admin/desktop/upload-image.js");
+/* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./loader */ "./resources/js/admin/desktop/loader.js");
+/* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message */ "./resources/js/admin/desktop/message.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2501,6 +2502,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
+
 var modalImageStoreButton = document.getElementById('modal-image-store-button');
 var modalImageDeleteButton = document.getElementById('modal-image-delete-button');
 var modalImageReturnButton = document.getElementById('modal-image-back-button');
@@ -2512,47 +2515,27 @@ var openModal = function openModal() {
   var modal = document.getElementById('main-image');
   modal.classList.add('modal-active');
 };
-var openImageModal = function openImageModal(image) {
-  var modal = document.getElementById('main-image');
+var updateImageModal = function updateImageModal(image) {
   var imageContainer = document.getElementById('modal-image-original');
   var imageForm = document.getElementById('image-form');
+  imageForm.reset();
 
   if (image.path) {
-    imageContainer.src = '../storage/' + image.path;
+    if (image.entity_id) {
+      image.imageId = image.id;
+      imageContainer.src = '../storage/' + image.path;
+    } else {
+      imageContainer.src = image.path;
+    }
+  } else {
+    imageContainer.src = image.dataset.path;
+    image = image.dataset;
   }
 
   for (var _i = 0, _Object$entries = Object.entries(image); _i < _Object$entries.length; _i++) {
     var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
         key = _Object$entries$_i[0],
         val = _Object$entries$_i[1];
-
-    var input = imageForm.elements[key];
-
-    if (input) {
-      switch (input.type) {
-        case 'checkbox':
-          input.checked = !!val;
-          break;
-
-        default:
-          input.value = val;
-          break;
-      }
-    }
-  }
-
-  modal.classList.add('modal-active');
-};
-var updateImageModal = function updateImageModal(image) {
-  var imageContainer = document.getElementById('modal-image-original');
-  imageContainer.src = image.dataset.image;
-  var imageForm = document.getElementById('image-form');
-  imageForm.reset();
-
-  for (var _i2 = 0, _Object$entries2 = Object.entries(image.dataset); _i2 < _Object$entries2.length; _i2++) {
-    var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-        key = _Object$entries2$_i[0],
-        val = _Object$entries2$_i[1];
 
     var input = imageForm.elements[key];
 
@@ -2584,6 +2567,9 @@ modalImageStoreButton.addEventListener("click", function (e) {
               try {
                 axios.post(url, data).then(function (response) {
                   modal.classList.remove('modal-active');
+                  imageForm.reset();
+                  (0,_loader__WEBPACK_IMPORTED_MODULE_2__.stopLoading)();
+                  (0,_message__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
                 });
               } catch (error) {}
 
@@ -2603,12 +2589,13 @@ modalImageStoreButton.addEventListener("click", function (e) {
   sendImagePostRequest();
 });
 modalImageDeleteButton.addEventListener("click", function (e) {
-  var modal = document.getElementById('upload-image-modal');
   var url = modalImageDeleteButton.dataset.route;
+  var modal = document.getElementById('main-image');
+  var imageForm = document.getElementById('image-form');
   var temporalId = document.getElementById('modal-image-temporal-id').value;
-  var entityId = document.getElementById('modal-image-entity-id').value;
+  var id = document.getElementById('modal-image-id').value;
 
-  if (entityId) {
+  if (id) {
     var sendImageDeleteRequest = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -2618,10 +2605,11 @@ modalImageDeleteButton.addEventListener("click", function (e) {
                 try {
                   axios.get(url, {
                     params: {
-                      'image': imageId
+                      'image': id
                     }
                   }).then(function (response) {
-                    showMessage('success', response.data.message);
+                    (0,_upload_image__WEBPACK_IMPORTED_MODULE_1__.deleteThumbnail)(response.data.imageId);
+                    (0,_message__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
                   });
                 } catch (error) {}
 
@@ -2639,11 +2627,13 @@ modalImageDeleteButton.addEventListener("click", function (e) {
     }();
 
     sendImageDeleteRequest();
+  } else {
+    (0,_upload_image__WEBPACK_IMPORTED_MODULE_1__.deleteThumbnail)(temporalId);
   }
 
   modal.classList.remove('modal-active');
-  stopWait();
-  (0,_upload_image__WEBPACK_IMPORTED_MODULE_1__.deleteThumbnail)(temporalId);
+  imageForm.reset();
+  (0,_loader__WEBPACK_IMPORTED_MODULE_2__.stopLoading)();
 });
 
 /***/ }),
@@ -2777,12 +2767,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modal_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal-image */ "./resources/js/admin/desktop/modal-image.js");
+/* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message */ "./resources/js/admin/desktop/message.js");
+/* harmony import */ var _modal_image__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal-image */ "./resources/js/admin/desktop/modal-image.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 var renderUploadImage = function renderUploadImage() {
@@ -2872,12 +2864,12 @@ function updateThumbnail(uploadElement, file) {
       var inputElement = uploadElement.getElementsByClassName("upload-input")[0];
       _thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
       uploadElement.dataset.temporalId = temporalId;
-      uploadElement.dataset.image = reader.result;
+      uploadElement.dataset.path = reader.result;
       inputElement.name = "images[" + content + "-" + temporalId + "." + language + "]";
       uploadElement.classList.remove('upload-image-add');
       uploadElement.classList.add('upload');
-      (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.updateImageModal)(uploadElement);
-      (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.openModal)();
+      (0,_modal_image__WEBPACK_IMPORTED_MODULE_2__.updateImageModal)(uploadElement);
+      (0,_modal_image__WEBPACK_IMPORTED_MODULE_2__.openModal)();
     };
   } else {
     thumbnailElement.style.backgroundImage = null;
@@ -2885,9 +2877,10 @@ function updateThumbnail(uploadElement, file) {
 }
 
 function openImage(image) {
+  var temporalId = image.dataset.temporalId;
   var url = image.dataset.url;
 
-  if (url) {
+  if (temporalId) {
     var sendImageRequest = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -2895,10 +2888,24 @@ function openImage(image) {
             switch (_context.prev = _context.next) {
               case 0:
                 try {
-                  axios.get(url).then(function (response) {
-                    (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.openImageModal)(response.data);
+                  axios.get(url, {
+                    params: {
+                      'image': temporalId
+                    }
+                  }).then(function (response) {
+                    if (response.data) {
+                      response.data.path = image.dataset.path;
+                      (0,_modal_image__WEBPACK_IMPORTED_MODULE_2__.updateImageModal)(response.data);
+                    } else {
+                      (0,_modal_image__WEBPACK_IMPORTED_MODULE_2__.updateImageModal)(image);
+                    }
+
+                    ;
+                    (0,_modal_image__WEBPACK_IMPORTED_MODULE_2__.openModal)();
                   });
-                } catch (error) {}
+                } catch (error) {
+                  (0,_message__WEBPACK_IMPORTED_MODULE_1__.showMessage)();
+                }
 
               case 1:
               case "end":
@@ -2915,27 +2922,57 @@ function openImage(image) {
 
     sendImageRequest();
   } else {
-    (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.updateImageModal)(image);
-    (0,_modal_image__WEBPACK_IMPORTED_MODULE_1__.openModal)();
+    var _sendImageRequest = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                try {
+                  axios.get(url).then(function (response) {
+                    response.data.path = response.data.original_image.path;
+                    (0,_modal_image__WEBPACK_IMPORTED_MODULE_2__.updateImageModal)(response.data);
+                    (0,_modal_image__WEBPACK_IMPORTED_MODULE_2__.openModal)();
+                  });
+                } catch (error) {}
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function _sendImageRequest() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+
+    _sendImageRequest();
   }
 }
 
 function deleteThumbnail(imageId) {
   var uploadImages = document.querySelectorAll(".upload");
   uploadImages.forEach(function (uploadImage) {
-    if (uploadImage.classList.contains('collection') && uploadImage.dataset.imageid == imageId) {
-      uploadImage.remove();
+    if (uploadImage.classList.contains('collection')) {
+      if (uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId) {
+        uploadImage.remove();
+      }
     }
 
-    if (uploadImage.classList.contains('single') && uploadImage.dataset.imageid == imageId) {
-      uploadImage.querySelector(".upload-thumb").remove();
-      uploadImage.dataset.imageid == '';
-      uploadImage.querySelector(".upload-prompt").classList.remove('hidden');
-      uploadImage.classList.remove('upload');
-      uploadImage.classList.add('upload-image-add');
+    if (uploadImage.classList.contains('single')) {
+      if (uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId) {
+        uploadImage.querySelector(".upload-thumb").remove();
+        uploadImage.dataset.temporalId == '';
+        uploadImage.querySelector(".upload-prompt").classList.remove('hidden');
+        uploadImage.classList.remove('upload');
+        uploadImage.classList.add('upload-image-add');
 
-      if (uploadImage.querySelector(".upload-input")) {
-        uploadImage.querySelector(".upload-input").value = "";
+        if (uploadImage.querySelector(".upload-input")) {
+          uploadImage.querySelector(".upload-input").value = "";
+        }
       }
     }
   });

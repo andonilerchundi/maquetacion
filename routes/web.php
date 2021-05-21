@@ -17,6 +17,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/image/delete/{image?}', 'App\Vendor\Image\Image@destroy')->name('delete_image');
     Route::get('/image/{image}', 'App\Vendor\Image\Image@show')->name('show_image_seo');
+    Route::get('/image/temporal/{image?}', 'App\Vendor\Image\Image@showTemporal')->name('show_temporal_image_seo');
     Route::post('/image/seo', 'App\Vendor\Image\Image@storeSeo')->name('store_image_seo');
     
     Route::resource('faqs/categorias', 'App\Http\Controllers\Admin\FaqCategoryController', [

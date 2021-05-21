@@ -31,19 +31,11 @@ class FaqController extends Controller
     public function index()
     {        
         
-        // $locale = $this->locale->getAllByLanguage();
         
-        // $faqs = $this->faq->with(['locale' => function($query){
-        //     $query->pluck('value','tag')->toArray();
-        // }])->where('active', 1)->get();
 
-        // $faqs = $faqs->map(function($faq) {  
-        //     return collect($faq)->union($faq->locale->pluck('value','tag'));
-        // });
-
-        $faqs = $this->faq->where('active', 1)->get();
-        // ->with('image_featured_desktop') Lo añadiremos antes del ->where('active', 1)
-        // ->where('visible', 1)
+        $faqs = $this->faq->where('active', 1)->with('image_featured_desktop')->with('image_grid_desktop')->get();
+         
+     
 
         $faqs = $faqs->each(function($faq) {  
             

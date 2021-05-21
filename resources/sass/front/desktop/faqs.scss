@@ -12,7 +12,7 @@
     outline: auto;
     font-size: 24px;
     font-weight: bold;
-   margin: 0.2em auto;
+    margin: 0.2em auto;
     
 }
 
@@ -61,9 +61,10 @@
     font-size: 1em;
     max-height: 0;
     overflow: hidden;
+    
 
     p{
-        font-weight: 400;
+       
         margin: 0.5em;
     }
 }
@@ -71,9 +72,60 @@
 .faq-description.active{
     background-color:hsla(177, 70%, 41%, 0.521); 
     max-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+   
 }
 
 
+.faq-description-text{
+
+    width: 50%;
+    max-height:40vh ;
+
+}
+
+.image-grid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    
+    width: 70%;
+}
+
+.single-description-image-box{
+    height: 25vh;
+    width: 80%;
+   
+    display: flex;
+    justify-content: center;
+    
+
+    .faq-image-single{
+        max-height: 20vh;
+        max-width: 90% ;
+       
+    }
+}
+
+.grid-description-image-box{
+   
+    height: 10vh;
+    width: 70%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+   
+    .faq-image-collection{
+        max-height: 5vh;
+        max-width: 69% ;
+        
+        
+    }
+
+}
 
 
 

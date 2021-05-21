@@ -1,4 +1,5 @@
-import {openImageModal, openModal, updateImageModal} from './modal-image'
+import { showMessage } from './message';
+import {openModal, updateImageModal} from './modal-image'
 
 export let renderUploadImage = () => {
 
@@ -105,7 +106,7 @@ function updateThumbnail(uploadElement, file) {
 
             thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
             uploadElement.dataset.temporalId = temporalId;
-            uploadElement.dataset.image = reader.result;
+            uploadElement.dataset.path = reader.result;
             inputElement.name = "images[" + content + "-" + temporalId + "." + language  + "]"; 
 
             uploadElement.classList.remove('upload-image-add');
@@ -122,21 +123,35 @@ function updateThumbnail(uploadElement, file) {
 
 function openImage(image){
 
+    let temporalId = image.dataset.temporalId;
     let url = image.dataset.url;
 
-    if(url){
+    if(temporalId){
 
         let sendImageRequest = async () => {
 
             try {
-                axios.get(url).then(response => {
+                axios.get(url, {
+                    params: {
+                      'image': temporalId
+                    }
+                }).then(response => {
+                        
+                    if(response.data){  
+                        response.data.path = image.dataset.path;
+                        updateImageModal(response.data);
+                    }else{
+                        updateImageModal(image);
+                    };
 
-                    openImageModal(response.data);
+                    openModal();
                     
                 });
                 
             } catch (error) {
 
+                showMessage()
+    
             }
         };
 
@@ -144,8 +159,23 @@ function openImage(image){
 
     }else{       
         
-        updateImageModal(image);
-        openModal();
+        let sendImageRequest = async () => {
+
+            try {
+                axios.get(url).then(response => {
+    
+                    response.data.path = response.data.original_image.path;
+                    updateImageModal(response.data);
+                    openModal();
+                    
+                });
+                
+            } catch (error) {
+    
+            }
+        };
+
+        sendImageRequest();
     }
 }
 
@@ -155,21 +185,29 @@ export function deleteThumbnail(imageId) {
 
     uploadImages.forEach(uploadImage => {
     
-        if(uploadImage.classList.contains('collection') && uploadImage.dataset.imageid == imageId){
+        if(uploadImage.classList.contains('collection')){
 
-            uploadImage.remove();
+            if(uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId){
+
+                uploadImage.remove();
+            }
+
+            
         }
 
-        if(uploadImage.classList.contains('single') && uploadImage.dataset.imageid == imageId){
+        if(uploadImage.classList.contains('single')){
 
-            uploadImage.querySelector(".upload-thumb").remove();
-            uploadImage.dataset.imageid == '';
-            uploadImage.querySelector(".upload-prompt").classList.remove('hidden');
-            uploadImage.classList.remove('upload');
-            uploadImage.classList.add('upload-image-add');
+            if(uploadImage.dataset.temporalId == imageId || uploadImage.dataset.imageId == imageId){
 
-            if(uploadImage.querySelector(".upload-input")){
-                uploadImage.querySelector(".upload-input").value = "";
+                uploadImage.querySelector(".upload-thumb").remove();
+                uploadImage.dataset.temporalId == '';
+                uploadImage.querySelector(".upload-prompt").classList.remove('hidden');
+                uploadImage.classList.remove('upload');
+                uploadImage.classList.add('upload-image-add');
+
+                if(uploadImage.querySelector(".upload-input")){
+                    uploadImage.querySelector(".upload-input").value = "";
+                }
             }
         }
     });

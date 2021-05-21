@@ -21,11 +21,12 @@
 
                 {{ csrf_field() }}
     
-                <input id="modal-image-temporal-id" type="hidden" name="temporalId" class="input-highlight"  /> 
-                <input id="modal-image-entity-id" type="hidden" name="entityId" class="input-highlight"  />                              
+                <input id="modal-image-id" type="hidden" name="imageId" class="input-highlight"  />                              
+                <input id="modal-image-temporal-id" type="hidden" name="temporalId" class="input-highlight"  />   
                 <input id="modal-image-entity" type="hidden" name="entity" class="input-highlight"  />                              
                 <input id="modal-image-content" type="hidden" name="content" class="input-highlight"  />                              
-                <input id="modal-image-filename" type="hidden" name="filename" class="input-highlight"  />                                                                                                                 
+                <input id="modal-image-filename" type="hidden" name="filename" class="input-highlight"  />                              
+                <input id="modal-image-language" type="hidden" name="language" class="input-highlight"  />                                                                                                           
     
                 <div class="one-column">
                     <div class="form-group">
