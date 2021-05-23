@@ -558,7 +558,8 @@ li:hover {
 .right-top-bar {
   display: flex;
   flex-direction: row;
-  width: 15%;
+  justify-content: space-around;
+  width: 9%;
   height: 2em;
 }
 .right-top-bar #refresh-form {
