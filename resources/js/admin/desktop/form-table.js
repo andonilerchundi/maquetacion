@@ -4,23 +4,30 @@ import {startLoading, stopLoading} from './loader';
 import {renderTabs} from './tab';
 import {renderLanguages} from './languageTab';
 import {renderUploadImage} from './upload-image';
+import {renderLocaleTags} from './tags';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
 const refreshForm = document.getElementById('refresh-form');
 let visibleSwitch = document.getElementById('visible');
 
-refreshForm.addEventListener('click', (event) =>{
 
-    event.preventDefault();
+if (refreshForm){
 
-    let url = refreshForm.dataset.url;
+    refreshForm.addEventListener('click', (event) =>{
 
-    axios.get(url).then(response => {
-        form.innerHTML = response.data.form;
-        renderForm();
-    });    
-})
+        event.preventDefault();
+    
+        let url = refreshForm.dataset.url;
+    
+        axios.get(url).then(response => {
+            form.innerHTML = response.data.form;
+            renderForm();
+        });    
+    })
+
+}
+
 
 
 export let renderForm = () => {
@@ -61,65 +68,70 @@ export let renderForm = () => {
             }
         });
     }
- 
-    enviar.addEventListener("click", (event) => {
 
-        event.preventDefault ()
+    if (enviar){
+
+        enviar.addEventListener("click", (event) => {
+
+            event.preventDefault ()
+        
+            forms.forEach(form => { 
+                            
+                let data = new FormData(form);
     
-        forms.forEach(form => { 
-                        
-            let data = new FormData(form);
-
-            if( ckeditors != 'null'){
-
-                Object.entries(ckeditors).forEach(([key, value]) => {
-                    data.append(key, value.getData());
-                });
-            }
-
-            let url = form.action;
+                if( ckeditors != 'null'){
     
-            let sendPostRequest = async () => {
-
-                startLoading();
-    
-                try {
-                    await axios.post(url, data).then(response => {
-                        form.id.value = response.data.id;
-                        table.innerHTML = response.data.table;
-
-                        showMessage('success', response.data.message);
-                        renderTable();
-                        stopLoading();
-                       
+                    Object.entries(ckeditors).forEach(([key, value]) => {
+                        data.append(key, value.getData());
                     });
-                    
-                } catch (error) {
-
-                    stopLoading();
-    
-                    if(error.response.status == '422'){
-    
-                        let errors = error.response.data.errors;      
-                        let errorMessage = '';
-    
-                        Object.keys(errors).forEach(function(key) {
-                            errorMessage += '<li>' + errors[key] + '</li>';
-                        })
-
-                        showMessage('error', errorMessage);
-                    }
                 }
-            };
     
-            sendPostRequest();
+                let url = form.action;
+        
+                let sendPostRequest = async () => {
+    
+                    startLoading();
+        
+                    try {
+                        await axios.post(url, data).then(response => {
+                            form.id.value = response.data.id;
+                            table.innerHTML = response.data.table;
+    
+                            showMessage('success', response.data.message);
+                            renderTable();
+                            stopLoading();
+                           
+                        });
+                        
+                    } catch (error) {
+    
+                        stopLoading();
+        
+                        if(error.response.status == '422'){
+        
+                            let errors = error.response.data.errors;      
+                            let errorMessage = '';
+        
+                            Object.keys(errors).forEach(function(key) {
+                                errorMessage += '<li>' + errors[key] + '</li>';
+                            })
+    
+                            showMessage('error', errorMessage);
+                        }
+                    }
+                };
+        
+                sendPostRequest();
+            });
         });
-    });
 
+    }
+    
     renderCkeditor()
     renderTabs()
     renderLanguages()
     renderUploadImage()
+    renderLocaleTags()
     
 };
 
@@ -131,51 +143,60 @@ export let renderTable = () => {
     let headerCells = document.querySelectorAll(".table-sortable th");
     let paginationButtons = document.querySelectorAll('.table-pagination-button');
 
-    editButtons.forEach(editButton => {
+    if(editButtons){
 
-        editButton.addEventListener("click", () => {
+        editButtons.forEach(editButton => {
 
-            let url = editButton.dataset.url;
-
-            let sendEditRequest = async () => {
-
-                try {
-                    await axios.get(url).then(response => {
-                        form.innerHTML = response.data.form;
-                        renderForm();
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-
-            sendEditRequest();
+            editButton.addEventListener("click", () => {
+    
+                let url = editButton.dataset.url;
+    
+                let sendEditRequest = async () => {
+    
+                    try {
+                        await axios.get(url).then(response => {
+                            form.innerHTML = response.data.form;
+                            renderForm();
+                        });
+                        
+                    } catch (error) {
+                        console.error(error);
+                    }
+                };
+    
+                sendEditRequest();
+            });
         });
-    });
 
-    removeButtons.forEach(removeButton => {
+    }
 
-        removeButton.addEventListener("click", () => {
+    if(removeButtons){
 
-            let url = removeButton.dataset.url;
+        removeButtons.forEach(removeButton => {
 
-            let sendDeleteRequest = async () => {
-
-                try {
-                    await axios.delete(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-
-            sendDeleteRequest();
+            removeButton.addEventListener("click", () => {
+    
+                let url = removeButton.dataset.url;
+    
+                let sendDeleteRequest = async () => {
+    
+                    try {
+                        await axios.delete(url).then(response => {
+                            table.innerHTML = response.data.table;
+                            renderTable();
+                        });
+                        
+                    } catch (error) {
+                        console.error(error);
+                    }
+                };
+    
+                sendDeleteRequest();
+            });
         });
-    });
+
+    }
+    
 
     /**
      * Ordenar HTML Tabla   

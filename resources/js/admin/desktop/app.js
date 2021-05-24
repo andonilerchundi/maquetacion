@@ -8,6 +8,7 @@ require('./tab');
 require('./languageTab');
 require('./upload-image');
 require('./modal-image');
+require('./tags');
 
 
 

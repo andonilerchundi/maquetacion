@@ -25,7 +25,7 @@
     @endif  
 
     
-    <p class="p">@lang('admin/form-titulos.image-single')</p>
+    <p class="p">@lang('admin/form_titulos.image-single')</p>
     
     
 @endif
@@ -60,7 +60,7 @@
 
     </div>
 
-    <p class="p">@lang('admin/form-titulos.image-multiple')</p>
+    <p class="p">@lang('admin/form_titulos.image-multiple')</p>
 
     
 @endif

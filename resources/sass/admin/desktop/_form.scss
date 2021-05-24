@@ -44,3 +44,30 @@
    
 }
 
+textarea{
+    width: 100%;
+    height: 20vh;
+}
+
+.import-content{
+    width: 100%;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+}
+#import-tags{
+    width: 90%;
+    height: 4vh;
+    border-radius: 0.5em;
+    background-color: hsl(183, 98%, 35%);
+    color: white;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+       svg{
+           width: 2em;
+           height:2em ;
+       }
+}

@@ -1895,6 +1895,8 @@ __webpack_require__(/*! ./languageTab */ "./resources/js/admin/desktop/languageT
 __webpack_require__(/*! ./upload-image */ "./resources/js/admin/desktop/upload-image.js");
 
 __webpack_require__(/*! ./modal-image */ "./resources/js/admin/desktop/modal-image.js");
+
+__webpack_require__(/*! ./tags */ "./resources/js/admin/desktop/tags.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -2055,6 +2057,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tab */ "./resources/js/admin/desktop/tab.js");
 /* harmony import */ var _languageTab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./languageTab */ "./resources/js/admin/desktop/languageTab.js");
 /* harmony import */ var _upload_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./upload-image */ "./resources/js/admin/desktop/upload-image.js");
+/* harmony import */ var _tags__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./tags */ "./resources/js/admin/desktop/tags.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2087,18 +2090,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var table = document.getElementById("table");
 var form = document.getElementById("form");
 var refreshForm = document.getElementById('refresh-form');
 var visibleSwitch = document.getElementById('visible');
-refreshForm.addEventListener('click', function (event) {
-  event.preventDefault();
-  var url = refreshForm.dataset.url;
-  axios.get(url).then(function (response) {
-    form.innerHTML = response.data.form;
-    renderForm();
+
+if (refreshForm) {
+  refreshForm.addEventListener('click', function (event) {
+    event.preventDefault();
+    var url = refreshForm.dataset.url;
+    axios.get(url).then(function (response) {
+      form.innerHTML = response.data.form;
+      renderForm();
+    });
   });
-});
+}
+
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var labels = document.getElementsByTagName('label');
@@ -2129,169 +2137,179 @@ var renderForm = function renderForm() {
     });
   }
 
-  enviar.addEventListener("click", function (event) {
-    event.preventDefault();
-    forms.forEach(function (form) {
-      var data = new FormData(form);
+  if (enviar) {
+    enviar.addEventListener("click", function (event) {
+      event.preventDefault();
+      forms.forEach(function (form) {
+        var data = new FormData(form);
 
-      if (ckeditors != 'null') {
-        Object.entries(ckeditors).forEach(function (_ref) {
-          var _ref2 = _slicedToArray(_ref, 2),
-              key = _ref2[0],
-              value = _ref2[1];
+        if (ckeditors != 'null') {
+          Object.entries(ckeditors).forEach(function (_ref) {
+            var _ref2 = _slicedToArray(_ref, 2),
+                key = _ref2[0],
+                value = _ref2[1];
 
-          data.append(key, value.getData());
-        });
-      }
+            data.append(key, value.getData());
+          });
+        }
 
-      var url = form.action;
+        var url = form.action;
 
-      var sendPostRequest = /*#__PURE__*/function () {
-        var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-          var errors, errorMessage;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  (0,_loader__WEBPACK_IMPORTED_MODULE_3__.startLoading)();
-                  _context.prev = 1;
-                  _context.next = 4;
-                  return axios.post(url, data).then(function (response) {
-                    form.id.value = response.data.id;
-                    table.innerHTML = response.data.table;
-                    (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
-                    renderTable();
-                    (0,_loader__WEBPACK_IMPORTED_MODULE_3__.stopLoading)();
-                  });
-
-                case 4:
-                  _context.next = 10;
-                  break;
-
-                case 6:
-                  _context.prev = 6;
-                  _context.t0 = _context["catch"](1);
-                  (0,_loader__WEBPACK_IMPORTED_MODULE_3__.stopLoading)();
-
-                  if (_context.t0.response.status == '422') {
-                    errors = _context.t0.response.data.errors;
-                    errorMessage = '';
-                    Object.keys(errors).forEach(function (key) {
-                      errorMessage += '<li>' + errors[key] + '</li>';
+        var sendPostRequest = /*#__PURE__*/function () {
+          var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+            var errors, errorMessage;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    (0,_loader__WEBPACK_IMPORTED_MODULE_3__.startLoading)();
+                    _context.prev = 1;
+                    _context.next = 4;
+                    return axios.post(url, data).then(function (response) {
+                      form.id.value = response.data.id;
+                      table.innerHTML = response.data.table;
+                      (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                      renderTable();
+                      (0,_loader__WEBPACK_IMPORTED_MODULE_3__.stopLoading)();
                     });
-                    (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('error', errorMessage);
-                  }
 
-                case 10:
-                case "end":
-                  return _context.stop();
+                  case 4:
+                    _context.next = 10;
+                    break;
+
+                  case 6:
+                    _context.prev = 6;
+                    _context.t0 = _context["catch"](1);
+                    (0,_loader__WEBPACK_IMPORTED_MODULE_3__.stopLoading)();
+
+                    if (_context.t0.response.status == '422') {
+                      errors = _context.t0.response.data.errors;
+                      errorMessage = '';
+                      Object.keys(errors).forEach(function (key) {
+                        errorMessage += '<li>' + errors[key] + '</li>';
+                      });
+                      (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('error', errorMessage);
+                    }
+
+                  case 10:
+                  case "end":
+                    return _context.stop();
+                }
               }
-            }
-          }, _callee, null, [[1, 6]]);
-        }));
+            }, _callee, null, [[1, 6]]);
+          }));
 
-        return function sendPostRequest() {
-          return _ref3.apply(this, arguments);
-        };
-      }();
+          return function sendPostRequest() {
+            return _ref3.apply(this, arguments);
+          };
+        }();
 
-      sendPostRequest();
+        sendPostRequest();
+      });
     });
-  });
+  }
+
   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
   (0,_tab__WEBPACK_IMPORTED_MODULE_4__.renderTabs)();
   (0,_languageTab__WEBPACK_IMPORTED_MODULE_5__.renderLanguages)();
   (0,_upload_image__WEBPACK_IMPORTED_MODULE_6__.renderUploadImage)();
+  (0,_tags__WEBPACK_IMPORTED_MODULE_7__.renderLocaleTags)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit");
   var removeButtons = document.querySelectorAll(".remove");
   var headerCells = document.querySelectorAll(".table-sortable th");
   var paginationButtons = document.querySelectorAll('.table-pagination-button');
-  editButtons.forEach(function (editButton) {
-    editButton.addEventListener("click", function () {
-      var url = editButton.dataset.url;
 
-      var sendEditRequest = /*#__PURE__*/function () {
-        var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.prev = 0;
-                  _context2.next = 3;
-                  return axios.get(url).then(function (response) {
-                    form.innerHTML = response.data.form;
-                    renderForm();
-                  });
+  if (editButtons) {
+    editButtons.forEach(function (editButton) {
+      editButton.addEventListener("click", function () {
+        var url = editButton.dataset.url;
 
-                case 3:
-                  _context2.next = 8;
-                  break;
+        var sendEditRequest = /*#__PURE__*/function () {
+          var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.prev = 0;
+                    _context2.next = 3;
+                    return axios.get(url).then(function (response) {
+                      form.innerHTML = response.data.form;
+                      renderForm();
+                    });
 
-                case 5:
-                  _context2.prev = 5;
-                  _context2.t0 = _context2["catch"](0);
-                  console.error(_context2.t0);
+                  case 3:
+                    _context2.next = 8;
+                    break;
 
-                case 8:
-                case "end":
-                  return _context2.stop();
+                  case 5:
+                    _context2.prev = 5;
+                    _context2.t0 = _context2["catch"](0);
+                    console.error(_context2.t0);
+
+                  case 8:
+                  case "end":
+                    return _context2.stop();
+                }
               }
-            }
-          }, _callee2, null, [[0, 5]]);
-        }));
+            }, _callee2, null, [[0, 5]]);
+          }));
 
-        return function sendEditRequest() {
-          return _ref4.apply(this, arguments);
-        };
-      }();
+          return function sendEditRequest() {
+            return _ref4.apply(this, arguments);
+          };
+        }();
 
-      sendEditRequest();
+        sendEditRequest();
+      });
     });
-  });
-  removeButtons.forEach(function (removeButton) {
-    removeButton.addEventListener("click", function () {
-      var url = removeButton.dataset.url;
+  }
 
-      var sendDeleteRequest = /*#__PURE__*/function () {
-        var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  _context3.prev = 0;
-                  _context3.next = 3;
-                  return axios["delete"](url).then(function (response) {
-                    table.innerHTML = response.data.table;
-                    renderTable();
-                  });
+  if (removeButtons) {
+    removeButtons.forEach(function (removeButton) {
+      removeButton.addEventListener("click", function () {
+        var url = removeButton.dataset.url;
 
-                case 3:
-                  _context3.next = 8;
-                  break;
+        var sendDeleteRequest = /*#__PURE__*/function () {
+          var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    _context3.prev = 0;
+                    _context3.next = 3;
+                    return axios["delete"](url).then(function (response) {
+                      table.innerHTML = response.data.table;
+                      renderTable();
+                    });
 
-                case 5:
-                  _context3.prev = 5;
-                  _context3.t0 = _context3["catch"](0);
-                  console.error(_context3.t0);
+                  case 3:
+                    _context3.next = 8;
+                    break;
 
-                case 8:
-                case "end":
-                  return _context3.stop();
+                  case 5:
+                    _context3.prev = 5;
+                    _context3.t0 = _context3["catch"](0);
+                    console.error(_context3.t0);
+
+                  case 8:
+                  case "end":
+                    return _context3.stop();
+                }
               }
-            }
-          }, _callee3, null, [[0, 5]]);
-        }));
+            }, _callee3, null, [[0, 5]]);
+          }));
 
-        return function sendDeleteRequest() {
-          return _ref5.apply(this, arguments);
-        };
-      }();
+          return function sendDeleteRequest() {
+            return _ref5.apply(this, arguments);
+          };
+        }();
 
-      sendDeleteRequest();
+        sendDeleteRequest();
+      });
     });
-  });
+  }
   /**
    * Ordenar HTML Tabla   
    * 
@@ -2299,6 +2317,7 @@ var renderTable = function renderTable() {
    * @param {number} column El index de la columna que ordenamos
    * @param {boolean} asc Determina la dirreccion del orden asc o dsc 
    */
+
 
   headerCells.forEach(function (headerCell) {
     headerCell.addEventListener("click", function () {
@@ -2748,6 +2767,77 @@ var renderTabs = function renderTabs() {
         }
       });
     });
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/tags.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/desktop/tags.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderLocaleTags": () => (/* binding */ renderLocaleTags)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _form_table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-table */ "./resources/js/admin/desktop/form-table.js");
+/* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message */ "./resources/js/admin/desktop/message.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var renderLocaleTags = function renderLocaleTags() {
+  var table = document.getElementById("table");
+  var importTags = document.getElementById('import-tags');
+  importTags.addEventListener("click", function () {
+    var url = importTags.dataset.url;
+
+    var sendEditRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get(url).then(function (response) {
+                  table.innerHTML = response.data.table;
+                  (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                  (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                });
+
+              case 3:
+                _context.next = 8;
+                break;
+
+              case 5:
+                _context.prev = 5;
+                _context.t0 = _context["catch"](0);
+                console.error(_context.t0);
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 5]]);
+      }));
+
+      return function sendEditRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    sendEditRequest();
   });
 };
 

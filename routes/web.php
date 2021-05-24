@@ -19,6 +19,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/image/{image}', 'App\Vendor\Image\Image@show')->name('show_image_seo');
     Route::get('/image/temporal/{image?}', 'App\Vendor\Image\Image@showTemporal')->name('show_temporal_image_seo');
     Route::post('/image/seo', 'App\Vendor\Image\Image@storeSeo')->name('store_image_seo');
+
+    Route::get('/tags/filter/{filters?}', 'App\Http\Controllers\Admin\LocaleTagController@filter')->name('tags_filter');
+    Route::get('/tags/{group}/{key}', 'App\Http\Controllers\Admin\LocaleTagController@edit')->name('tags_edit');
+    Route::get('/tags/import', 'App\Http\Controllers\Admin\LocaleTagController@importTags')->name('tags_import');
+    Route::get('/tags', 'App\Http\Controllers\Admin\LocaleTagController@index')->name('tags');
+    Route::post('/tags', 'App\Http\Controllers\Admin\LocaleTagController@store')->name('tags_store');
     
     Route::resource('faqs/categorias', 'App\Http\Controllers\Admin\FaqCategoryController', [
         'parameters' => [
@@ -92,6 +98,8 @@ Route::group(['prefix' => 'admin'], function () {
             'show' => 'sliders_show',
         ]
     ]);
+
+  
 
 });
 

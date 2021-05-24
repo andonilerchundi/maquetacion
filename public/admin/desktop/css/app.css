@@ -59,6 +59,35 @@
   height: 18vh;
 }
 
+textarea {
+  width: 100%;
+  height: 20vh;
+}
+
+.import-content {
+  width: 100%;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+}
+
+#import-tags {
+  width: 90%;
+  height: 4vh;
+  border-radius: 0.5em;
+  background-color: #02a8b1;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#import-tags svg {
+  width: 2em;
+  height: 2em;
+}
+
 .table {
   width: 40%;
   margin-top: 2vh;
