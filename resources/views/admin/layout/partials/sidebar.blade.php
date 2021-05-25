@@ -8,6 +8,7 @@
             <li class="link" data-url="{{route('customers')}}">Clientes</li>
             <li class="link" data-url="{{route('sliders')}}">Sliders</li>
             <li class="link" data-url="{{route('tags')}}">TAG's</li>
+            <li class="link" data-url="{{route('seo')}}">SEO</li>
             
         </ul>
     </div>

@@ -1,18 +1,16 @@
 import {renderTable} from './form-table';
 import {showMessage} from './message';
 
-export let renderLocaleTags = () => {
+export let renderLocaleSeo = () => {
 
     let table = document.getElementById("table");
-    let importTags = document.getElementById('import-tags');
+    let importSeo = document.getElementById('import-seo');
 
+    if(importSeo){
 
-    if(importTags){
+        importSeo.addEventListener("click", () => {
 
-
-        importTags.addEventListener("click", () => {
-
-            let url = importTags.dataset.url;
+            let url = importSeo.dataset.url;
         
             let sendEditRequest = async () => {
     
@@ -21,17 +19,15 @@ export let renderLocaleTags = () => {
                         table.innerHTML = response.data.table;
                         renderTable();
                         showMessage('success', response.data.message);
+                        stopWait();
                     });
                     
                 } catch (error) {
                     console.error(error);
-                    
                 }
             };
     
             sendEditRequest();
         });
-
     }
-    
 }

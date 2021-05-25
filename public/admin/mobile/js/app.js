@@ -2015,51 +2015,57 @@ var buttonFilter = document.getElementById('filter-button');
 var filter = document.getElementById("filter");
 var filterForm = document.getElementById("filter-form");
 var applyFilter = document.getElementById('apply-filter');
-buttonFilter.addEventListener("click", function () {
-  filter.classList.toggle('appear');
-});
-applyFilter.addEventListener('click', function () {
-  var data = new FormData(filterForm);
-  var filters = {};
-  data.forEach(function (value, key) {
-    filters[key] = value;
+
+if (buttonFilter) {
+  buttonFilter.addEventListener("click", function () {
+    filter.classList.toggle('appear');
   });
-  var json = JSON.stringify(filters);
-  var url = filterForm.action;
+}
 
-  var sendPostRequest = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              try {
-                axios.get(url, {
-                  params: {
-                    filters: json
-                  }
-                }).then(function (response) {
-                  table.innerHTML = response.data.table;
-                  (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-                  filter.classList.remove("appear");
-                });
-              } catch (error) {}
+if (applyFilter) {
+  applyFilter.addEventListener('click', function () {
+    var data = new FormData(filterForm);
+    var filters = {};
+    data.forEach(function (value, key) {
+      filters[key] = value;
+    });
+    var json = JSON.stringify(filters);
+    var url = filterForm.action;
 
-            case 1:
-            case "end":
-              return _context.stop();
+    var sendPostRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                try {
+                  axios.get(url, {
+                    params: {
+                      filters: json
+                    }
+                  }).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                    filter.classList.remove("appear");
+                  });
+                } catch (error) {}
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      }, _callee);
-    }));
+        }, _callee);
+      }));
 
-    return function sendPostRequest() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+      return function sendPostRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
 
-  sendPostRequest();
-});
+    sendPostRequest();
+  });
+}
 
 /***/ }),
 

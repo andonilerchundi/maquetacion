@@ -9,6 +9,10 @@ require('./languageTab');
 require('./upload-image');
 require('./modal-image');
 require('./tags');
+require('./googlebot');
+require('./localeSeo');
+require('./sitemap');
+require('./blockParameters');
 
 
 

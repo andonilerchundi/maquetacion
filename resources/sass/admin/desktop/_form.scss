@@ -71,3 +71,88 @@ textarea{
            height:2em ;
        }
 }
+
+.buttons-seo{
+
+   
+    height: 4em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .buttons-seo-content{
+        
+        width: 100%;
+        height: 4em;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        #import-seo{
+
+            width: 46%;
+            height: 3em;
+            background-color: hsl(183, 98%, 35%);
+            color: white;
+            border-radius: 0.5em;
+
+        }
+
+        #ping-google{
+
+            width: 46%;
+            height: 3em;
+            background-color: hsl(183, 98%, 35%);
+            color: white;
+            border-radius: 0.5em;
+        }
+        #import-seo:hover{
+
+            color: hsl(19, 100%, 50%);
+            background-color: white;
+           
+        
+        }
+        #ping-google:hover{
+
+            color: hsl(19, 100%, 50%);
+            background-color: white;
+            
+        }
+    }
+}
+
+.sitemap-button{
+   
+    width: 100%;
+    height: 40vh;
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+   
+    #create-sitemap{
+        width: 70%;
+        height: 3em;
+        background-color: hsl(183, 98%, 35%);
+        color: white;
+        border-radius: 0.5em;
+    }
+    #create-sitemap:hover{
+   
+        color: hsl(19, 100%, 50%);
+        background-color: white;
+        
+    }
+    .sitemap{
+        width: 95%;
+    }
+}
+
+
+
+
+
+
+

@@ -5,6 +5,10 @@ import {renderTabs} from './tab';
 import {renderLanguages} from './languageTab';
 import {renderUploadImage} from './upload-image';
 import {renderLocaleTags} from './tags';
+import {renderGoogleBot} from './googlebot'
+import {renderLocaleSeo} from './localeSeo'
+import {renderSitemap} from './sitemap'
+import {renderBlockParameters} from './blockParameters'
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -94,7 +98,11 @@ export let renderForm = () => {
         
                     try {
                         await axios.post(url, data).then(response => {
-                            form.id.value = response.data.id;
+
+                            if(response.data.id){
+                                form.id.value = response.data.id;  
+                            }
+
                             table.innerHTML = response.data.table;
     
                             showMessage('success', response.data.message);
@@ -132,6 +140,10 @@ export let renderForm = () => {
     renderLanguages()
     renderUploadImage()
     renderLocaleTags()
+    renderLocaleSeo()
+    renderGoogleBot()
+    renderSitemap()
+    renderBlockParameters()
     
 };
 

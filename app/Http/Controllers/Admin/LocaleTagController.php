@@ -144,6 +144,38 @@ class LocaleTagController extends Controller
         return $view;
     }
 
+
+    public function filter(Request $request, $filters = null){
+
+        $filters = json_decode($request->input('filters'));
+        $query = $this->faq->query();
+
+        $query->when($filters->group, function ($q, $group) {
+
+            if($group == 'all'){
+                return $q;
+            }
+            else {
+                return $q->where('group', $group);
+            }
+        });
+
+        $tags = $query->select('group', 'key')
+                ->groupBy('group', 'key')
+                ->where('group', 'not like', 'admin/%')
+                ->where('group', 'not like', 'front/seo')
+                ->paginate($this->paginate)
+                ->appends(['filters' => json_encode($filters)]);  
+
+        $view = View::make('admin.tags.index')
+            ->with('tags', $tags)
+            ->renderSections();
+
+        return response()->json([
+            'table' => $view['table'],
+        ]);
+    }
+
     public function importTags()
     {
         $this->manager->importTranslations();  

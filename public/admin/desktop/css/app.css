@@ -88,6 +88,67 @@ textarea {
   height: 2em;
 }
 
+.buttons-seo {
+  height: 4em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.buttons-seo .buttons-seo-content {
+  width: 100%;
+  height: 4em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.buttons-seo .buttons-seo-content #import-seo {
+  width: 46%;
+  height: 3em;
+  background-color: #02a8b1;
+  color: white;
+  border-radius: 0.5em;
+}
+.buttons-seo .buttons-seo-content #ping-google {
+  width: 46%;
+  height: 3em;
+  background-color: #02a8b1;
+  color: white;
+  border-radius: 0.5em;
+}
+.buttons-seo .buttons-seo-content #import-seo:hover {
+  color: #ff5100;
+  background-color: white;
+}
+.buttons-seo .buttons-seo-content #ping-google:hover {
+  color: #ff5100;
+  background-color: white;
+}
+
+.sitemap-button {
+  width: 100%;
+  height: 40vh;
+  margin-top: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.sitemap-button #create-sitemap {
+  width: 70%;
+  height: 3em;
+  background-color: #02a8b1;
+  color: white;
+  border-radius: 0.5em;
+}
+.sitemap-button #create-sitemap:hover {
+  color: #ff5100;
+  background-color: white;
+}
+.sitemap-button .sitemap {
+  width: 95%;
+}
+
 .table {
   width: 40%;
   margin-top: 2vh;

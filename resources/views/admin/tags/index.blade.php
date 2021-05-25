@@ -1,6 +1,8 @@
 @php
     $route="tags";
-    $filters = ['created_at' => true, 'search' => true]; 
+    $filters = ['parent' => $groups]; 
+    
+
 @endphp
 
 
@@ -121,7 +123,9 @@
                 @component('admin.layout.partials.locale', ['tab' => 'contenido'])
 
                     @foreach ($localizations as $localization)
+
                         <div class="tab-panel-language {{ $loop->first ? 'language-active':'' }}" data-tab="contenido" data-localetab="{{$localization->alias}}">
+                           
                             <div class="one-column" >
 
                                 <div class="form-group">
@@ -131,12 +135,12 @@
                                     </div>
 
                                     <div class="input-container">
-                                        <textarea type="text" name="tag[value.{{$localization->alias}}]" value="{{isset($tag["value.$localization->alias"]) ? $tag["value.$localization->alias"] : ''}}" ></textarea>
-                                    </div>
+                                        <input type="text" name="tag[value.{{$localization->alias}}]" value="{{isset($tag["value.$localization->alias"]) ? $tag["value.$localization->alias"] : ''}}" class="translate-input">                                    </div>
                                 </div>
 
                             </div>
                         </div>
+
                     @endforeach
                     
                 @endcomponent

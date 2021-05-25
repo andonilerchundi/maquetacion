@@ -1897,6 +1897,14 @@ __webpack_require__(/*! ./upload-image */ "./resources/js/admin/desktop/upload-i
 __webpack_require__(/*! ./modal-image */ "./resources/js/admin/desktop/modal-image.js");
 
 __webpack_require__(/*! ./tags */ "./resources/js/admin/desktop/tags.js");
+
+__webpack_require__(/*! ./googlebot */ "./resources/js/admin/desktop/googlebot.js");
+
+__webpack_require__(/*! ./localeSeo */ "./resources/js/admin/desktop/localeSeo.js");
+
+__webpack_require__(/*! ./sitemap */ "./resources/js/admin/desktop/sitemap.js");
+
+__webpack_require__(/*! ./blockParameters */ "./resources/js/admin/desktop/blockParameters.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -1928,6 +1936,34 @@ __webpack_require__(/*! ./tags */ "./resources/js/admin/desktop/tags.js");
 // const app = new Vue({
 //     el: '#app',
 // });
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/blockParameters.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/admin/desktop/blockParameters.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderBlockParameters": () => (/* binding */ renderBlockParameters)
+/* harmony export */ });
+var renderBlockParameters = function renderBlockParameters() {
+  var blockParameters = document.querySelectorAll('.block-parameters');
+
+  if (blockParameters) {
+    blockParameters.forEach(function (blockParameter) {
+      blockParameter.addEventListener('keydown', function () {
+        var slug = blockParameter.value.match(/\{.*?\}/g);
+      });
+      blockParameter.addEventListener('keyup', function () {
+        var slug = blockParameter.value.match(/\{.*?\}/g);
+      });
+    });
+  }
+};
 
 /***/ }),
 
@@ -1989,51 +2025,57 @@ var buttonFilter = document.getElementById('filter-button');
 var filter = document.getElementById("filter");
 var filterForm = document.getElementById("filter-form");
 var applyFilter = document.getElementById('apply-filter');
-buttonFilter.addEventListener("click", function () {
-  filter.classList.toggle('appear');
-});
-applyFilter.addEventListener('click', function () {
-  var data = new FormData(filterForm);
-  var filters = {};
-  data.forEach(function (value, key) {
-    filters[key] = value;
+
+if (buttonFilter) {
+  buttonFilter.addEventListener("click", function () {
+    filter.classList.toggle('appear');
   });
-  var json = JSON.stringify(filters);
-  var url = filterForm.action;
+}
 
-  var sendPostRequest = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              try {
-                axios.get(url, {
-                  params: {
-                    filters: json
-                  }
-                }).then(function (response) {
-                  table.innerHTML = response.data.table;
-                  (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-                  filter.classList.remove("appear");
-                });
-              } catch (error) {}
+if (applyFilter) {
+  applyFilter.addEventListener('click', function () {
+    var data = new FormData(filterForm);
+    var filters = {};
+    data.forEach(function (value, key) {
+      filters[key] = value;
+    });
+    var json = JSON.stringify(filters);
+    var url = filterForm.action;
 
-            case 1:
-            case "end":
-              return _context.stop();
+    var sendPostRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                try {
+                  axios.get(url, {
+                    params: {
+                      filters: json
+                    }
+                  }).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                    filter.classList.remove("appear");
+                  });
+                } catch (error) {}
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      }, _callee);
-    }));
+        }, _callee);
+      }));
 
-    return function sendPostRequest() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+      return function sendPostRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
 
-  sendPostRequest();
-});
+    sendPostRequest();
+  });
+}
 
 /***/ }),
 
@@ -2058,6 +2100,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _languageTab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./languageTab */ "./resources/js/admin/desktop/languageTab.js");
 /* harmony import */ var _upload_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./upload-image */ "./resources/js/admin/desktop/upload-image.js");
 /* harmony import */ var _tags__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./tags */ "./resources/js/admin/desktop/tags.js");
+/* harmony import */ var _googlebot__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./googlebot */ "./resources/js/admin/desktop/googlebot.js");
+/* harmony import */ var _localeSeo__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./localeSeo */ "./resources/js/admin/desktop/localeSeo.js");
+/* harmony import */ var _sitemap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sitemap */ "./resources/js/admin/desktop/sitemap.js");
+/* harmony import */ var _blockParameters__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./blockParameters */ "./resources/js/admin/desktop/blockParameters.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2083,6 +2129,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
 
 
 
@@ -2166,7 +2216,10 @@ var renderForm = function renderForm() {
                     _context.prev = 1;
                     _context.next = 4;
                     return axios.post(url, data).then(function (response) {
-                      form.id.value = response.data.id;
+                      if (response.data.id) {
+                        form.id.value = response.data.id;
+                      }
+
                       table.innerHTML = response.data.table;
                       (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
                       renderTable();
@@ -2214,6 +2267,10 @@ var renderForm = function renderForm() {
   (0,_languageTab__WEBPACK_IMPORTED_MODULE_5__.renderLanguages)();
   (0,_upload_image__WEBPACK_IMPORTED_MODULE_6__.renderUploadImage)();
   (0,_tags__WEBPACK_IMPORTED_MODULE_7__.renderLocaleTags)();
+  (0,_localeSeo__WEBPACK_IMPORTED_MODULE_9__.renderLocaleSeo)();
+  (0,_googlebot__WEBPACK_IMPORTED_MODULE_8__.renderGoogleBot)();
+  (0,_sitemap__WEBPACK_IMPORTED_MODULE_10__.renderSitemap)();
+  (0,_blockParameters__WEBPACK_IMPORTED_MODULE_11__.renderBlockParameters)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit");
@@ -2396,6 +2453,75 @@ renderTable();
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/googlebot.js":
+/*!*************************************************!*\
+  !*** ./resources/js/admin/desktop/googlebot.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderGoogleBot": () => (/* binding */ renderGoogleBot)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message */ "./resources/js/admin/desktop/message.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var renderGoogleBot = function renderGoogleBot() {
+  var pingGoogle = document.getElementById('ping-google');
+
+  if (pingGoogle) {
+    pingGoogle.addEventListener("click", function () {
+      var url = pingGoogle.dataset.url;
+
+      var sendEditRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    (0,_message__WEBPACK_IMPORTED_MODULE_1__.showMessage)('success', response.data.message);
+                  });
+
+                case 3:
+                  _context.next = 8;
+                  break;
+
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[0, 5]]);
+        }));
+
+        return function sendEditRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendEditRequest();
+    });
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/languageTab.js":
 /*!***************************************************!*\
   !*** ./resources/js/admin/desktop/languageTab.js ***!
@@ -2451,6 +2577,81 @@ var startLoading = function startLoading() {
 };
 var stopLoading = function stopLoading() {
   dots.classList.remove('loading');
+};
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/localeSeo.js":
+/*!*************************************************!*\
+  !*** ./resources/js/admin/desktop/localeSeo.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderLocaleSeo": () => (/* binding */ renderLocaleSeo)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _form_table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-table */ "./resources/js/admin/desktop/form-table.js");
+/* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message */ "./resources/js/admin/desktop/message.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var renderLocaleSeo = function renderLocaleSeo() {
+  var table = document.getElementById("table");
+  var importSeo = document.getElementById('import-seo');
+
+  if (importSeo) {
+    importSeo.addEventListener("click", function () {
+      var url = importSeo.dataset.url;
+
+      var sendEditRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                    (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                    stopWait();
+                  });
+
+                case 3:
+                  _context.next = 8;
+                  break;
+
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[0, 5]]);
+        }));
+
+        return function sendEditRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendEditRequest();
+    });
+  }
 };
 
 /***/ }),
@@ -2740,6 +2941,75 @@ sidebarButton.addEventListener('click', function () {
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/sitemap.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/desktop/sitemap.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderSitemap": () => (/* binding */ renderSitemap)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var renderSitemap = function renderSitemap() {
+  var createSitemap = document.getElementById('create-sitemap');
+  var sitemap = document.getElementById('sitemap');
+
+  if (createSitemap) {
+    createSitemap.addEventListener("click", function () {
+      var url = createSitemap.dataset.url;
+
+      var sendEditRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    console.log(sitemap);
+                    sitemap.value = response.data.sitemap;
+                  });
+
+                case 3:
+                  _context.next = 8;
+                  break;
+
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[0, 5]]);
+        }));
+
+        return function sendEditRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendEditRequest();
+    });
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/tab.js":
 /*!*******************************************!*\
   !*** ./resources/js/admin/desktop/tab.js ***!
@@ -2798,47 +3068,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var renderLocaleTags = function renderLocaleTags() {
   var table = document.getElementById("table");
   var importTags = document.getElementById('import-tags');
-  importTags.addEventListener("click", function () {
-    var url = importTags.dataset.url;
 
-    var sendEditRequest = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios.get(url).then(function (response) {
-                  table.innerHTML = response.data.table;
-                  (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-                  (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
-                });
+  if (importTags) {
+    importTags.addEventListener("click", function () {
+      var url = importTags.dataset.url;
 
-              case 3:
-                _context.next = 8;
-                break;
+      var sendEditRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                    (0,_message__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                  });
 
-              case 5:
-                _context.prev = 5;
-                _context.t0 = _context["catch"](0);
-                console.error(_context.t0);
+                case 3:
+                  _context.next = 8;
+                  break;
 
-              case 8:
-              case "end":
-                return _context.stop();
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
             }
-          }
-        }, _callee, null, [[0, 5]]);
-      }));
+          }, _callee, null, [[0, 5]]);
+        }));
 
-      return function sendEditRequest() {
-        return _ref.apply(this, arguments);
-      };
-    }();
+        return function sendEditRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
 
-    sendEditRequest();
-  });
+      sendEditRequest();
+    });
+  }
 };
 
 /***/ }),

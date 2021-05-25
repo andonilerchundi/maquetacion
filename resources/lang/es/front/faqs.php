@@ -1,5 +1,5 @@
 <?php
 
 return array (
-  'title' => 'Faqs',
+  'title' => 'FAQ\'s',
 );

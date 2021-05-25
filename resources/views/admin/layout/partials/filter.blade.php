@@ -8,18 +8,20 @@
 
 
             @foreach ($filters as $key => $items)
+
+               
             
                 @if($key == 'parent')
                    
                        
                     <div class="label-container">
-                        <label for="category_id" class="label">Filtrar por</label>
+                        <label for="parent" class="label">Filtrar por grupo</label>
                     </div>
                     <div class="input-container">
-                        <select name="category_id" data-placeholder="Seleccione una categoría" class="input">
-                            <option value="all"}}>Todas</option>
+                        <select name="parent" data-placeholder="Seleccione una categoría" class="input">
+                            <option value="all">Todos</option>
                             @foreach($items as $item)
-                                <option value="{{$item->id}}"}}>{{ $item->name }}</option>
+                                <option value="{{$item}}"}}>{{$item}}</option>
                             @endforeach
                         </select>    
                     </div>
