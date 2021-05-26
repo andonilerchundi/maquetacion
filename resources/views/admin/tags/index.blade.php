@@ -1,21 +1,24 @@
 @php
+
     $route="tags";
     $filters = ['parent' => $groups]; 
     
-
 @endphp
 
-
 @extends('admin.layout.table_form')
-    
 
 @section('table')
+
     @isset($tag)
 
         <table class="table table-sortable">
+            
             <thead>
+                
                 <tr>
+                    
                     <th>Grupo</th>
+                    
                     <th>Clave</th>
                     <th>Fecha</th>
                     <th></th>
@@ -116,7 +119,6 @@
                         </div>
                         
                     </div>
-                    
                 
                 </div>
 

@@ -94,7 +94,12 @@
                         <svg  viewBox="0 0 24 24">
                             <path fill="currentColor" d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z" />
                         </svg>
-                    </div>  
+                    </div>
+                    <div class="tab-items" data-tab="seo">
+                        <svg  viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1V11.1Z" />
+                        </svg>
+                    </div>   
 
                 </div>
 
@@ -171,7 +176,7 @@
                                     </div>
 
                                     <div class="input-container">
-                                        <input type="text" name="locale[title.{{$localization->alias}}]" value="{{isset($locale["title.$localization->alias"]) ? $locale["title.$localization->alias"] : ''}}" class="input-highlight">
+                                        <input type="text" name="seo[title.{{$localization->alias}}]" value="{{isset($seo["title.$localization->alias"]) ? $seo["title.$localization->alias"] : ''}}" class="input-highlight">
                                     </div>
                                 </div>
 
@@ -242,6 +247,46 @@
                 @endcomponent
             
             </div>
+
+            <div class="tab-panel" data-tab="seo">
+
+                @component('admin.layout.partials.locale', ['tab' => 'seo'])
+                    
+                    @foreach ($localizations as $localization)
+
+                        <div class="tab-panel-language {{ $loop->first ? 'language-active':'' }}" data-tab="seo" data-localetab="{{$localization->alias}}">
+                            <div class="one-columns">
+
+                                <div class="form-group">
+                                    
+                                    <div class="label-container">
+                                        <label>Keywords:</label>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <input type="text" name="seo[keywords.{{$localization->alias}}]" value="{{isset($seo["keywords.$localization->alias"]) ? $seo["keywords.$localization->alias"] : ''}}" class="input-highlight">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    
+                                    <div class="label-container">
+                                        <label>Descripción:</label>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <textarea type="text" name="seo[description.{{$localization->alias}}]" value="{{isset($seo["description.$localization->alias"]) ? $seo["description.$localization->alias"] : ''}}" class="input-highlight">{{isset($seo["description.$localization->alias"]) ? $seo["description.$localization->alias"] : ''}}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    @endforeach
+                    
+                @endcomponent
+            
+            </div>
+ 
  
         </form>
     @endif

@@ -1951,18 +1951,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "renderBlockParameters": () => (/* binding */ renderBlockParameters)
 /* harmony export */ });
 var renderBlockParameters = function renderBlockParameters() {
-  var blockParameters = document.querySelectorAll('.block-parameters');
+  var BlockParameters = document.querySelectorAll(".block-parameters");
+  BlockParameters.forEach(function (blockInput) {
+    var originalInput = blockInput.value.match(/\{.*?\}/g);
 
-  if (blockParameters) {
-    blockParameters.forEach(function (blockParameter) {
-      blockParameter.addEventListener('keydown', function () {
-        var slug = blockParameter.value.match(/\{.*?\}/g);
+    if (originalInput) {
+      blockInput.addEventListener("keydown", function () {
+        var setInput = blockInput.value;
+        blockInput.addEventListener("keyup", function () {
+          var finalInput = blockInput.value.match(/\{.*?\}/g);
+
+          if (finalInput) {
+            if (originalInput.toString() != finalInput.toString()) {
+              blockInput.value = setInput;
+            }
+          } else {
+            blockInput.value = setInput;
+          }
+
+          setInput = blockInput.value;
+        });
       });
-      blockParameter.addEventListener('keyup', function () {
-        var slug = blockParameter.value.match(/\{.*?\}/g);
-      });
-    });
-  }
+    }
+  });
 };
 
 /***/ }),

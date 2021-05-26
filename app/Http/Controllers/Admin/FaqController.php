@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Jenssegers\Agent\Agent;
 use App\Http\Requests\Admin\FaqRequest;
 use App\Vendor\Locale\Locale;
+use App\Vendor\Locale\LocaleSlugSeo;
 use App\Models\DB\Faq; 
 use App\Vendor\Image\Image;
 use Debugbar;
@@ -19,16 +20,18 @@ class FaqController extends Controller
     protected $locale;
     protected $image;
     protected $faq;
+    protected $locale_slug_seo;
    
 
 
-    function __construct(Faq $faq, Agent $agent, Locale $locale, Image $image)
+    function __construct(Faq $faq, Agent $agent, Locale $locale, Image $image, LocaleSlugSeo $locale_slug_seo)
     {
         // $this->middleware('auth');
         $this->agent = $agent;
         $this->locale = $locale;
         $this->image = $image;
         $this->faq = $faq;
+        $this->locale_slug_seo = $locale_slug_seo;
 
         if ($this->agent->isMobile()) {
             $this->paginate = 9;
@@ -40,6 +43,7 @@ class FaqController extends Controller
 
         $this->locale->setParent('faqs');
         $this->image->setEntity('faqs');
+        $this->locale_slug_seo->setParent('faqs');
     }
 
     public function index()
@@ -76,13 +80,17 @@ class FaqController extends Controller
 
     public function store(FaqRequest $request)
     {    
-
+        Debugbar::info(request('seo'));
         $faq = $this->faq->updateOrCreate([
             'id' => request('id')],[
             'name' => request('name'),
             'category_id' => request('category_id'),
             'active' => 1,
         ]);
+
+        if(request('seo')){
+            $seo = $this->locale_slug_seo->store(request('seo'), $faq->id, 'front_faq');
+        }
 
         if(request('locale')){
             $locale = $this->locale->store(request('locale'), $faq->id);
@@ -115,30 +123,36 @@ class FaqController extends Controller
 
     public function edit(Faq $faq)
     {
-        $view = View::make('admin.faqs.index')
-        ->with('faq', $faq)
-        ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate($this->paginate));        
-        
-        if(request()->ajax()) {
+        // $locale = $this->locale->show($faq->id);
+        // $seo = $this->locale_slug_seo->show($faq->id);
 
-            $sections = $view->renderSections(); 
+        // $view = View::make('admin.faqs.index')
+        // ->with('locale', $locale)
+        // ->with('seo', $seo)
+        // ->with('faq', $faq)
+        // ->with('faqs', $this->faq->where('active', 1)->orderBy('created_at', 'desc')->paginate($this->paginate));        
+        
+        // if(request()->ajax()) {
+
+        //     $sections = $view->renderSections(); 
     
-            return response()->json([
-                'table' => $sections['table'],
-                'form' => $sections['form'],
-            ]); 
-        }
+        //     return response()->json([
+        //         'table' => $sections['table'],
+        //         'form' => $sections['form'],
+        //     ]); 
+        // }
                 
-        return $view;
+        // return $view;
     }
 
     public function show(Faq $faq)
     {
-
         $locale = $this->locale->show($faq->id);
+        $seo = $this->locale_slug_seo->show($faq->id);
 
         $view = View::make('admin.faqs.index')
         ->with('locale', $locale)
+        ->with('seo', $seo)
         ->with('faq', $faq)
         ->with('faqs', $this->faq->where('active', 1)->paginate($this->paginate))
         ->renderSections();   

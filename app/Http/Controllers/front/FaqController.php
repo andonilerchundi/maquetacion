@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Jenssegers\Agent\Agent;
 use App\Vendor\Locale\Locale;
+use App\Vendor\Locale\LocaleSlugSeo;
 use App\Models\DB\Faq;
 use App;
 use Debugbar;
@@ -19,14 +20,15 @@ class FaqController extends Controller
     protected $faq;
     protected $locale;
 
-    function __construct(Faq $faq, Locale $locale, Agent $agent)
+    function __construct(Faq $faq, Locale $locale, Agent $agent,LocaleSlugSeo $locale_slug_seo)
     {
         $this->agent = $agent;
         $this->faq = $faq;
         $this->locale = $locale;
+        $this->locale_slug_seo = $locale_slug_seo;
         
-        $this->locale->setParent('faqs');
-        $this->locale->setLanguage(App::getLocale());
+        $this->locale_slug_seo->setLanguage(app()->getLocale()); 
+        $this->locale_slug_seo->setParent('faqs');    
     }
 
     public function index()
@@ -57,9 +59,6 @@ class FaqController extends Controller
             return $faq;
         });
 
-        Debugbar::info($faqs);
-
-
         $view = View::make('front.faqs.index')
                 ->with('faqs', $faqs )
                 ->with('seo', $seo );
@@ -69,7 +68,6 @@ class FaqController extends Controller
 
     public function show($slug)
     {      
-
         $seo = $this->locale_slug_seo->getIdByLanguage($slug);
 
         if(isset($seo->key)){
@@ -92,7 +90,10 @@ class FaqController extends Controller
 
             $faq['locale'] = $faq->locale->pluck('value','tag');
 
-            $view = View::make('front.faqs.index.single')->with('faq', $faq);
+            Debugbar::info($faq);
+
+
+            $view = View::make('front.faqs.single')->with('faq', $faq);
 
             return $view;
 
@@ -100,7 +101,6 @@ class FaqController extends Controller
             return response()->view('errors.404', [], 404);
         }
     }
-
 }
 
     

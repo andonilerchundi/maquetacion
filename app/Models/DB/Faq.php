@@ -3,6 +3,7 @@
 namespace App\Models\DB;
 
 use App\Vendor\Locale\Models\Locale;
+use App\Vendor\Locale\Models\LocaleSlugSeo;
 use App\Vendor\Image\Models\ImageResized;
 use App;
 
@@ -20,6 +21,10 @@ class Faq extends DBModel
     public function locale()
     {
         return $this->hasMany(Locale::class, 'key')->where('rel_parent', 'faqs')->where('language', App::getLocale());
+    }
+    public function seo()
+    {
+        return $this->hasOne(LocaleSlugSeo::class, 'key')->where('rel_parent', 'faqs')->where('language', App::getLocale());
     }
     
     public function images_featured_preview()
