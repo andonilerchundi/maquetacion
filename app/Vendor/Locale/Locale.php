@@ -84,5 +84,3 @@ class Locale
         return $items;
     }
 }
-    
-

@@ -29,6 +29,21 @@ class ViewComposerServiceProvider extends ServiceProvider
             'admin.tags.index'],
             'App\Http\ViewComposers\Admin\LocaleGroups'
         );
+
+        view()->composer([
+            "admin.gloves.index"],
+            "App\Http\ViewComposers\Admin\Oz"
+        );
+
+        view()->composer([
+            "admin.gloves.index"],
+            "App\Http\ViewComposers\Admin\Brand"
+        );
+
+        view()->composer([
+            "admin.gloves.index"],
+            "App\Http\ViewComposers\Admin\IVA"
+        );
     }
 
     

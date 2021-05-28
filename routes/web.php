@@ -110,6 +110,24 @@ Route::group(['prefix' => 'admin'], function () {
         ]
     ]);
 
+
+    Route::get('/gloves/filter/{filters?}', 'App\Http\Controllers\Admin\GloveController@filter')->name('gloves_filter');
+    Route::resource('gloves', 'App\Http\Controllers\Admin\GloveController', [
+        'parameters' => [
+            'gloves' => 'glove', 
+        ],
+        'names' => [
+            'index' => 'gloves',
+            'create' => 'gloves_create',
+            'store' => 'gloves_store',
+            'destroy' => 'gloves_destroy',
+            'show' => 'gloves_show',
+        ]
+    ]);
+
+  
+
+
   
 
 });
@@ -120,11 +138,13 @@ Route::group(['prefix' => $localizationseo->setLocale(),
 
     Route::get($localizationseo->transRoute('routes.front_faqs'), 'App\Http\Controllers\Front\FaqController@index')->name('front_faqs');
     Route::get($localizationseo->transRoute('routes.front_faq'), 'App\Http\Controllers\Front\FaqController@show')->name('front_faq');
+    
+
 });
 
 Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('front_fingerprint');
 
-Route::get('/faqs', 'App\Http\Controllers\front\FaqController@index')->name('faqs_front');
+
 Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');
 Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');
 Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');
