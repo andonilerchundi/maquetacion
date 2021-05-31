@@ -10,6 +10,6 @@ class IVA extends DBModel
 
     public function product()
     {
-        return $this->hasMany(Product::class, 'iva_id');
+        return $this->hasMany(Product::class, 'iva');
     }
 }

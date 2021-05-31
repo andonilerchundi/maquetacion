@@ -71,7 +71,7 @@
                         <select name="brand_id" data-placeholder="Seleccione Marca" class="input">
                             <option value="all">Todas</option>
                             @foreach($items as $item)
-                                <option value="{{$item->id}}">{{ $item->brand }}</option>
+                                <option value="{{$item->id}}">{{ $item->name }}</option>
                             @endforeach
                         </select>    
                     </div>

@@ -138,6 +138,8 @@ Route::group(['prefix' => $localizationseo->setLocale(),
 
     Route::get($localizationseo->transRoute('routes.front_faqs'), 'App\Http\Controllers\Front\FaqController@index')->name('front_faqs');
     Route::get($localizationseo->transRoute('routes.front_faq'), 'App\Http\Controllers\Front\FaqController@show')->name('front_faq');
+    Route::get($localizationseo->transRoute('routes.front_gloves'), 'App\Http\Controllers\Front\GloveController@index')->name('front_gloves');
+    Route::get($localizationseo->transRoute('routes.front_glove'), 'App\Http\Controllers\Front\GloveController@show')->name('front_glove');
     
 
 });

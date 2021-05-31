@@ -14,12 +14,12 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>OZ</th>
                     <th>Precio Total</th>
                     <th>Fecha</th>
                     <th></th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach($gloves as $glove_element)
                     <tr>
@@ -27,19 +27,14 @@
                         <td>
                             {{$glove_element->name}}
                         </td>
-
-                        <td>
-                            {{$glove_element->oz->id}}
-                        </td>
                         
                         <td>
                             {{$glove_element->total_price}}
                         </td>
+
                         <td>
                             {{ Carbon\Carbon::parse($glove_element->created_at)->format('d-m-Y') }}
                         </td>
-
-
 
                         <td>
                             <div class="button-container">
@@ -67,9 +62,11 @@
             </tbody>
             
         </table>
+        
         @if($agent->isDesktop())
             @include('admin.layout.partials.table_pagination_desktop', ['items' => $gloves])
         @endif
+
         @if($agent->isMobile())
             @include('admin.layout.partials.table_pagination_mobile', ['items' => $gloves])
         @endif
@@ -137,7 +134,7 @@
 
             <div class="tab-panel tab-active" data-tab="contenido">
 
-                <div class="two-columns">
+                <div class="one-columns">
 
                     <div class="form-group">
                         
@@ -150,6 +147,10 @@
                         </div>
                     </div>
                     
+                   
+                </div>
+                <div class="one_column">
+
                     <div class="form-group">
                         <div class="label-container">
                             <label for="oz_id" class="label-highlight">
@@ -158,19 +159,17 @@
                         </div>
                         <div class="input-container">
                             <div class="oz_id">
-                                
-                                <select name="oz_id"> 
-                                    <option> </option>
-
-                                    @foreach($oz as $oz_element)
-                                        <option value="{{$oz_element->id}}" {{$oz_element->id == $glove->oz_id ? 'selected' : ''}}> {{$oz_element->oz}} </option>
-                                    @endforeach
+                                @foreach($oz as $oz_element)
+                                    <div class="checkbox-oz">
+                                        <label for="oz">{{$oz_element->oz}}</label>
+                                        <input type="checkbox" name="oz[{{$oz_element->oz}}]" value="{{$oz_element->id}}">
+                                    </div>
+                                @endforeach
                                     
-                                </select>
                             </div>
                         </div>
                     </div> 
-                
+
                 </div>
 
                 @component('admin.layout.partials.locale', ['tab' => 'contenido'])
@@ -299,88 +298,78 @@
 
             <div class="tab-panel" data-tab="product">
 
-                @component('admin.layout.partials.locale', ['tab' => 'product'])
-                    
-                    @foreach ($localizations as $localization)
+                <div class="three-columns">
 
-                        <div class="tab-panel-language {{ $loop->first ? 'language-active':'' }}" data-tab="seo" data-localetab="{{$localization->alias}}">
-                            <div class="three-columns">
-
-                                <div class="form-group">
-                                    
-                                    <div class="label-container">
-                                        <label>Base Imponible:</label>
-                                    </div>
-
-                                    <div class="input-container">
-                                        <input type="number" name="product[price]">
-                                    </div>
-                                </div>
-                               
-                                <div class="form-group">
-                                    
-                                    <div class="label-container">
-                                        <label>IVA:</label>
-                                    </div>
-
-                                    <div class="input-container">
-                                        <select name="product[iva_id]"> 
-                                            <option> </option>
-        
-                                            @foreach($iva as $iva_element)
-                                                <option value="{{$iva_element->id}}" @isset($glove->product->iva_id) {{$iva_element->id == $glove->product->iva_id ? 'selected' : ''}} @endisset> {{$iva_element->name}} </option>
-                                            @endforeach
-                                            
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    
-                                    <div class="label-container">
-                                        <label>Precio Final:</label>
-                                    </div>
-
-                                    <div class="input-container">
-                                        <input type="number" name="product[total_price]">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="one-column">
-                                <div class="form-group">
-                                    
-                                    <div class="label-container">
-                                        <label>Color:</label>
-                                    </div>
-
-                                    <div class="input-container color">
-                                        <input type="color" name="product[color]">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    
-                                    <div class="label-container">
-                                        <label>Marca:</label>
-                                    </div>
-
-                                    <select name="brand_id" class="brand-input"> 
-                                        <option> </option>
-    
-                                        @foreach($brand as $brand_element)
-                                            <option value="{{$brand_element->id}}" {{$brand_element->id == $glove->brand_id ? 'selected' : ''}}> {{$brand_element->name}} </option>
-                                        @endforeach
-                                        
-                                    </select>
-                                </div>
-
-                            </div>
-                            
+                    <div class="form-group">
+                        
+                        <div class="label-container">
+                            <label>Base Imponible:</label>
                         </div>
 
-                    @endforeach
+                        <div class="input-container">
+                            <input type="number" name="product[price]" value="{{isset($product->price) ? $product->price : ''}}" readonly>
+                        </div>
+                    </div>
                     
-                @endcomponent
+                    <div class="form-group">
+                        
+                        <div class="label-container">
+                            <label>IVA:</label>
+                        </div>
+
+                        <div class="input-container">
+                            <select name="product[iva]" value="{{isset($product->iva) ? $product->iva : ''}}" > 
+                                <option> </option>
+
+                                @foreach($iva as $iva_element)
+                                    <option value="{{$iva_element->iva}}" @isset($glove->product->iva_id) {{$iva_element->id == $glove->product->iva_id ? 'selected' : ''}} @endisset> {{$iva_element->name}} </option>
+                                @endforeach
+                                
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        
+                        <div class="label-container">
+                            <label>Precio Final:</label>
+                        </div>
+
+                        <div class="input-container">
+                            <input type="number" name="product[total_price]" value="{{isset($product->total_price) ? $product->total_price : ''}}" >
+                        </div>
+                    </div>
+
+                </div>
+                <div class="one-column">
+                    <div class="form-group">
+                        
+                        <div class="label-container">
+                            <label>Color:</label>
+                        </div>
+
+                        <div class="input-container color">
+                            <input type="color" name="color" value="{{isset($glove->color) ? $glove->color : ''}}" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="label-container">
+                            <label>Marca:</label>
+                        </div>
+
+                        <select name="brand_id" class="brand-input"> 
+                            <option> </option>
+
+                            @foreach($brand as $brand_element)
+                                <option value="{{$brand_element->id}}" {{$brand_element->id == $glove->brand_id ? 'selected' : ''}}> {{$brand_element->name}} </option>
+                            @endforeach
+                            
+                        </select>
+                    </div>
+
+                </div>
+                
             
             </div>
  

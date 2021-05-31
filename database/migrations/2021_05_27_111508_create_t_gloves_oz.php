@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTGloves extends Migration
+class CreateTGlovesOz extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateTGloves extends Migration
      */
     public function up()
     {
-        Schema::create('t_gloves', function (Blueprint $table) {
+        Schema::create('t_gloves_oz', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('brand_id');
-            $table->string('color');
-            $table->boolean('active');
+            $table->integer('glove_id');
+            $table->integer('oz_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateTGloves extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_gloves');
+        Schema::dropIfExists('t_gloves_oz');
     }
 }

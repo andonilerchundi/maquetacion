@@ -8,20 +8,19 @@ use App\Vendor\Image\Models\ImageResized;
 use App;
 
 class Glove extends DBModel
-
-
 {
 
     protected $table = 't_gloves';
-    protected $with = ['product' ,'brands', 'oz'];
+    protected $with = ['product'];
 
     public function brands()
     {
-        return $this->hasOne(Brand::class, 'name_id');
+        return $this->hasOne(Brand::class);
     }
-    public function oz()
+
+    public function glove_oz()
     {
-        return $this->hasOne(Oz::class, 'oz_id');
+        return $this->hasMany(GlovesOz::class);
     }
 
     public function locale()
@@ -31,7 +30,7 @@ class Glove extends DBModel
 
     public function product()
     {
-        return $this->hasOne(LocaleSlugSeo::class, 'key')->where('rel_parent', 'gloves');
+        return $this->hasOne(Product::class, 'key')->where('rel_parent', 'gloves');
     }
 
     public function seo()

@@ -3,12 +3,12 @@
 namespace App\Vendor\Product;
 
 use App\Vendor\Product\Models\Product as DBProduct;
-use App\Vendor\Locale\Models\LocaleLanguage;
+use Debugbar;
 
 class Product
 {
     protected $rel_parent;
-    protected $language;
+    
 
     function __construct(DBProduct $product)
     {
@@ -25,22 +25,16 @@ class Product
         return $this->rel_parent;
     }
     
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
 
     public function store($product, $key)
     {  
-
         $product[] = $this->product->updateOrCreate([
             'key' => $key,
             'rel_parent' => $this->rel_parent],[
             'rel_parent' => $this->rel_parent,
-            'color'=> $color,
-            'price'=> $price,
-            'iva_id'=> $iva,
-            'total_price '=> $price + ($price * $iva),
+            'price'=> $product['total_price'] / (1 + $product['iva'] ),
+            'iva'=>$product['iva'] ,
+            'total_price'=>$product['total_price'],
         ]);
 
         return $product;
@@ -48,7 +42,8 @@ class Product
 
     public function show($key)
     {
-        return DBProduct::getValues($this->rel_parent, $key);
+        return DBProduct::getValues($this->rel_parent, $key)->first();
+
     }
 
     public function delete($key)
@@ -59,18 +54,5 @@ class Product
         }
     }
 
-    public function getIdByLanguage($key){ 
-        return DBProduct::getIdByLanguage($this->rel_parent, $this->language, $key)->pluck('color')->all();
-    }
 
-    public function getAllByLanguage(){ 
-
-        $items = DBProduct::getAllByLanguage($this->rel_parent, $this->language)->get()->groupBy('key');
-
-        $items =  $items->map(function ($item) {
-            return $item->pluck('value','tag');
-        });
-
-        return $items;
-    }
 }

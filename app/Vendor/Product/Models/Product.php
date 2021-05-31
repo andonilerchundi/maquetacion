@@ -16,14 +16,4 @@ class Product extends Model
             ->where('rel_parent', $rel_parent);
     }
 
-    public function scopeGetIdByLanguage($query, $rel_parent, $key){
-        
-        return $query->where('key', $key)
-            ->where('rel_parent', $rel_parent);
-    }
-
-    public function scopeGetAllByLanguage($query, $rel_parent){
-
-        return $query->where('rel_parent', $rel_parent);
-    }
 }

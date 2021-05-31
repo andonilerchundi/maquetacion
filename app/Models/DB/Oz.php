@@ -6,10 +6,10 @@ class Oz extends DBModel
 {
 
     protected $table = 't_oz';
-    protected $with = ['gloves'];
+    protected $with = ['glovesoz'];
 
-    public function gloves()
+    public function glovesoz()
     {
-        return $this->hasMany(Glove::class, 'oz_id');
+        return $this->hasMany(GlovesOz::class, 'oz_id');
     }
 }

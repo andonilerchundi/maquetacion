@@ -11,6 +11,7 @@ use App\Http\Requests\Admin\GloveRequest;
 use App\Vendor\Locale\Locale;
 use App\Vendor\Locale\LocaleSlugSeo;
 use App\Models\DB\Glove; 
+use App\Models\DB\GlovesOz; 
 use App\Vendor\Image\Image;
 use App\Vendor\Product\Product;
 use Debugbar;
@@ -23,10 +24,11 @@ class GloveController extends Controller
     protected $glove;
     protected $locale_slug_seo;
     protected $product;
+    protected $glovesoz;
    
 
 
-    function __construct(Glove $glove, Agent $agent, Locale $locale, Image $image, LocaleSlugSeo $locale_slug_seo, Product $product)
+    function __construct(Glove $glove, GlovesOz $glovesoz, Agent $agent, Locale $locale, Image $image, LocaleSlugSeo $locale_slug_seo, Product $product)
     {
         // $this->middleware('auth');
         $this->agent = $agent;
@@ -35,6 +37,7 @@ class GloveController extends Controller
         $this->glove = $glove;
         $this->locale_slug_seo = $locale_slug_seo;
         $this->product = $product;
+        $this->glovesoz = $glovesoz;
 
         if ($this->agent->isMobile()) {
             $this->paginate = 9;
@@ -82,17 +85,20 @@ class GloveController extends Controller
         ]);
     }
 
-    public function store(gloveRequest $request)
-    {    
-        Debugbar::info(request('seo'));
+    public function store(GloveRequest $request)
+    {   
+
         $glove = $this->glove->updateOrCreate([
             'id' => request('id')],[
-            'name_id' => request('name_id'),
-            'oz_id' => request('oz_id'),
-            'color' => request('color'),
+            'name' => request('name'),
             'brand_id'=>request('brand_id'),
+            'color' => request('color'),
             'active' => 1,
         ]);
+
+        if(request('oz')){
+            $oz  = $this->storeOz(request('oz'), $glove->id);
+        }
 
         if(request('seo')){
             $seo = $this->locale_slug_seo->store(request('seo'), $glove->id, 'front_gloves');
@@ -109,9 +115,9 @@ class GloveController extends Controller
         }
 
         if (request('id')){
-            $message = \Lang::get('admin/gloves.glove-update');
+            $message = \Lang::get('admin/gloves.gloves-update');
         }else{
-            $message = \Lang::get('admin/gloves.glove-create');
+            $message = \Lang::get('admin/gloves.gloves-create');
         }
 
         $view = View::make('admin.gloves.index')
@@ -155,9 +161,11 @@ class GloveController extends Controller
         // return $view;
     }
 
-    public function show(glove $glove)
+    public function show(Glove $glove)
     {
+        $product = $this->product->show($glove->id);
         $locale = $this->locale->show($glove->id);
+        Debugbar::info($product);
         $seo = $this->locale_slug_seo->show($glove->id);
 
         $view = View::make('admin.gloves.index')
@@ -176,12 +184,10 @@ class GloveController extends Controller
         return $view;
     }
 
-    public function destroy(glove $glove)
+    public function destroy(Glove $glove)
     {
         $glove->active = 0;
         $glove->save();
-
-        // $glove->delete();
 
         $view = View::make('admin.gloves.index')
         ->with('glove', $this->glove)
@@ -193,8 +199,21 @@ class GloveController extends Controller
             'table' => $view['table'],
             'form' => $view['form']
         ]);
-
         
+    }
+
+    public function storeOz($ozs, $id)
+    {  
+
+        foreach($ozs as $oz){
+            
+            $ozs[] = $this->glovesoz->updateOrCreate([
+                'glove_id' => $id,
+                'oz_id' => $oz],[
+            ]);
+        }
+        
+        return $oz;
     }
 
     public function filter(Request $request, $filters = null){
@@ -209,6 +228,16 @@ class GloveController extends Controller
             }
             else {
                 return $q->where('oz_id', $oz_id);
+            }
+        });
+
+        $query->when($filters->brand_id, function ($q, $brand_id) {
+
+            if($brand_id == 'all'){
+                return $q;
+            }
+            else {
+                return $q->where('brand_id', $brand_id);
             }
         });
 

@@ -21,7 +21,9 @@
 .form {
   background-color: white;
   width: 50%;
-  height: 54vh;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   margin-top: 4vh;
   padding: 1em;
   border-radius: 1em;
@@ -147,6 +149,19 @@ textarea {
 }
 .sitemap-button .sitemap {
   width: 95%;
+}
+
+.checkbox-oz {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  height: 3vh;
+}
+.checkbox-oz label {
+  width: 30%;
+}
+.checkbox-oz input {
+  height: 2vh;
 }
 
 .table {

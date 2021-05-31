@@ -1,7 +1,7 @@
 .form {
     background-color: hsl(0, 0%, 100%);
     width: 50%;
-    height: 54vh;
+    height: max-content;
     margin-top: 4vh;
     padding: 1em;
     border-radius: 1em;
@@ -150,6 +150,18 @@ textarea{
     }
 }
 
+.checkbox-oz{
+    display: flex;
+    align-items: center;
+    width: 30%;
+    height: 3vh;
+    label{
+        width: 30%;
+    }
+    input{
+        height: 2vh;
+    }
+}
 
 
 

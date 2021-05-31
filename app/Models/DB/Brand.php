@@ -6,9 +6,9 @@ class Brand extends DBModel
 {
 
     protected $table = 't_brand';
-    
+    protected $with = ['gloves'];
 
-    public function products()
+    public function gloves()
     {
         return $this->hasMany(Glove::class, 'brand_id');
     }
