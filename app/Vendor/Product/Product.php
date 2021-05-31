@@ -35,13 +35,12 @@ class Product
 
         $product[] = $this->product->updateOrCreate([
             'key' => $key,
-            'rel_parent' => $this->rel_parent,],
-            [
+            'rel_parent' => $this->rel_parent],[
             'rel_parent' => $this->rel_parent,
             'color'=> $color,
             'price'=> $price,
             'iva_id'=> $iva,
-            'total_price '=> $price + ($price * $iva)
+            'total_price '=> $price + ($price * $iva),
         ]);
 
         return $product;
