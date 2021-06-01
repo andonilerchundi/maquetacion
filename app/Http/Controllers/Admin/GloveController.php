@@ -165,7 +165,6 @@ class GloveController extends Controller
     {
         $product = $this->product->show($glove->id);
         $locale = $this->locale->show($glove->id);
-        Debugbar::info($product);
         $seo = $this->locale_slug_seo->show($glove->id);
 
         $view = View::make('admin.gloves.index')

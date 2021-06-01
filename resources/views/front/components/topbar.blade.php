@@ -2,8 +2,7 @@
 
     <div class="top-bar">
         <div class="left-side">
-            <div id="title-page">
-                Preguntas Frecuentes
+            <div id="title-page">   
                 {{-- @lang('admin/'.$route.'.parent_section') --}}
             </div>  
         </div>

@@ -29,7 +29,7 @@
                         </td>
                         
                         <td>
-                            {{$glove_element->total_price}}
+                            {{$glove_element->product->total_price}}
                         </td>
 
                         <td>
@@ -159,11 +159,23 @@
                         </div>
                         <div class="input-container">
                             <div class="oz_id">
+
+                              
+
                                 @foreach($oz as $oz_element)
+
                                     <div class="checkbox-oz">
                                         <label for="oz">{{$oz_element->oz}}</label>
-                                        <input type="checkbox" name="oz[{{$oz_element->oz}}]" value="{{$oz_element->id}}">
-                                    </div>
+                                        <input type="checkbox" name="oz[{{$oz_element->oz}}]" value="{{$oz_element->id}}" 
+                                    
+
+                                        @foreach($glove->glove_oz as $gloves_oz)
+
+                                            {{$oz_element->id == $gloves_oz->oz->id ? 'checked': ''}}
+                                        
+
+                                        @endforeach
+                                     ></div>
                                 @endforeach
                                     
                             </div>
@@ -205,8 +217,6 @@
                     
                 @endcomponent
     
-                
-
             </div>
 
             <div class="tab-panel" data-tab="imagen">
@@ -241,16 +251,9 @@
 
                                 </div>
 
-                                
-
-                                
-                                
                             </div>
                         </div>
 
-                        
-
-                        
                     @endforeach
                     
                 @endcomponent
@@ -318,11 +321,11 @@
                         </div>
 
                         <div class="input-container">
-                            <select name="product[iva]" value="{{isset($product->iva) ? $product->iva : ''}}" > 
+                            <select name="product[iva]" > 
                                 <option> </option>
 
                                 @foreach($iva as $iva_element)
-                                    <option value="{{$iva_element->iva}}" @isset($glove->product->iva_id) {{$iva_element->id == $glove->product->iva_id ? 'selected' : ''}} @endisset> {{$iva_element->name}} </option>
+                                    <option value="{{$iva_element->iva}}" @isset($glove->product->iva) {{$iva_element->iva == $glove->product->iva ? 'selected' : ''}} @endisset> {{$iva_element->name}} </option>
                                 @endforeach
                                 
                             </select>

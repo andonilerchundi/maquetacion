@@ -19,6 +19,7 @@ class GloveController extends Controller
     protected $agent;
     protected $glove;
     protected $locale;
+    protected $locale_slug_seo;
 
     function __construct(Glove $glove, Locale $locale, Agent $agent,LocaleSlugSeo $locale_slug_seo)
     {
@@ -89,9 +90,6 @@ class GloveController extends Controller
             }
 
             $glove['locale'] = $glove->locale->pluck('value','tag');
-
-            Debugbar::info($glove);
-
 
             $view = View::make('front.gloves.single')->with('glove', $glove);
 

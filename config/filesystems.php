@@ -64,6 +64,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'gloves' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/gloves'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

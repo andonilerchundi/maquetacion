@@ -10,6 +10,7 @@
             <li class="link" data-url="{{route('tags')}}">TAG's</li>
             <li class="link" data-url="{{route('seo')}}">SEO</li>
             
+            
         </ul>
     </div>
 </div>
