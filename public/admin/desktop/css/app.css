@@ -158,10 +158,30 @@ textarea {
   height: 3vh;
 }
 .checkbox-oz label {
-  width: 30%;
+  width: 100%;
 }
 .checkbox-oz input {
   height: 2vh;
+}
+
+.oz-content {
+  width: 50%;
+}
+
+.glove-style {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.color-brand {
+  width: 50%;
+}
+.color-brand .color {
+  width: 50%;
+}
+.color-brand select {
+  width: 50%;
 }
 
 .table {

@@ -1983,6 +1983,73 @@ sendFingerprintRequest();
 
 /***/ }),
 
+/***/ "./resources/js/front/desktop/show-product.js":
+/*!****************************************************!*\
+  !*** ./resources/js/front/desktop/show-product.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var linkProducts = document.querySelectorAll(".show-single-product");
+var sidebar = document.getElementById("sidebar");
+var sidebarButton = document.getElementById("sidebar-button");
+linkProducts.forEach(function (linkProduct) {
+  linkProduct.addEventListener("click", function () {
+    var url = linkProduct.dataset.url;
+
+    var RefreshRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get(url).then(function (response) {
+                  view.innerHTML = response.data.view;
+                  title.textContent = link.textContent;
+                  sidebar.classList.remove("active");
+                  sidebarButton.classList.remove('active');
+                  window.history.pushState('', '', url);
+                });
+
+              case 3:
+                _context.next = 8;
+                break;
+
+              case 5:
+                _context.prev = 5;
+                _context.t0 = _context["catch"](0);
+                console.error(_context.t0);
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 5]]);
+      }));
+
+      return function RefreshRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    RefreshRequest();
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/front/desktop/sidebar.js":
 /*!***********************************************!*\
   !*** ./resources/js/front/desktop/sidebar.js ***!
@@ -20358,6 +20425,8 @@ __webpack_require__(/*! ./faqs */ "./resources/js/front/desktop/faqs.js");
 __webpack_require__(/*! ./fingerprint */ "./resources/js/front/desktop/fingerprint.js");
 
 __webpack_require__(/*! ./sidebar */ "./resources/js/front/desktop/sidebar.js");
+
+__webpack_require__(/*! ./show-product */ "./resources/js/front/desktop/show-product.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when

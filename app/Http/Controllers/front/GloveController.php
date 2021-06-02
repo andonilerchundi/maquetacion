@@ -36,8 +36,6 @@ class GloveController extends Controller
     {        
         $seo = $this->locale_slug_seo->getByKey(Route::currentRouteName());
         
-        
-
         if($this->agent->isDesktop()){
             $gloves = $this->glove
                     ->with('image_featured_desktop')
@@ -61,7 +59,7 @@ class GloveController extends Controller
         });
 
         $view = View::make('front.gloves.index')
-                ->with('gloves', $gloves )
+                ->with('gloves', $gloves)
                 ->with('seo', $seo );
 
         return $view;
@@ -93,6 +91,18 @@ class GloveController extends Controller
 
             $view = View::make('front.gloves.single')->with('glove', $glove);
 
+            
+            if(request()->ajax()) {
+
+                $sections = $view->renderSections(); 
+        
+                return response()->json([
+                    'table' => $sections['table'],
+                    'form' => $sections['form'],
+                ]); 
+            }
+
+            
             return $view;
 
         }else{

@@ -167,6 +167,11 @@ class FaqController extends Controller
 
     public function destroy(Faq $faq)
     {
+
+        $this->locale->delete($faq->id);
+        $this->locale_slug_seo->delete($faq->id);
+
+        
         $faq->active = 0;
         $faq->save();
 

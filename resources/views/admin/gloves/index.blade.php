@@ -149,9 +149,9 @@
                     
                    
                 </div>
-                <div class="one_column">
+                <div class="two_column glove-style">
 
-                    <div class="form-group">
+                    <div class="form-group oz-content">
                         <div class="label-container">
                             <label for="oz_id" class="label-highlight">
                                 OZ:
@@ -181,6 +181,35 @@
                             </div>
                         </div>
                     </div> 
+
+                    <div class="one-column color-brand">
+                        <div class="form-group">
+                            
+                            <div class="label-container">
+                                <label>Color:</label>
+                            </div>
+    
+                            <div class="input-container color">
+                                <input type="color" name="color" value="{{isset($glove->color) ? $glove->color : ''}}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            
+                            <div class="label-container">
+                                <label>Marca:</label>
+                            </div>
+    
+                            <select name="brand_id" class="brand-input"> 
+                                <option> </option>
+    
+                                @foreach($brand as $brand_element)
+                                    <option value="{{$brand_element->name}}" {{$brand_element->name == $glove->brand_id ? 'selected' : ''}}> {{$brand_element->name}} </option>
+                                @endforeach
+                                
+                            </select>
+                        </div>
+    
+                    </div>
 
                 </div>
 
@@ -344,35 +373,7 @@
                     </div>
 
                 </div>
-                <div class="one-column">
-                    <div class="form-group">
-                        
-                        <div class="label-container">
-                            <label>Color:</label>
-                        </div>
-
-                        <div class="input-container color">
-                            <input type="color" name="color" value="{{isset($glove->color) ? $glove->color : ''}}" >
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        
-                        <div class="label-container">
-                            <label>Marca:</label>
-                        </div>
-
-                        <select name="brand_id" class="brand-input"> 
-                            <option> </option>
-
-                            @foreach($brand as $brand_element)
-                                <option value="{{$brand_element->id}}" {{$brand_element->id == $glove->brand_id ? 'selected' : ''}}> {{$brand_element->name}} </option>
-                            @endforeach
-                            
-                        </select>
-                    </div>
-
-                </div>
-                
+               
             
             </div>
  

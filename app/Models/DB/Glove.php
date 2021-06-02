@@ -33,7 +33,6 @@ class Glove extends DBModel
         return $this->hasOne(Product::class, 'key')->where('rel_parent', 'gloves');
     }
     
-
     public function seo()
     {
         return $this->hasOne(LocaleSlugSeo::class, 'key')->where('rel_parent', 'gloves')->where('language', App::getLocale());

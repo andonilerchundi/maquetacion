@@ -1,0 +1,34 @@
+.gloves{
+    
+    height: max-content;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+
+}
+
+.image-grid{
+  
+   width: 100%;
+    
+}
+
+.show-single-product{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.product-name{
+   display: flex;
+   justify-content: center;
+}
+
+.price{
+    font-weight: bolder;
+    width: 40%;
+    text-align: center;
+}
