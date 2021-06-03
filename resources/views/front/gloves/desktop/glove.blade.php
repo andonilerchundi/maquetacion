@@ -1,7 +1,5 @@
 
-
-
-<div class="glove">
+<div class="glove" >
     <div class="glove-color">
 
         <input type="color" value="{!!isset ($glove->color) ? $glove->color : "" !!}">
@@ -33,7 +31,7 @@
             <div class="product-brand-head">
                 
 
-               <h2>{!!isset ($glove->brand_id) ? $glove->brand_id : "" !!}</h2> 
+               <h2>{!!isset ($glove->brand_name) ? $glove->brand_name : "" !!}</h2> 
 
 
 
@@ -41,28 +39,30 @@
 
             <div class="product-size">
                 <h3>OZ:</h3>
-
-                @foreach ($glove->glove_oz as $gloves_oz)
-
-                    <label for="oz">{{$gloves_oz->oz->oz}}</label>
-                    <input type="checkbox" @foreach ($glove->glove_oz as $gloves_oz)
-                    {{$gloves_oz->oz->oz}}
-                    @endforeach  >
-
                 
-                   
+                <div class="size-oz">
+                    @foreach ($glove->glove_oz as $gloves_oz)
+                        <div class="oz-options">
+
+                            <label for="oz">{{$gloves_oz->oz->oz}}</label>
+                            <input type="checkbox" @foreach ($glove->glove_oz as $gloves_oz)
+                            {{$gloves_oz->oz->oz}}
+                            @endforeach  >
+
+                        </div>
+                        
                     
-                @endforeach
+                    @endforeach
 
 
+                </div>
+                
             </div>
+
+
             <div class="product-price">
-    
-               
 
                 {{isset ($glove->product->total_price) ? $glove->product->total_price : "" }} € 
-
-               
             
             </div>
             

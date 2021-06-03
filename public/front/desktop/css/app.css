@@ -864,17 +864,21 @@ li:hover {
   display: block;
   position: absolute;
   right: 0;
-  bottom: 28%;
-  text-align: justify;
+  bottom: 32%;
+  text-align: initial;
 }
 .product-info-content .product-size {
   width: 20%;
   height: 9vh;
   display: block;
   position: absolute;
-  right: 0;
+  right: 20%;
   bottom: 20%;
   text-align: start;
+}
+.product-info-content .product-size .size-oz {
+  display: flex;
+  flex-direction: column;
 }
 .product-info-content .product-brand-head {
   width: 40%;
@@ -899,7 +903,7 @@ li:hover {
   right: 0%;
   bottom: 14%;
   text-align: end;
-  font-size: 2em;
+  font-size: 3em;
 }
 
 .cart-button {
@@ -908,7 +912,7 @@ li:hover {
   display: block;
   position: absolute;
   right: 10%;
-  bottom: 8%;
+  bottom: 6%;
   background-color: black;
   color: #f3f3f3;
   font-size: 1.2em;
@@ -919,17 +923,52 @@ li:hover {
   padding: 0;
 }
 
+.content-product {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-content {
+  margin-top: 1em;
+  width: 30%;
+}
+.filter-content .button-filter {
+  width: 50%;
+  margin-left: 0.5em;
+  height: 2em;
+  border-bottom: solid 0.2px black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.filter-content .button-filter svg {
+  width: 1.5em;
+  height: 2em;
+}
+.filter-content .button-filter p {
+  margin: 0;
+  padding: 0;
+}
+.filter-content .filter-menu {
+  border-bottom: solid 0.2px black;
+  margin-left: 0.5em;
+  height: 15vh;
+}
+
 .gloves {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2em;
+  margin-top: 2em;
 }
 
 .image-grid {
   width: 100%;
+  cursor: pointer;
 }
 
 .show-single-product {
@@ -937,11 +976,29 @@ li:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 50vh;
+}
+
+.product-especification {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand {
+  margin-top: 0.2em;
+}
+.brand h4 {
+  margin: 0;
+  padding: 0;
 }
 
 .product-name {
   display: flex;
   justify-content: center;
+  font-size: 0.8em;
 }
 
 .price {

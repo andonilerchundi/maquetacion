@@ -146,7 +146,7 @@ Route::group(['prefix' => $localizationseo->setLocale(),
 
 Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('front_fingerprint');
 
-
+Route::get('/gloves/filter/{filters?}', 'App\Http\Controllers\Front\GloveController@filter')->name('gloves_filter');
 Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');
 Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');
 Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');

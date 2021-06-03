@@ -26,7 +26,7 @@
     @include('front.components.sidebar')
     
     
-    <div class="main-content">
+    <div class="main-content" id="main-content">
 
         @yield('content')
   

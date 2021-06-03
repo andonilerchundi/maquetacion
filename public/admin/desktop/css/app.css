@@ -548,7 +548,7 @@ li:hover {
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 10em;
+  bottom: 1em;
   right: -40em;
   transition: 0.5s;
 }
@@ -571,7 +571,7 @@ li:hover {
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 10em;
+  bottom: 1em;
   right: -40em;
   transition: 0.5s;
 }

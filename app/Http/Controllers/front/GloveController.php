@@ -97,8 +97,7 @@ class GloveController extends Controller
                 $sections = $view->renderSections(); 
         
                 return response()->json([
-                    'table' => $sections['table'],
-                    'form' => $sections['form'],
+                    'product' => $sections['content'],
                 ]); 
             }
 
@@ -109,6 +108,83 @@ class GloveController extends Controller
             return response()->view('errors.404', [], 404);
         }
     }
+
+
+    public function filter(Request $request, $filters = null){
+
+        $filters = json_decode($request->input('filters'));
+        $query = $this->glove->query();
+
+        $query->when($filters->oz_id, function ($q, $oz_id) {
+
+            if($oz_id == 'all'){
+                return $q;
+            }
+            else {
+                return $q->where('oz_id', $oz_id);
+            }
+        });
+
+        $query->when($filters->brand_name, function ($q, $brand_name) {
+
+            if($brand_name == 'all'){
+                return $q;
+            }
+            else {
+                return $q->where('brand_name', $brand_name);
+            }
+        });
+
+        $query->when($filters->total_price, function ($q, $total_price) {
+
+            if($total_price == 'all'){
+                return $q;
+            }
+            else {
+                return $q->where('total_price', $total_price);
+            }
+        });
+        
+
+        $query->when($filters->created_at_from, function ($q, $created_at_from) {
+
+            if($created_at_from == null){
+                return $q;
+            }
+            else {
+                $q->whereDate('created_at', '>=',  $created_at_from);
+            }
+        });
+
+        $query->when($filters->created_at_since, function ($q, $created_at_since) {
+
+            if( $created_at_since == null){
+                return $q;
+            }
+            else {
+                $q->whereDate('created_at', '<=',  $created_at_since);
+            }
+        });
+        
+        
+
+        
+        $gloves = $query->where('active', 1)
+        ->paginate($this->paginate)
+        ->appends(['filters' => json_encode($filters)]);
+
+        
+        
+        $view = View::make('admin.gloves.index')
+            ->with('gloves', $gloves)
+            ->renderSections();
+
+        return response()->json([
+            'table' => $view['table'],
+        ]);
+    }
+
+
 }
 
     

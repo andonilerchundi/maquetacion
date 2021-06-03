@@ -10,6 +10,6 @@ class Brand extends DBModel
 
     public function gloves()
     {
-        return $this->hasMany(Glove::class, 'brand_id');
+        return $this->hasMany(Glove::class, 'brand_name');
     }
 }

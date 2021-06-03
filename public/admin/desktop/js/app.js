@@ -2067,6 +2067,7 @@ if (applyFilter) {
                   }).then(function (response) {
                     table.innerHTML = response.data.table;
                     (0,_form_table__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                    console.log(response.data.table);
                     filter.classList.remove("appear");
                   });
                 } catch (error) {}

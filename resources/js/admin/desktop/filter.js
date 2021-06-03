@@ -23,14 +23,19 @@ if(applyFilter){
     
         let data = new FormData(filterForm);
         let filters = {};
+         
     
         data.forEach(function(value, key){
             filters[key] = value;
+           
         });
+
+         
     
         let json = JSON.stringify(filters);
     
         let url = filterForm.action;
+        
     
         let sendPostRequest = async () => {
     
@@ -43,7 +48,8 @@ if(applyFilter){
                    
                     table.innerHTML = response.data.table;
                     renderTable();
-    
+                    console.log( response.data.table)
+                
                     filter.classList.remove("appear");
                 });
                

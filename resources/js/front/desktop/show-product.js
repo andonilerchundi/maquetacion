@@ -1,6 +1,8 @@
 const linkProducts = document.querySelectorAll(".show-single-product");
 const sidebar = document.getElementById("sidebar");
 const sidebarButton = document.getElementById("sidebar-button");
+const container = document.getElementById('main-content');
+
 
 linkProducts.forEach(linkProduct =>{
 
@@ -13,12 +15,9 @@ linkProducts.forEach(linkProduct =>{
             try {
                 await axios.get(url).then(response => {
                     
-                    view.innerHTML = response.data.view;
-                    title.textContent = link.textContent;
+                    container.innerHTML = response.data.product;
 
-                    sidebar.classList.remove("active");
-                    sidebarButton.classList.remove('active');
-
+                
                     window.history.pushState('','',url);
 
                 });
@@ -33,3 +32,16 @@ linkProducts.forEach(linkProduct =>{
         RefreshRequest();
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+

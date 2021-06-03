@@ -32,8 +32,6 @@ if (refreshForm){
 
 }
 
-
-
 export let renderForm = () => {
 
     let forms = document.querySelectorAll(".admin-form");

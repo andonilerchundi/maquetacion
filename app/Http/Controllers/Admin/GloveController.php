@@ -91,7 +91,7 @@ class GloveController extends Controller
         $glove = $this->glove->updateOrCreate([
             'id' => request('id')],[
             'name' => request('name'),
-            'brand_id'=>request('brand_id'),
+            'brand_name'=>request('brand_name'),
             'color' => request('color'),
             'active' => 1,
         ]);
@@ -220,36 +220,15 @@ class GloveController extends Controller
         $filters = json_decode($request->input('filters'));
         $query = $this->glove->query();
 
-        $query->when($filters->oz_id, function ($q, $oz_id) {
+        $query->when($filters->brand_name, function ($q, $brand_name) {
 
-            if($oz_id == 'all'){
+            if($brand_name == 'all'){
                 return $q;
             }
             else {
-                return $q->where('oz_id', $oz_id);
+                return $q->where('brand_name', $brand_name);
             }
         });
-
-        $query->when($filters->brand_id, function ($q, $brand_id) {
-
-            if($brand_id == 'all'){
-                return $q;
-            }
-            else {
-                return $q->where('brand_id', $brand_id);
-            }
-        });
-
-        $query->when($filters->total_price, function ($q, $total_price) {
-
-            if($total_price == 'all'){
-                return $q;
-            }
-            else {
-                return $q->where('total_price', $total_price);
-            }
-        });
-        
 
         $query->when($filters->created_at_from, function ($q, $created_at_from) {
 

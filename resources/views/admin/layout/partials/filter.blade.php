@@ -45,36 +45,24 @@
                     </div>
                         
                 @endif
-                @if($key == 'oz')
-                    
-                    <div class="label-container">
-                        <label for="oz_id" class="label">Filtrar por OZ</label>
-                    </div>
-                    <div class="input-container">
-                        <select name="oz_id" data-placeholder="Seleccione OZ" class="input">
-                            <option value="all">Todas</option>
-                            @foreach($items as $item)
-                                <option value="{{$item->id}}">{{ $item->oz }}</option>
-                            @endforeach
-                        </select>    
-                    </div>
-                    
-                @endif
+               
                 
                 @if($key == 'brand')
                     
                        
                     <div class="label-container">
-                        <label for="brand_id" class="label">Filtrar por Marca</label>
+                        <label for="brand_name" class="label">Filtrar por Marca</label>
                     </div>
                     <div class="input-container">
-                        <select name="brand_id" data-placeholder="Seleccione Marca" class="input">
+                        <select name="brand_name" data-placeholder="Seleccione Marca" class="input">
                             <option value="all">Todas</option>
                             @foreach($items as $item)
-                                <option value="{{$item->id}}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>    
+                                <option value="{{$item->name}}">{{ $item->name }}</option>
+                            @endforeach  
+                        </select>   
+                       
                     </div>
+                    
                     
                 @endif
 

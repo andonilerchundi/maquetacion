@@ -1,9 +1,50 @@
+.content-product{
+
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+
+.filter-content{
+    margin-top: 1em;
+    width: 30%;
+    
+
+    .button-filter{
+        width: 50%;
+        margin-left: 0.5em;
+        height: 2em;
+        border-bottom: solid 0.2px black;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+       
+        svg{
+            width:1.5em ;
+            height: 2em;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .filter-menu{
+        border-bottom: solid 0.2px black;
+        margin-left: 0.5em;
+        height: 15vh;
+    }
+}
+
+
 .gloves{
     
     height: max-content;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2em;
+    margin-top: 2em;
     
 
 }
@@ -11,20 +52,43 @@
 .image-grid{
   
    width: 100%;
+   cursor: pointer;
+  
     
 }
+
+
 
 .show-single-product{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+   
+    height: 50vh;
+   
+}
+.product-especification{
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+.brand{
+    margin-top: 0.2em;
+    h4{
+        margin: 0;
+        padding: 0;
+    }
+}
 
 .product-name{
    display: flex;
    justify-content: center;
+   font-size: 0.8em;
 }
 
 .price{

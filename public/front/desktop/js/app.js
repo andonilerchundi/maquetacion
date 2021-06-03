@@ -2002,6 +2002,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var linkProducts = document.querySelectorAll(".show-single-product");
 var sidebar = document.getElementById("sidebar");
 var sidebarButton = document.getElementById("sidebar-button");
+var container = document.getElementById('main-content');
 linkProducts.forEach(function (linkProduct) {
   linkProduct.addEventListener("click", function () {
     var url = linkProduct.dataset.url;
@@ -2015,10 +2016,7 @@ linkProducts.forEach(function (linkProduct) {
                 _context.prev = 0;
                 _context.next = 3;
                 return axios.get(url).then(function (response) {
-                  view.innerHTML = response.data.view;
-                  title.textContent = link.textContent;
-                  sidebar.classList.remove("active");
-                  sidebarButton.classList.remove('active');
+                  container.innerHTML = response.data.product;
                   window.history.pushState('', '', url);
                 });
 

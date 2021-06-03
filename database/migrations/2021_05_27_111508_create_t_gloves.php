@@ -16,7 +16,7 @@ class CreateTGloves extends Migration
         Schema::create('t_gloves', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('brand_id');
+            $table->string('brand_name');
             $table->string('color');
             $table->boolean('active');
             $table->timestamps();

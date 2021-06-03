@@ -1,6 +1,6 @@
 @php
     $route="gloves";
-    $filters = ['oz' => $oz,'brand'=>$brand, 'created_at' => true, 'search' => true]; 
+    $filters = ['brand'=>$brand, 'created_at' => true]; 
 @endphp
 
 
@@ -8,13 +8,13 @@
     
 
 @section('table')
-    @isset($glove)
+    @isset($gloves)
 
         <table class="table table-sortable">
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Precio Total</th>
+                    <th>Marca</th>
                     <th>Fecha</th>
                     <th></th>
                 </tr>
@@ -29,7 +29,7 @@
                         </td>
                         
                         <td>
-                            {{$glove_element->product->total_price}}
+                            {{$glove_element->brand_name}}
                         </td>
 
                         <td>
@@ -199,13 +199,13 @@
                                 <label>Marca:</label>
                             </div>
     
-                            <select name="brand_id" class="brand-input"> 
+                            <select name="brand_name" class="brand-input"> 
                                 <option> </option>
-    
+
                                 @foreach($brand as $brand_element)
-                                    <option value="{{$brand_element->name}}" {{$brand_element->name == $glove->brand_id ? 'selected' : ''}}> {{$brand_element->name}} </option>
+                                    <option value="{{$brand_element->name}}" {{$brand_element->name == $glove->brand_name ? 'selected' : ''}}> {{$brand_element->name}} </option>
                                 @endforeach
-                                
+                               
                             </select>
                         </div>
     
