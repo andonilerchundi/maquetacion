@@ -12,7 +12,7 @@ modalImageReturnButton.addEventListener('click', () =>{
 
     let modal = document.getElementById('main-image');
 
-    modal.classList.toggle('modal-active');
+    modal.classList.toggle('modal-image-active');
 })
 
 

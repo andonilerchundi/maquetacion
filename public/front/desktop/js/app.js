@@ -1909,6 +1909,99 @@ faqButtons.forEach(function (faqButton) {
 
 /***/ }),
 
+/***/ "./resources/js/front/desktop/filter.js":
+/*!**********************************************!*\
+  !*** ./resources/js/front/desktop/filter.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var frontButtonFilter = document.getElementById('front-button-filter');
+var menuFilter = document.getElementById('filter-menu');
+var buttonsSelected = document.querySelectorAll('.oz-button');
+var applyFilter = document.getElementById('apply-filter-front');
+
+if (frontButtonFilter) {
+  frontButtonFilter.addEventListener('click', function () {
+    menuFilter.classList.toggle('menu-drop-down');
+  });
+}
+
+buttonsSelected.forEach(function (buttonSelected) {
+  buttonSelected.addEventListener("click", function (event) {
+    event.preventDefault();
+    var selectedElements = document.querySelectorAll(".selected");
+    selectedElements.forEach(function (selectedElements) {
+      selectedElements.classList.remove("selected");
+    });
+    buttonSelected.classList.add("selected");
+  });
+});
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function () {
+  output.innerHTML = this.value;
+};
+
+if (applyFilter) {
+  applyFilter.addEventListener('click', function () {
+    var data = new FormData(filterForm);
+    var filters = {};
+    data.forEach(function (value, key) {
+      filters[key] = value;
+    });
+    var json = JSON.stringify(filters);
+    var url = filterForm.action;
+
+    var sendPostRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                try {
+                  axios.get(url, {
+                    params: {
+                      filters: json
+                    }
+                  }).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    renderTable();
+                    console.log(response.data.table);
+                    filter.classList.remove("menu-drop-down");
+                  });
+                } catch (error) {}
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function sendPostRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    sendPostRequest();
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/front/desktop/fingerprint.js":
 /*!***************************************************!*\
   !*** ./resources/js/front/desktop/fingerprint.js ***!
@@ -20425,6 +20518,8 @@ __webpack_require__(/*! ./fingerprint */ "./resources/js/front/desktop/fingerpri
 __webpack_require__(/*! ./sidebar */ "./resources/js/front/desktop/sidebar.js");
 
 __webpack_require__(/*! ./show-product */ "./resources/js/front/desktop/show-product.js");
+
+__webpack_require__(/*! ./filter */ "./resources/js/front/desktop/filter.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when

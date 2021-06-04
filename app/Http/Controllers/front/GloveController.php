@@ -175,11 +175,11 @@ class GloveController extends Controller
 
         
         
-        $view = View::make('admin.gloves.index')
+        $view = View::make('front.gloves.index')
             ->with('gloves', $gloves)
             ->renderSections();
 
-        return response()->json([
+            return response()->json([
             'table' => $view['table'],
         ]);
     }

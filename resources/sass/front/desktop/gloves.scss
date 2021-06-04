@@ -8,32 +8,100 @@
 
 .filter-content{
     margin-top: 1em;
-    width: 30%;
+    width: 100%;
     
 
-    .button-filter{
-        width: 50%;
-        margin-left: 0.5em;
+    
+}
+#front-button-filter{
+    width: 100%;
+    margin-left: 0.5em;
+    height: 2em;
+    border-bottom: solid 0.2px black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    svg{
+        width:1.5em ;
         height: 2em;
-        border-bottom: solid 0.2px black;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-       
-        svg{
-            width:1.5em ;
-            height: 2em;
-        }
-        p{
-            margin: 0;
-            padding: 0;
-        }
     }
-    .filter-menu{
-        border-bottom: solid 0.2px black;
-        margin-left: 0.5em;
-        height: 15vh;
-    }
+   
+  
+}
+
+
+p{
+    margin: 0;
+    padding: 0;
+}
+#filter-menu{
+   
+    margin-left: 0.5em;
+    height: 0vh;
+    overflow: hidden;
+   
+    
+}
+
+#filter-menu.menu-drop-down{
+
+    border-bottom: solid 0.2px black;
+    margin-left: 0.5em;
+    height:max-content;
+    font-size: 1.5em;
+   
+}
+.filter-brands{
+
+    margin-top: 00.5em;
+}
+
+select{
+    width: 13em;
+    height: 3vh;
+    font-size: 0.8em;
+    border: solid black 0.1em;
+    border-radius: 0.3em;
+}
+
+.filter-oz{
+    margin-top: 0.5em;
+}
+
+.oz-button{
+    background-color:white;
+    border: black solid 0.15em;
+    width: 6em;
+    height: 2em;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: 00.5em;
+}
+
+.oz-button.selected{
+    background-color: cyan;
+}
+
+.price-filter{
+    margin-top: 00.5em;
+}
+
+.slider-price{
+    width: 15em;
+}
+
+.apply-filter-front{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border: black solid 0.1em;
+    width: 5em;
+    border-radius:0.2em ;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+
 }
 
 

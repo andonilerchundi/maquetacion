@@ -13,6 +13,10 @@ require('./googlebot');
 require('./localeSeo');
 require('./sitemap');
 require('./blockParameters');
+require('./menuItems');
+require('./modalMenuItem');
+require('./sortable');
+require('./selects');
 
 
 

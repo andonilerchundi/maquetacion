@@ -36,6 +36,24 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/tags/import', 'App\Http\Controllers\Admin\LocaleTagController@importTags')->name('tags_import');
     Route::get('/tags', 'App\Http\Controllers\Admin\LocaleTagController@index')->name('tags');
     Route::post('/tags', 'App\Http\Controllers\Admin\LocaleTagController@store')->name('tags_store');
+
+
+    Route::get('/menus/item/index/{language?}/{item?}', 'App\Http\Controllers\Admin\MenuItemController@index')->name('menus_item_index');
+    Route::get('/menus/item/create/{language?}', 'App\Http\Controllers\Admin\MenuItemController@create')->name('menus_item_create');
+    Route::delete('/menus/item/delete/{item?}', 'App\Http\Controllers\Admin\MenuItemController@destroy')->name('menus_item_destroy');
+    Route::get('/menus/item/show/{item?}', 'App\Http\Controllers\Admin\MenuItemController@show')->name('menus_item_show');
+    Route::post('/menus/item/store', 'App\Http\Controllers\Admin\MenuItemController@store')->name('menus_item_store'); 
+    Route::post('/menus/item/reordermenu', 'App\Http\Controllers\Admin\MenuItemController@orderItem')->name('menus_reorder');
+    
+    Route::resource('menus', 'App\Http\Controllers\Admin\MenuController', [
+        'names' => [
+            'index' => 'menus',
+            'create' => 'menus_create',
+            'store' => 'menus_store',
+            'destroy' => 'menus_destroy',
+            'show' => 'menus_show',
+        ]
+    ]);
     
     Route::resource('faqs/categorias', 'App\Http\Controllers\Admin\FaqCategoryController', [
         'parameters' => [

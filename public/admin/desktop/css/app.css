@@ -864,7 +864,7 @@ li:hover {
   display: none;
 }
 
-#main-image.modal-active {
+#main-image.modal-image-active {
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.397);
@@ -966,6 +966,120 @@ li:hover {
 .modal-image-delete-button svg {
   height: 3vh;
   width: 3em;
+}
+
+.nested-sort-wrap {
+  width: 100%;
+}
+.nested-sort-wrap .nested-sort {
+  margin-top: 1.5em;
+}
+.nested-sort-wrap .nested-sort li {
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 1em;
+  padding: 1em;
+  text-decoration: none;
+}
+.nested-sort-wrap .nested-sort .item-actions {
+  display: flex;
+  float: right;
+  position: relative;
+  top: -0.5em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.nested-sort-wrap .nested-sort .item-actions .item-button {
+  cursor: pointer;
+}
+.nested-sort-wrap .nested-sort .item-actions .item-button svg {
+  height: 2em;
+  margin: 0 0.5em;
+  width: 2em;
+}
+.nested-sort-wrap .nested-sort .item-actions .item-button svg .button-icon {
+  fill: #666666;
+}
+.nested-sort-wrap .nested-sort .item-actions .item-button:hover svg .menu-button-icon {
+  fill: #ff5100;
+}
+
+.item-actions.clone {
+  display: none;
+}
+
+#menu-item-modal {
+  background-color: white;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  justify-content: space-between;
+  left: 35%;
+  padding: 2em 1em;
+  position: fixed;
+  top: -100vh;
+  transition: top 0.3s;
+  width: 30%;
+  z-index: 3000;
+}
+
+#menu-item-modal.modal-active {
+  top: 20vh;
+  transition: top 0.3s;
+}
+
+.modal-menu-item-store-button {
+  cursor: pointer;
+  float: right;
+  padding-top: 1em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.modal-menu-item-store-button:hover .store-button-icon {
+  fill: #ff5100;
+}
+.modal-menu-item-store-button svg {
+  float: right;
+  height: 2.4em;
+  width: 2.4em;
+}
+.modal-menu-item-store-button svg .store-button-icon {
+  fill: gray;
+}
+
+.modal-menu-item-delete-button {
+  bottom: 1em;
+  cursor: pointer;
+  position: absolute;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.modal-menu-item-delete-button p {
+  color: red;
+  text-decoration: underline;
+}
+
+.select-display-option {
+  display: none;
+}
+.select-display-option.visible {
+  display: inherit;
+}
+
+.select-related {
+  display: none;
+}
+.select-related.visible {
+  display: grid;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

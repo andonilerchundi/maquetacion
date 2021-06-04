@@ -3,23 +3,77 @@
 @section('content')
     <div class="content-product">
         <div class="filter-content">
-            <div class="button-filter">
+            <div class="filter-content">
+                <div id="front-button-filter">
+        
+                    <svg  viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M14,12V19.88C14.04,20.18 13.94,20.5 13.71,20.71C13.32,21.1 12.69,21.1 12.3,20.71L10.29,18.7C10.06,18.47 9.96,18.16 10,17.87V12H9.97L4.21,4.62C3.87,4.19 3.95,3.56 4.38,3.22C4.57,3.08 4.78,3 5,3V3H19V3C19.22,3 19.43,3.08 19.62,3.22C20.05,3.56 20.13,4.19 19.79,4.62L14.03,12H14Z" />
+                    </svg>
+                    <p>FILTROS</p>
+        
+                    <svg  viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M7,10L12,15L17,10H7Z" />
+                    </svg>
+        
+                </div>
+                <div id="filter-menu">
+                    <form class="front-filter-form" id="-front-filter-form"   autocomplete="off">
 
-                <svg  viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M14,12V19.88C14.04,20.18 13.94,20.5 13.71,20.71C13.32,21.1 12.69,21.1 12.3,20.71L10.29,18.7C10.06,18.47 9.96,18.16 10,17.87V12H9.97L4.21,4.62C3.87,4.19 3.95,3.56 4.38,3.22C4.57,3.08 4.78,3 5,3V3H19V3C19.22,3 19.43,3.08 19.62,3.22C20.05,3.56 20.13,4.19 19.79,4.62L14.03,12H14Z" />
-                </svg>
-                <p>FILTROS</p>
+                        {{ csrf_field() }}
+                        
+                        <div class="filter-brands">
+                            <p>Filtre por Marca</p>
+            
+                            <select >
+                                <option value="1">Everlast</option> 
+                                <option value="1">Leone 1947</option>
+                                <option value="1">Tape&Wrape</option>
+                            </select>
+            
+            
+                        </div>
+            
+                        <div class="filter-oz">
+            
+                            <p>Filtre por talla</p>
+            
+                            <button class="oz-button">8 oz</button>
+                            <button class="oz-button">10 oz</button>
+                            <button class="oz-button">12 oz</button>
+                            <button class="oz-button">14 oz</button>
+                            <button class="oz-button">16 oz</button>
+                        </div>
+            
+                        <div class="price-filter">
+            
+                            <p> Filtrar por precio:</p>
+            
+                            
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="1000" value="500" class="slider-price" id="myRange">
+                            </div>
+            
+                            <p> Hasta <span id="demo"></span> € </p>
+            
+            
+                        </div>
 
-                <svg  viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7,10L12,15L17,10H7Z" />
-                </svg>
+                        <div class="apply-filter-front" id="apply-filter-front">
 
-            </div>
-            <div class="filter-menu">
-                hola
+                            <p>Filtrar</p>
+                        
+                        </div>
 
 
 
+                        
+                    </form>
+                    
+        
+                </div>
+        
+        
+        
             </div>
 
 

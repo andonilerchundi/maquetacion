@@ -9,6 +9,9 @@ import {renderGoogleBot} from './googlebot'
 import {renderLocaleSeo} from './localeSeo'
 import {renderSitemap} from './sitemap'
 import {renderBlockParameters} from './blockParameters'
+import {renderNestedSortables} from './sortable';
+import {renderMenuItems} from './menuItems';
+import {renderSelects} from './selects';
 
 const table = document.getElementById("table");
 const form = document.getElementById("form");
@@ -133,15 +136,18 @@ export let renderForm = () => {
 
     }
     
-    renderCkeditor()
-    renderTabs()
-    renderLanguages()
-    renderUploadImage()
-    renderLocaleTags()
-    renderLocaleSeo()
-    renderGoogleBot()
-    renderSitemap()
-    renderBlockParameters()
+    renderCkeditor();
+    renderTabs();
+    renderLanguages();
+    renderUploadImage();
+    renderLocaleTags();
+    renderLocaleSeo();
+    renderGoogleBot();
+    renderSitemap();
+    renderBlockParameters();
+    renderSelects();
+    renderNestedSortables();
+    renderMenuItems();
     
 };
 
