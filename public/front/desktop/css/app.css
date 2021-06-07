@@ -930,7 +930,7 @@ li:hover {
 
 .filter-content {
   margin-top: 1em;
-  width: 100%;
+  width: 99%;
 }
 
 #front-button-filter {
@@ -1068,4 +1068,119 @@ select {
   font-weight: bolder;
   width: 40%;
   text-align: center;
+}
+
+.main-header {
+  width: 100%;
+  height: 15vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #000000;
+  border-radius: 0px 0px 12px 12px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 15vh;
+}
+
+.logo-container {
+  width: 20%;
+  height: 15vh;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+.logo-container a {
+  width: 90%;
+}
+.logo-container img {
+  width: 100%;
+}
+
+.header-menu {
+  width: 40%;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.contact {
+  color: black;
+}
+
+.prueba {
+  color: black;
+}
+
+.footer {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  background-color: #797979;
+  position: relative;
+  margin-top: 1.5em;
+  color: white;
+}
+
+.footer .footer-element-container p, .footer .footer-element-container a, .footer .footer-element-container h1, .footer .footer-element-container h2, .footer .footer-element-container h3, .footer .footer-element-container h4, .footer .footer-element-container h5 {
+  color: white;
+  font-weight: 400;
+}
+
+.footer-container {
+  width: 99%;
+  margin: auto;
+}
+
+.footer-logo {
+  margin-top: 1em;
+  width: 20%;
+}
+
+.footer-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer .footer-element-icon {
+  margin-right: 0.5em;
+}
+.footer .footer-element-icon svg {
+  height: 2em;
+  width: 2em;
+}
+.footer .footer-element-icon svg path {
+  fill: white;
+}
+
+.footer .footer-socials-container {
+  display: flex;
+}
+
+.footer .footer-contact-item {
+  display: flex;
+  margin: 0.5em 0;
+}
+
+.main-content {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.bottombar {
+  width: 100%;
+  height: 5vh;
+  background-color: #797979;
 }

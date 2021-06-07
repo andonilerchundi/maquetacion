@@ -13,7 +13,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 100vh;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  min-height: 100vh;
   width: 100%;
   background-color: #b0b0b0;
 }
@@ -37,6 +40,10 @@
 
 .form form {
   width: 100%;
+}
+
+.language-bar-form {
+  margin-bottom: 0.5em;
 }
 
 .form-group {
@@ -444,9 +451,12 @@ li:hover {
   text-align: center;
   margin-top: 0.5em;
   height: 3vh;
-  width: 10em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   font-size: 1.8em;
   font-weight: bold;
+  margin-left: 0.5em;
 }
 
 .main-filter {
@@ -551,6 +561,7 @@ li:hover {
   bottom: 1em;
   right: -40em;
   transition: 0.5s;
+  z-index: 5000;
 }
 .success svg {
   width: 3em;
@@ -574,6 +585,7 @@ li:hover {
   bottom: 1em;
   right: -40em;
   transition: 0.5s;
+  z-index: 5000;
 }
 .error svg {
   width: 3em;

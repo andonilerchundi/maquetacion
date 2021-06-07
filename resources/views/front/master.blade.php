@@ -24,6 +24,8 @@
 <body>
     @include('front.components.topbar')
     @include('front.components.sidebar')
+    @include('front.components.header')
+    
     
     
     <div class="main-content" id="main-content">
@@ -31,6 +33,10 @@
         @yield('content')
   
     </div>
+
+    
+    @include('front.components.footer')
+    @include('front.components.bottombar')
         
 
     @include('front.layout.js')   

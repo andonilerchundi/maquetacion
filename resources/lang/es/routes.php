@@ -6,4 +6,7 @@ return array (
   'front_faq' => 'preguntas-frecuentes/{slug}',
   'front_gloves' => 'guantes',
   'front_glove' => 'guantes/{slug}',
+  'front_contact' => 'contacto',
+  'front_about_us' => 'nuestra-flota',
+  
 );

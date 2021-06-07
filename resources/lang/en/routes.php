@@ -6,4 +6,7 @@ return array (
   'front_faq' => 'faqs/{slug}',
   'front_gloves'=>'gloves',
   'front_glove'=>'gloves/{slug}',
+  'front_contact' => 'contacto',
+  'front_about_us' => 'our-fleet',
+  
 );

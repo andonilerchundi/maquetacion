@@ -1,0 +1,67 @@
+.footer{
+    width: 100%;
+    height: max-content;
+    background-color:rgb(121, 121, 121);
+    position: relative;
+    margin-top: 1.5em;
+    color: white;
+    
+   
+   
+   
+}
+
+
+.footer .footer-element-container{
+
+	p,a,h1,h2,h3,h4,h5{
+		color: white;
+		font-weight: 400;
+	}
+
+ 
+}
+
+.footer-container{
+    width: 99%;
+    margin: auto;
+    
+}
+
+.footer-logo{
+    margin-top: 1em;
+    width: 20%;
+}
+
+.footer-menu{
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  
+}
+
+.footer .footer-element-icon{
+
+	margin-right: 0.5em;
+
+	svg{
+		height: 2em;
+		width: 2em;
+
+		path{
+			fill: white;
+		}
+	}
+}
+
+.footer .footer-socials-container{
+	display: flex;
+}
+
+.footer .footer-contact-item{
+	display: flex;
+	margin: 0.5em 0;
+}
+

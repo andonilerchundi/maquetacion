@@ -44,6 +44,24 @@ class ViewComposerServiceProvider extends ServiceProvider
             "admin.gloves.index"],
             "App\Http\ViewComposers\Admin\IVA"
         );
+
+        view()->composer([
+            "front.components.header"],
+            "App\Http\ViewComposers\Front\Logo"
+        );
+        view()->composer([
+            "front.components.header"],
+            "App\Http\ViewComposers\Front\LogoLight"
+        );
+
+        view()->composer([
+            "front.components.footer"],
+            "App\Http\ViewComposers\Front\Logo"
+        );
+        view()->composer([
+            "front.components.footer"],
+            "App\Http\ViewComposers\Front\LogoLight"
+        );
     }
 
     
