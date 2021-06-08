@@ -5,17 +5,19 @@
     background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #000000;
-    border-radius: 0px 0px 12px 12px;       
+    
+    background-color: #000000;      
     
    
 }
 .header-container{
 
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     height: 15vh;
+    border-bottom: 2px solid #000000;
+    background-color: white;
 
 }
 
@@ -40,20 +42,4 @@
 
 }
 
-.header-menu{
-  
-    width: 40%;
-    height: 15vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
 
-}
-
-.contact{
-    color: black;
-}
-.prueba{
-    color: black;
-}

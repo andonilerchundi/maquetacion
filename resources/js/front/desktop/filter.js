@@ -16,32 +16,28 @@ if (frontButtonFilter){
 
 }
     
+if(buttonsSelected){
 
-buttonsSelected.forEach(buttonSelected => { 
+    buttonsSelected.forEach(buttonSelected => { 
     
-    buttonSelected.addEventListener("click", (event) => {
-
-        event.preventDefault();
-
-        let selectedElements = document.querySelectorAll(".selected");
-
-        selectedElements.forEach(selectedElements => {
-            selectedElements.classList.remove("selected");
+        buttonSelected.addEventListener("click", (event) => {
+    
+            event.preventDefault();
+    
+            let selectedElements = document.querySelectorAll(".selected");
+    
+            selectedElements.forEach(selectedElements => {
+                selectedElements.classList.remove("selected");
+            });
+            
+            buttonSelected.classList.add("selected");
+    
+           
         });
-        
-        buttonSelected.classList.add("selected");
-
-       
     });
-});
-
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value;
-
-slider.oninput = function() {
-  output.innerHTML = this.value;
+    
 }
+
 
 if(applyFilter){
 

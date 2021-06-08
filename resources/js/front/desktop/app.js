@@ -4,6 +4,8 @@ require('./fingerprint');
 require('./sidebar');
 require('./show-product');
 require('./filter');
+require('./homepage');
+require('./forms');
 
 /**
  * First we will load all of this project's JavaScript dependencies which

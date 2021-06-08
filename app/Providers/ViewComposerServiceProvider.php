@@ -62,6 +62,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             "front.components.footer"],
             "App\Http\ViewComposers\Front\LogoLight"
         );
+       
     }
 
     
