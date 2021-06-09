@@ -62,6 +62,15 @@ class GloveController extends Controller
                 ->with('gloves', $gloves)
                 ->with('seo', $seo );
 
+        if(request()->ajax()) {
+
+            $sections = $view->renderSections(); 
+    
+            return response()->json([
+                'view' => $sections['content'],
+            ]); 
+        }
+
         return $view;
     }
 
@@ -92,12 +101,13 @@ class GloveController extends Controller
             $view = View::make('front.gloves.single')->with('glove', $glove);
 
             
+            
             if(request()->ajax()) {
-
+    
                 $sections = $view->renderSections(); 
         
                 return response()->json([
-                    'product' => $sections['content'],
+                    'view' => $sections['content'],
                 ]); 
             }
 

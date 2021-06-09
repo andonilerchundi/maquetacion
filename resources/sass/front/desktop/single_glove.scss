@@ -23,7 +23,7 @@
 }
 
 .product-image-content{
-    background-color: rgb(243, 243, 243);
+    background-color: white;
     margin-top: 0.1em;
     width:50%;
     height: 60vh;
@@ -43,9 +43,9 @@
 .product-info-content{
     width:50%;
     height: 60vh;
-    background-color: rgb(243, 243, 243);
+    background-color: white;
+    border: blue solid 2px;
     
-
     .product-title{
        margin-top: 0.5em;
         width: 40%;
@@ -108,7 +108,7 @@
         display: block;
         position: absolute;
         right: 0%;
-        bottom: 14%;
+        bottom: -6%;
         text-align:end;
         font-size: 3em;
     }
@@ -122,7 +122,7 @@
     display: block;
     position: absolute;
     right: 10%;
-    bottom: 6%;
+    bottom: -16%;
     background-color: black;
     color:rgb(243, 243, 243);
     font-size: 1.2em;

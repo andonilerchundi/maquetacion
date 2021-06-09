@@ -1876,36 +1876,65 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/front/desktop/components.js":
+/*!**************************************************!*\
+  !*** ./resources/js/front/desktop/components.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderComponents": () => (/* binding */ renderComponents)
+/* harmony export */ });
+/* harmony import */ var _faqs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./faqs */ "./resources/js/front/desktop/faqs.js");
+/* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms */ "./resources/js/front/desktop/forms.js");
+
+
+var renderComponents = function renderComponents() {
+  (0,_faqs__WEBPACK_IMPORTED_MODULE_0__.renderFaqs)();
+  (0,_forms__WEBPACK_IMPORTED_MODULE_1__.renderForm)();
+};
+
+/***/ }),
+
 /***/ "./resources/js/front/desktop/faqs.js":
 /*!********************************************!*\
   !*** ./resources/js/front/desktop/faqs.js ***!
   \********************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-var faqButtons = document.querySelectorAll(".faq-button");
-var faqElements = document.querySelectorAll(".faq-description");
-faqButtons.forEach(function (faqButton) {
-  faqButton.addEventListener("click", function () {
-    var activeElements = document.querySelectorAll(".active");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderFaqs": () => (/* binding */ renderFaqs)
+/* harmony export */ });
+var renderFaqs = function renderFaqs() {
+  var faqButtons = document.querySelectorAll(".faq-button");
+  var faqElements = document.querySelectorAll(".faq-description");
+  faqButtons.forEach(function (faqButton) {
+    faqButton.addEventListener("click", function () {
+      var activeElements = document.querySelectorAll(".active");
 
-    if (faqButton.classList.contains("active")) {
-      faqButton.classList.remove("active");
-      activeElements.forEach(function (activeElement) {
-        activeElement.classList.remove("active");
-      });
-    } else {
-      activeElements.forEach(function (activeElement) {
-        activeElement.classList.remove("active");
-      });
-      faqButton.classList.add("active");
-      faqElements.forEach(function (faq) {
-        if (faq.dataset.content == faqButton.dataset.button) {
-          faq.classList.add("active");
-        } else {}
-      });
-    }
+      if (faqButton.classList.contains("active")) {
+        faqButton.classList.remove("active");
+        activeElements.forEach(function (activeElement) {
+          activeElement.classList.remove("active");
+        });
+      } else {
+        activeElements.forEach(function (activeElement) {
+          activeElement.classList.remove("active");
+        });
+        faqButton.classList.add("active");
+        faqElements.forEach(function (faq) {
+          if (faq.dataset.content == faqButton.dataset.button) {
+            faq.classList.add("active");
+          } else {}
+        });
+      }
+    });
   });
-});
+};
 
 /***/ }),
 
@@ -2005,6 +2034,9 @@ if (applyFilter) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getFingerPrint": () => (/* binding */ getFingerPrint)
+/* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var clientjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! clientjs */ "./node_modules/clientjs/dist/client.min.js");
@@ -2017,6 +2049,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var client = new ClientJS();
+var getFingerPrint = function getFingerPrint() {
+  var fingerprint = {};
+  fingerprint['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  fingerprint['fingerprint_code'] = client.getFingerprint();
+  fingerprint['browser'] = client.getBrowser();
+  fingerprint['browser_version'] = client.getBrowserMajorVersion();
+  fingerprint['OS'] = client.getOS();
+  fingerprint['resolution'] = client.getCurrentResolution();
+  fingerprint['current_url'] = window.location.pathname;
+  return fingerprint;
+};
 
 var sendFingerprintRequest = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2025,41 +2068,31 @@ var sendFingerprintRequest = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            fingerprint = {};
-            fingerprint['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fingerprint['fingerprint_code'] = client.getFingerprint();
-            fingerprint['browser'] = client.getBrowser();
-            fingerprint['browser_version'] = client.getBrowserMajorVersion();
-            fingerprint['OS'] = client.getOS();
-            fingerprint['resolution'] = client.getCurrentResolution();
-            fingerprint['current_url'] = window.location.pathname;
+            fingerprint = getFingerPrint();
             data = new FormData();
 
             for (key in fingerprint) {
               data.append(key, fingerprint[key]);
             }
 
-            _context.prev = 10;
-            _context.next = 13;
-            return axios.post('/fingerprint', data).then(function (response) {
-              console.log(response);
-            });
+            _context.prev = 3;
+            _context.next = 6;
+            return axios.post('/fingerprint', data).then(function (response) {});
 
-          case 13:
-            _context.next = 18;
+          case 6:
+            _context.next = 10;
             break;
 
-          case 15:
-            _context.prev = 15;
-            _context.t0 = _context["catch"](10);
-            console.log(_context.t0);
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](3);
 
-          case 18:
+          case 10:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[10, 15]]);
+    }, _callee, null, [[3, 8]]);
   }));
 
   return function sendFingerprintRequest() {
@@ -2172,6 +2205,186 @@ renderForm();
 
 /***/ }),
 
+/***/ "./resources/js/front/desktop/localization.js":
+/*!****************************************************!*\
+  !*** ./resources/js/front/desktop/localization.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderLocalization": () => (/* binding */ renderLocalization)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sidebar */ "./resources/js/front/desktop/sidebar.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var renderLocalization = function renderLocalization() {
+  var modalLocalization = document.getElementById('modal-localization');
+  var localization = document.getElementById('localization');
+  var localizationOptions = document.querySelectorAll('.localization-option');
+
+  if (localization) {
+    localization.addEventListener("click", function (event) {
+      modalLocalization.classList.add('modal-active');
+    });
+  }
+
+  if (localizationOptions) {
+    localizationOptions.forEach(function (localizationOption) {
+      localizationOption.addEventListener("click", function (event) {
+        var url = localizationOption.dataset.route;
+
+        var sendLocalizationRequest = /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    try {
+                      axios.get(url).then(function (response) {
+                        modalLocalization.classList.remove('modal-active');
+                      });
+                    } catch (error) {}
+
+                  case 1:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee);
+          }));
+
+          return function sendLocalizationRequest() {
+            return _ref.apply(this, arguments);
+          };
+        }();
+
+        sendLocalizationRequest();
+      });
+    });
+  }
+};
+renderLocalization();
+(0,_sidebar__WEBPACK_IMPORTED_MODULE_1__.renderSidebar)();
+
+/***/ }),
+
+/***/ "./resources/js/front/desktop/menu.js":
+/*!********************************************!*\
+  !*** ./resources/js/front/desktop/menu.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderMenu": () => (/* binding */ renderMenu)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./resources/js/front/desktop/components.js");
+/* harmony import */ var _fingerprint__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fingerprint */ "./resources/js/front/desktop/fingerprint.js");
+/* harmony import */ var _sidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sidebar */ "./resources/js/front/desktop/sidebar.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var renderMenu = function renderMenu() {
+  var menuItems = document.querySelectorAll('.menu-item');
+  menuItems.forEach(function (menuItem) {
+    menuItem.addEventListener("click", function () {
+      var activeElements = document.querySelectorAll(".selected");
+      var url = menuItem.dataset.route;
+      var mainContent = document.getElementById('main-content');
+
+      if (!menuItem.classList.contains("active")) {
+        activeElements.forEach(function (activeElement) {
+          activeElement.classList.remove("selected");
+        });
+        menuItem.classList.add("selected");
+
+        var sendPageRequest = /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    try {
+                      axios.get(url).then(function (response) {
+                        mainContent.innerHTML = response.data.view;
+                        (0,_components__WEBPACK_IMPORTED_MODULE_1__.renderComponents)();
+                        window.history.pushState('', '', url);
+                      });
+                    } catch (error) {}
+
+                  case 1:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee);
+          }));
+
+          return function sendPageRequest() {
+            return _ref.apply(this, arguments);
+          };
+        }();
+
+        sendPageRequest();
+      }
+    });
+  });
+  window.addEventListener('popstate', function (event) {
+    var mainContent = document.getElementById('main-content');
+    var url = event.state;
+
+    var sendPageRequest = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                try {
+                  axios.get(url).then(function (response) {
+                    mainContent.innerHTML = response.data.view;
+                    (0,_components__WEBPACK_IMPORTED_MODULE_1__.renderComponents)();
+                    window.history.pushState(url, 'url', url);
+                  });
+                } catch (error) {}
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function sendPageRequest() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+
+    sendPageRequest();
+  });
+};
+renderMenu();
+
+/***/ }),
+
 /***/ "./resources/js/front/desktop/show-product.js":
 /*!****************************************************!*\
   !*** ./resources/js/front/desktop/show-product.js ***!
@@ -2205,7 +2418,7 @@ linkProducts.forEach(function (linkProduct) {
                 _context.prev = 0;
                 _context.next = 3;
                 return axios.get(url).then(function (response) {
-                  container.innerHTML = response.data.product;
+                  container.innerHTML = response.data.view;
                   window.history.pushState('', '', url);
                 });
 
@@ -2241,18 +2454,25 @@ linkProducts.forEach(function (linkProduct) {
 /*!***********************************************!*\
   !*** ./resources/js/front/desktop/sidebar.js ***!
   \***********************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-var links = document.querySelectorAll(".link");
-var sidebar = document.getElementById("sidebar");
-var sidebarButton = document.getElementById("sidebar-button");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderSidebar": () => (/* binding */ renderSidebar)
+/* harmony export */ });
+var renderSidebar = function renderSidebar() {
+  var menuLink = document.querySelectorAll('.menulink');
+  var sidebar = document.getElementById("sidebar");
+  var sidebarButton = document.getElementById("sidebar-button");
 
-if (sidebarButton) {
-  sidebarButton.addEventListener('click', function () {
-    sidebarButton.classList.toggle("active");
-    sidebar.classList.toggle("active");
-  });
-}
+  if (sidebarButton) {
+    sidebarButton.addEventListener('click', function () {
+      sidebarButton.classList.toggle("active");
+      sidebar.classList.toggle("active");
+    });
+  }
+};
 
 /***/ }),
 
@@ -20623,6 +20843,12 @@ __webpack_require__(/*! ./filter */ "./resources/js/front/desktop/filter.js");
 __webpack_require__(/*! ./homepage */ "./resources/js/front/desktop/homepage.js");
 
 __webpack_require__(/*! ./forms */ "./resources/js/front/desktop/forms.js");
+
+__webpack_require__(/*! ./menu */ "./resources/js/front/desktop/menu.js");
+
+__webpack_require__(/*! ./components */ "./resources/js/front/desktop/components.js");
+
+__webpack_require__(/*! ./localization */ "./resources/js/front/desktop/localization.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when

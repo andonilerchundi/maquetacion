@@ -80,7 +80,7 @@ class FaqController extends Controller
 
     public function store(FaqRequest $request)
     {    
-        Debugbar::info(request('seo'));
+       
         $faq = $this->faq->updateOrCreate([
             'id' => request('id')],[
             'name' => request('name'),

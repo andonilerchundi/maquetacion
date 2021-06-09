@@ -6,6 +6,9 @@ require('./show-product');
 require('./filter');
 require('./homepage');
 require('./forms');
+require('./menu');
+require('./components');
+require('./localization');
 
 /**
  * First we will load all of this project's JavaScript dependencies which

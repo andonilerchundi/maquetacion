@@ -71,7 +71,7 @@ class LocaleTagController extends Controller
 
     public function store(Request $request)
     {    
-        Debugbar::info(request('group'));
+       
     
         foreach (request('tag') as $rel_anchor => $value){
 

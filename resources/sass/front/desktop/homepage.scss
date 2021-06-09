@@ -52,21 +52,21 @@ width: 100%;
 
 .lines {
 	position: absolute;
-	height: 500px;
-	width: 2px;
+	height: 15em;
+	width: 0.1em;
 	background-color: #000;
 	right: 310px;
-	bottom: 200px;
+	bottom: 30em;
 }
 .lines:before {
 	content: "";
 	position: absolute;
-	height: 500px;
-	width: 2px;
+	height: 15em;
+	width: 0.1em;
 	background-color: #000;
-	right: 40px;
+	right: 30em;
 	transform-origin: bottom;
-	transform: rotate(3deg);
+	transform: rotate(5deg);
 }
 .lines:after {
 	content: "";

@@ -84,7 +84,7 @@
                 <div class="image-grid">
     
                     <li class="show-single-product" data-url="{{route('front_glove', ['slug' => $glove->seo->slug])}}">
-                        {{Debugbar::info($glove->seo->slug)}}
+                     
                         <div class="single-product-image-content">
                             @isset($glove->image_featured_desktop->path)
                                 <div class="glove-image-single">

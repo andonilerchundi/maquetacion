@@ -22,6 +22,7 @@
     @include('front.layout.style')
 </head>
 <body>
+    @include("front.components.modal_localization")
     @include('front.components.topbar')
     @include('front.components.sidebar')
     @include('front.components.header')

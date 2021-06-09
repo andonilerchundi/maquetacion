@@ -15,7 +15,7 @@ linkProducts.forEach(linkProduct =>{
             try {
                 await axios.get(url).then(response => {
                     
-                    container.innerHTML = response.data.product;
+                    container.innerHTML = response.data.view;
 
                 
                     window.history.pushState('','',url);

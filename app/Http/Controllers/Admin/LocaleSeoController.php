@@ -149,7 +149,7 @@ class LocaleSeoController extends Controller
             $seo['group.'. $language->alias] = empty($locale->group) ? '': $locale->group;
         }
 
-        Debugbar::info($seo);
+       
 
         $view = View::make('admin.seo.index')
         ->with('seos', $seos)
@@ -158,7 +158,7 @@ class LocaleSeoController extends Controller
         if(request()->ajax()) {
             $sections = $view->renderSections(); 
     
-            Debugbar::info($sections['form']);
+            
 
             return response()->json([
                 'layout' => $sections['content'],
@@ -245,7 +245,7 @@ class LocaleSeoController extends Controller
         $this->seo->where('redirection', 1)->update(array('redirection' => 0 ));
         $this->locale_redirect->truncate();
 
-        Debugbar::info($sitemap['xml']);
+       
         if(request()->ajax()) {
     
             return response()->json([

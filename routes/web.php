@@ -175,4 +175,6 @@ Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('
 Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');
 Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');
 Route::post('/contacto', 'App\Http\Controllers\Front\ContactController@store')->name('front_contact_form');
+Route::get('/traduccion/{language}/{parent}/{slug?}', 'App\Http\Controllers\Front\LocalizationController@show')->name('front_localization');
+
 
