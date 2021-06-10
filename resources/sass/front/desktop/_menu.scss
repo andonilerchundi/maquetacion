@@ -8,7 +8,7 @@
 
 		margin: 0.5em; 
 
-		&.selected{
+		.menu-item.menu-item-selected{
 
 			a h4{
 				color: $red;

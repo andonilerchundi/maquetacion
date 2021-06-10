@@ -32,7 +32,7 @@
         position: absolute;
         width: 50%;
         z-index: 4;
-        top: 20%;
+        top: 30%;
         img{
             width: 100%;
             height: auto;
@@ -44,10 +44,10 @@
     width:50%;
     height: 60vh;
     background-color: white;
-    border: blue solid 2px;
+   
     
     .product-title{
-       margin-top: 0.5em;
+       margin-top: 1em;
         width: 40%;
         height: 6vh;
         display: block;
@@ -63,9 +63,10 @@
         max-height: 20vh;
         display: block;
         position: absolute;
-        right: 0;
-        bottom: 32%;
+        right: 0.2%;
+        bottom: 10%;
         text-align:initial;
+        
         
     }
     .product-size{
@@ -75,7 +76,7 @@
         display: block;
         position: absolute;
         right:20%;
-        bottom: 20%;
+        bottom: -3%;
         text-align:start;
 
         .size-oz{
@@ -92,10 +93,10 @@
         display: block;
         position: absolute;
         right:0% ;
-        bottom: 54.5%;
+        bottom: 39.65%;
         text-align:start;
         font-size: 3.5em;
-        color: rgb(243, 243, 243);
+        color: rgb(255, 255, 255);
         h2{
             -webkit-text-stroke: 0.00001em black;
             margin: 0;
