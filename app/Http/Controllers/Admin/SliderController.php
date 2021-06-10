@@ -17,7 +17,7 @@ class SliderController extends Controller
 
     function __construct(Slider $slider, Agent $agent)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->agent = $agent;
         $this->slider = $slider;
     }

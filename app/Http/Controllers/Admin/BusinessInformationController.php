@@ -20,7 +20,7 @@ class BusinessInformationController extends Controller
 
     function __construct(LocaleTag $locale_tag, Manager $manager, Image $image, BusinessInformation $business)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->manager = $manager;
         $this->locale_tag = $locale_tag;
         $this->image = $image;

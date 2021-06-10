@@ -29,7 +29,7 @@ class LocaleSeoController extends Controller
     
     function __construct(Agent $agent, Manager $manager, LocaleLanguage $language, Sitemap $sitemap, LocaleSeo $seo, LocaleRedirect $locale_redirect, Googlebot $googlebot)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->agent = $agent;
         $this->manager = $manager;
         $this->language = $language;

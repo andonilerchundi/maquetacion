@@ -30,7 +30,7 @@ class GloveController extends Controller
 
     function __construct(Glove $glove, GlovesOz $glovesoz, Agent $agent, Locale $locale, Image $image, LocaleSlugSeo $locale_slug_seo, Product $product)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->agent = $agent;
         $this->locale = $locale;
         $this->image = $image;

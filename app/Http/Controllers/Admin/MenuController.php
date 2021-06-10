@@ -23,7 +23,7 @@ class MenuController extends Controller
 
     function __construct(Menu $menu, Agent $agent, MenuItem $menu_item, LocaleSeo $locale_seo, LocaleSlugSeo $locale_slug_seo)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->agent = $agent;
         $this->menu = $menu;
         $this->menu_item = $menu_item;

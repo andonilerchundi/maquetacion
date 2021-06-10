@@ -22,7 +22,7 @@ class MenuItemController extends Controller
 
     function __construct(MenuItem $menu_item, LocaleSeo $locale_seo, LocaleSlugSeo $locale_slug_seo)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         
         $this->menu_item = $menu_item;
         $this->locale_seo = $locale_seo;
