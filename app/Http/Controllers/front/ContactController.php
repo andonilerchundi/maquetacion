@@ -14,7 +14,6 @@ use App\Jobs\ContactEmail;
 
 class ContactController extends Controller
 {
-    
     protected $agent;
     protected $contact;
     protected $locale_slug_seo;
