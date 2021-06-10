@@ -11,6 +11,7 @@
             <li class="link" data-url="{{route('seo')}}">SEO</li>
             <li class="link" data-url="{{route('menus')}}">Menus</li>
             <li class="link" data-url="{{route('business_information')}}">Informacion Empresa</li>
+            <li class="link" data-url="{{route('gloves')}}">Guantes</li>
             
             
         </ul>
