@@ -173,6 +173,7 @@ Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@st
 Route::get('/gloves/filter/{filters?}', 'App\Http\Controllers\Front\GloveController@filter')->name('gloves_filter');
 Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');
 Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');
+Route::post('/login/register', 'App\Http\Controllers\Front\LoginController@register')->name('front_login_register');
 Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');
 Route::post('/contacto', 'App\Http\Controllers\Front\ContactController@store')->name('front_contact_form');
 Route::get('/traduccion/{language}/{parent}/{slug?}', 'App\Http\Controllers\Front\LocalizationController@show')->name('front_localization');
