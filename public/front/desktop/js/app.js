@@ -1889,6 +1889,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _faqs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./faqs */ "./resources/js/front/desktop/faqs.js");
 /* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./forms */ "./resources/js/front/desktop/forms.js");
+/* harmony import */ var _show_product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./show-product */ "./resources/js/front/desktop/show-product.js");
+
 
 
 var renderComponents = function renderComponents() {
@@ -2398,6 +2400,9 @@ renderMenu();
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderShowProduct": () => (/* binding */ renderShowProduct)
+/* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -2406,52 +2411,52 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var linkProducts = document.querySelectorAll(".show-single-product");
-var sidebar = document.getElementById("sidebar");
-var sidebarButton = document.getElementById("sidebar-button");
-var container = document.getElementById('main-content');
-linkProducts.forEach(function (linkProduct) {
-  linkProduct.addEventListener("click", function () {
-    var url = linkProduct.dataset.url;
+var renderShowProduct = function renderShowProduct() {
+  var linkProducts = document.querySelectorAll(".show-single-product");
+  var container = document.getElementById('main-content');
+  linkProducts.forEach(function (linkProduct) {
+    linkProduct.addEventListener("click", function () {
+      var url = linkProduct.dataset.url;
 
-    var RefreshRequest = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios.get(url).then(function (response) {
-                  container.innerHTML = response.data.view;
-                  window.history.pushState('', '', url);
-                });
+      var RefreshRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    container.innerHTML = response.data.view;
+                    window.history.pushState('', '', url);
+                  });
 
-              case 3:
-                _context.next = 8;
-                break;
+                case 3:
+                  _context.next = 8;
+                  break;
 
-              case 5:
-                _context.prev = 5;
-                _context.t0 = _context["catch"](0);
-                console.error(_context.t0);
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
 
-              case 8:
-              case "end":
-                return _context.stop();
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
             }
-          }
-        }, _callee, null, [[0, 5]]);
-      }));
+          }, _callee, null, [[0, 5]]);
+        }));
 
-      return function RefreshRequest() {
-        return _ref.apply(this, arguments);
-      };
-    }();
+        return function RefreshRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
 
-    RefreshRequest();
+      RefreshRequest();
+    });
   });
-});
+};
 
 /***/ }),
 

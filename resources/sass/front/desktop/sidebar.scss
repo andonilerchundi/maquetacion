@@ -1,12 +1,13 @@
 .sidebar{
     width: 0;
-    height: 100%;
+    min-height: 100vh;
     background-color:hsl(0, 0%, 0%);
     position:fixed;
     right: 0;
+    top: 0;
     overflow-x: hidden;
     transition: 0.5s;
-    z-index: 3;
+    z-index: 1;
 }
 
 .sidebar.active{
@@ -15,7 +16,7 @@
 
 .link-menu{
     font-size: 1.5em;
-    margin-top: 0.5em;
+    margin-top: 3em;
     cursor: pointer;
    
     p,a,h4,h5{

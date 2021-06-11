@@ -13,6 +13,16 @@
         z-index: 2;
         
     }
+
+    .sidebar-button-superpuesto{
+        position: absolute;
+        right: 0px;
+        z-index: +100;
+        width: 3em;
+        height: 3em;
+
+
+    }
     
     .sidebar-button{
         width:3em;
@@ -24,6 +34,7 @@
         justify-content: center;
         align-items: center;
         transition: all .5s ease-in-out;
+       
        
        
     }
